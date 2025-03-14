@@ -6,10 +6,10 @@ class Ambiente{
     this.altura = altura;
     this.largura = largura;
   }
-  public int dentroDosLimites(int x, int y){
+  public boolean  dentroDosLimites(int x, int y){
     if(x <= largura && y <= altura){
-      return 1;
+      return true;
     }
-    return 0;
+    return false;
   }
 }
