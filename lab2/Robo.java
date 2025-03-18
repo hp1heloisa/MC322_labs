@@ -1,7 +1,7 @@
 class Robo {
   private String nome;
-  private int posicaoX;
-  private int posicaoY;
+  protected int posicaoX;
+  protected int posicaoY;
   public Robo(String nome, int posicaoX, int posicaoY){
     this.nome = nome;
     this.posicaoX = posicaoX;
