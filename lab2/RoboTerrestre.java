@@ -1,5 +1,5 @@
 class RoboTerrestre extends Robo{
-    private int velocidadeMax;
+    protected int velocidadeMax;
     
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMax){
         super(nome, posicaoX, posicaoY);        
