@@ -1,3 +1,5 @@
 class RoboTopeira extends RoboAereo {
-    public RoboTopeira()
+    public RoboTopeira(){
+        super();
+    }
 }
