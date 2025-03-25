@@ -28,7 +28,7 @@ public class TiposRobos {
             System.out.println((i+1) + ". " + listTerrestre[i]);
         robo_escolhido = scanner.nextInt();
         if (robo_escolhido == 1)
-            return new RoboDesenrolado("seila", 0, 0, 10,"pulando");
+            return new RoboDesenrolado();
         else 
             return new RoboTransportador("seila", 0, 0, 10,"rural");
     }
