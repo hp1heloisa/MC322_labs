@@ -2,10 +2,10 @@ class Robo {
   private String nome;
   protected int posicaoX;
   protected int posicaoY;
-  public Robo(String nome, int posicaoX, int posicaoY){
-    this.nome = nome;
-    this.posicaoX = posicaoX;
-    this.posicaoY = posicaoY;
+  public Robo(){
+    this.nome = "sei la";
+    this.posicaoX = 0;
+    this.posicaoY = 0;
   }
   public void mover(int deltaX, int deltaY) {
     posicaoX = deltaX;
