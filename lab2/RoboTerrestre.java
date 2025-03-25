@@ -2,7 +2,7 @@ class RoboTerrestre extends Robo{
     protected int velocidadeMax;
     
     public RoboTerrestre(String nome, int posicaoX, int posicaoY, int velocidadeMax){
-        super(nome, posicaoX, posicaoY);        
+        super();   
         this.velocidadeMax = velocidadeMax; 
     }
     public void mover(int deltaX, int deltaY, int velocidade){ {
