@@ -6,17 +6,17 @@ class RoboAereo extends Robo{
         this.altitude = altitude;
         this.altitudeMaxima = altitudeMaxima;
     }
-    public void subir(int metros){
-        if (altitude+metros <= altitudeMaxima){
-            altitude += metros;
+    public void subir(){
+        if (altitude+1 <= altitudeMaxima){
+            altitude++;
         }else {
             altitude = altitudeMaxima;
         }
         printAltura();
     }
-    public void descer(int metros){
-        if (altitude-metros >= 0){
-            altitude -= metros;        
+    public void descer(){
+        if (altitude-1 >= 0){
+            altitude--;        
         } else 
             altitude = 0;
         printAltura();
