@@ -30,6 +30,6 @@ public class TiposRobos {
         if (robo_escolhido == 1)
             return new RoboDesenrolado();
         else 
-            return new RoboTransportador("seila", 0, 0, 10,"rural");
+            return new RoboTransportador();
     }
 }

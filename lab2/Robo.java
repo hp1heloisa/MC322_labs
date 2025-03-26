@@ -6,21 +6,22 @@ class Robo {
   protected Scanner scanner = new Scanner(System.in);
   public Robo(){
     System.out.printf("Diga qual é o nome do seu robô\n");
-    String nome_robo = scanner.nextLine();
+    nome = scanner.nextLine();
     System.out.printf("Aviso : Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = 0)\n");
-    nome = nome_robo;
     posicaoX = 0;
     posicaoY = 0;
   }
   public void mover(int deltaX, int deltaY) {
-    posicaoX = deltaX;
-    posicaoY = deltaY;
+    posicaoX += deltaX;
+    posicaoY += deltaY; 
+    exibirPosicao();
   }
   public void exibirPosicao(){
     System.out.println("Posição: (" + posicaoX + ", " + posicaoY + ")");
   }
-  public void exibirNome(){
+  public String exibirNome(){
     System.out.println("O nome do seu robo é: " + nome);
+    return nome;
   }
   public int posicaoX(){
     return posicaoX;

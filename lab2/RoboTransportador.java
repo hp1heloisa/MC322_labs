@@ -1,8 +1,10 @@
 class RoboTransportador extends RoboTerrestre{
     private String area_atuacao;
-    public RoboTransportador(String nome, int posicaoX, int posicaoY, int velocidadeMax, String area_atuacao){
-        super(nome, posicaoX, posicaoY, velocidadeMax);
-        this.area_atuacao = area_atuacao;
+    public RoboTransportador(){
+        super();
+        System.err.println("Qual será a area de atuação do robô?");
+        area_atuacao = scanner.nextLine();
+        scanner.nextLine();
     }
     public void mover(int delta_x, int delta_y, int velocidade, String area_da_entrega){
         if(velocidade > velocidadeMax | area_da_entrega != area_atuacao){
