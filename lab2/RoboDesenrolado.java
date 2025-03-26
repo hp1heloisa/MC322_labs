@@ -6,7 +6,7 @@ class RoboDesenrolado extends RoboTerrestre{
         super();
         System.out.printf("A velocidade máxima do robô Desenrolado é de 100 km/h\n");
         velocidadeMax = 100;
-        System.out.println("Dga a forma de como o seu robô irá desviar dos obstáculos. Seja criativo, por exemplo, pulando de estrelinha");
+        System.out.println("Diga a forma de como o seu robô irá desviar dos obstáculos. Seja criativo, por exemplo, pulando de estrelinha");
         String modo_desvio = scanner.nextLine();
         this.modo_desvio = modo_desvio;
     }
