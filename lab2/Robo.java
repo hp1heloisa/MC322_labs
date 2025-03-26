@@ -3,8 +3,8 @@ class Robo {
   private String nome;
   protected int posicaoX;
   protected int posicaoY;
+  protected Scanner scanner = new Scanner(System.in);
   public Robo(){
-    Scanner scanner = new Scanner(System.in);
     System.out.printf("Diga qual é o nome do seu robô\n");
     String nome_robo = scanner.nextLine();
     System.out.printf("Aviso : Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = 0)\n");

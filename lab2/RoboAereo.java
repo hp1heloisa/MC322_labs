@@ -3,8 +3,10 @@ class RoboAereo extends Robo{
     protected int altitudeMaxima;
     public RoboAereo(){
         super();
-        this.altitude = 1;
-        this.altitudeMaxima = 2;
+        System.out.println("Em qual altidude o seu robô se encontra?");
+        altitude = scanner.nextInt();
+        System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
+        altitudeMaxima = scanner.nextInt();
     }
     public void subir(){
         if (altitude+1 <= altitudeMaxima){

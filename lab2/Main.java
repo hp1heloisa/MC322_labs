@@ -1,12 +1,12 @@
 import java.util.Scanner;
 public class Main {
   public static void main(String[] args){
+    RoboTerrestre robo_terr = new RoboTerrestre();
+    RoboAereo robo_ar = new RoboAereo();
     
     Scanner scanner = new Scanner(System.in);
     TiposRobos tiposRobos = new TiposRobos();
     int tipoRobo = scanner.nextInt();
-    RoboTerrestre robo_terr;
-    RoboAereo robo_ar;
     
     if (tipoRobo == 1){
       robo_terr = tiposRobos.terrestres();
@@ -15,7 +15,8 @@ public class Main {
 
     else {
       robo_ar= tiposRobos.aereos();
-      robo_ar.posicaoX();
+      System.out.println(robo_ar.posicaoX());
+      robo_ar.descer();
     }
     
     
