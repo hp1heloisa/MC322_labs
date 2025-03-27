@@ -1,15 +1,23 @@
 import java.util.Scanner;
 
-public class TiposRobos {
+public class TiposRobos{
     Scanner scanner = new Scanner(System.in);
     private static String[] listAereos = {"Robô Topeira"}; 
     private static String[] listTerrestre = {"Robô Desenrolado", "Robô Transportador"};
     int robo_escolhido; 
-
-    public TiposRobos () {
+    public TiposRobos(){
         System.out.println("Qual tipo de robô você quer criar?");
         System.out.println("1. terrestre");
         System.out.println("2. aéreo");
+    }
+    
+    public Robo definir_robo() {
+        int robo_escolhido = scanner.nextInt();
+        this.robo_escolhido = robo_escolhido;
+        if(robo_escolhido == 1)
+            return this.terrestres();
+        return this.aereos();
+        
     }
     public RoboAereo aereos() {
         System.out.println("Digite o número do robô escolhido:");

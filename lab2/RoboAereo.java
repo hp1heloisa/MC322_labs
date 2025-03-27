@@ -8,6 +8,10 @@ class RoboAereo extends Robo{
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
         altitudeMaxima = scanner.nextInt();
     }
+    @Override
+    public void explicar_movimentacao(){
+        System.out.println("Digite w para subir, s para descer, n para criar um novo robô e x para sair");
+    }
     public void subir(){
         if (altitude+1 <= altitudeMaxima){
             altitude++;

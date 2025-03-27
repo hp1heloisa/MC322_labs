@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Robo {
+public abstract class Robo {
   private String nome;
   protected int posicaoX;
   protected int posicaoY;
@@ -11,6 +11,8 @@ class Robo {
     posicaoX = 0;
     posicaoY = 0;
   }
+  public abstract void explicar_movimentacao();
+
   public void mover(int deltaX, int deltaY) {
     posicaoX += deltaX;
     posicaoY += deltaY; 

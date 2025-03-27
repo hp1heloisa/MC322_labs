@@ -1,27 +1,19 @@
 import java.util.Scanner;
 public class Main {
   public static void main(String[] args){
-    RoboTerrestre robo_terr = null;
-    RoboAereo robo_ar = null;
-    Robo robo = new Robo();
     Scanner scanner = new Scanner(System.in);
     TiposRobos tiposRobos = new TiposRobos();
-    int tipoRobo = scanner.nextInt();
+    Robo robo;
+    robo = tiposRobos.definir_robo();
     char movimento_robo = ' ';
+    System.out.printf("Você agora está no mundo do robô %s!", robo.exibirNome());
+    robo.explicar_movimentacao();
     
-    if (tipoRobo == 1){
-      robo = tiposRobos.terrestres();
-      System.out.printf("Você agora está no mundo do robô %s!", robo_terr.exibirNome());
-      System.out.println(" Digite a para ir para esquerda, d para ir para direita, n para criar um novo robô e x para sair");
-    }
+      
+    
 
-    else {
-      robo_ar = tiposRobos.aereos();
-      System.out.printf("Você agora está no mundo do robô %s!", robo_ar.exibirNome());
-      System.out.println("Digite w para subir, s para descer, n para criar um novo robô e x para sair");
-    }
     
-    while (movimento_robo != 'x'){
+    /*while (movimento_robo != 'x'){
       movimento_robo = scanner.next().charAt(0);
       if (movimento_robo == 'a' && tipoRobo == 1){ //TODO: pensar em um jeito melhor de fazer essa movimentação, frente tras, direita, esquerda, cima, baixo
         robo_terr.mover(-1, 0);
@@ -48,7 +40,7 @@ public class Main {
         break;
       else
         System.out.println("Movimento inválido para o seu robô");
-    }
+    }*/
   
     
 

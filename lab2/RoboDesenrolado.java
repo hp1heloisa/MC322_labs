@@ -19,5 +19,10 @@ class RoboDesenrolado extends RoboTerrestre{
             System.out.printf("Velocidade extendida, mas movimentação do robô desenrolado feita com sucesso por meio de %s\n", modo_desvio);
             }
     }
+    @Override
+    public void explicar_movimentacao(){
+        super.explicar_movimentacao();
+        
+    }
 }
     
