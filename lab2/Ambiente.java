@@ -1,3 +1,4 @@
+import java.util.Random;
 class Ambiente{
   private int largura;
   private int altura;
@@ -11,5 +12,10 @@ class Ambiente{
       return false;
     else 
       return true;
+  }
+
+  public boolean tem_obstaculo(){
+    Random aleatorio = new Random();
+    return aleatorio.nextBoolean();
   }
 }

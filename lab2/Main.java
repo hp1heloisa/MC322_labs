@@ -3,6 +3,7 @@ public class Main {
   public static void main(String[] args){
     RoboTerrestre robo_terr = null;
     RoboAereo robo_ar = null;
+    Obstaculo obstaculo = new Obstaculo();
     
     Scanner scanner = new Scanner(System.in);
     TiposRobos tiposRobos = new TiposRobos();
