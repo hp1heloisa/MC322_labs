@@ -8,8 +8,8 @@ public class Main {
     char movimento_robo = ' ';
     System.out.printf("Você agora está no mundo do robô %s!", robo.exibirNome());
     robo.explicar_movimentacao();
+    robo.movimentacao();
     
-      
     
 
     

@@ -4,6 +4,7 @@ public abstract class Robo {
   protected int posicaoX;
   protected int posicaoY;
   protected Scanner scanner = new Scanner(System.in);
+
   public Robo(){
     System.out.printf("Diga qual é o nome do seu robô\n");
     nome = scanner.nextLine();
@@ -13,9 +14,11 @@ public abstract class Robo {
   }
   public abstract void explicar_movimentacao();
 
-  public void mover(int deltaX, int deltaY) {
-    posicaoX += deltaX;
-    posicaoY += deltaY; 
+  public abstract void movimentacao();
+
+  protected void mover(int deltaX, int deltaY) {
+    this.posicaoX += deltaX;
+    this.posicaoY += deltaY; 
     exibirPosicao();
   }
   public void exibirPosicao(){

@@ -1,6 +1,4 @@
-import java.util.Scanner;
 class RoboDesenrolado extends RoboTerrestre{
-    Scanner scanner = new Scanner(System.in);
     private String modo_desvio;
     public RoboDesenrolado(){
         super();
@@ -10,19 +8,17 @@ class RoboDesenrolado extends RoboTerrestre{
         String modo_desvio = scanner.nextLine();
         this.modo_desvio = modo_desvio;
     }
-    public void mover(int deltaX, int deltaY, int velocidade){
-        posicaoX = deltaX;
-        posicaoY = deltaY;
-        if(velocidade <= velocidadeMax)
-            System.out.printf("Movimentação do robô desenrolado feita sem problemas.\n");
-        else{
-            System.out.printf("Velocidade extendida, mas movimentação do robô desenrolado feita com sucesso por meio de %s\n", modo_desvio);
-            }
+    @Override
+    protected void mover(int deltaX, int deltaY, int velocidade){
+        super.mover(deltaX, deltaY, velocidade);
     }
     @Override
     public void explicar_movimentacao(){
         super.explicar_movimentacao();
-        
+    }   
+    @Override
+    public void movimentacao(){
+        super.movimentacao();
     }
 }
     
