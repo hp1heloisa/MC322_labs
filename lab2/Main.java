@@ -3,15 +3,14 @@ public class Main {
   public static void main(String[] args){
     RoboTerrestre robo_terr = null;
     RoboAereo robo_ar = null;
-    Obstaculo obstaculo = new Obstaculo();
-    
+    Robo robo = new Robo();
     Scanner scanner = new Scanner(System.in);
     TiposRobos tiposRobos = new TiposRobos();
     int tipoRobo = scanner.nextInt();
     char movimento_robo = ' ';
     
     if (tipoRobo == 1){
-      robo_terr = tiposRobos.terrestres();
+      robo = tiposRobos.terrestres();
       System.out.printf("Você agora está no mundo do robô %s!", robo_terr.exibirNome());
       System.out.println(" Digite a para ir para esquerda, d para ir para direita, n para criar um novo robô e x para sair");
     }
