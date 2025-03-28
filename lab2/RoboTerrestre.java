@@ -18,7 +18,6 @@ public class RoboTerrestre extends Robo{
 
 
 }
-
     @Override
     public void movimentacao(){
         char movimento_robo = ' ';
@@ -27,14 +26,14 @@ public class RoboTerrestre extends Robo{
             movimento_robo = scanner.next().charAt(0);
             switch(movimento_robo) {
             case 'a':
-                this.mover(-1, 0, velocidadeatual);
-                break;
+                this.mover(-1, 0, this.velocidadeatual);
+                break;    /*Falta adicionar o metodo que eu criei no ambiente que verifica o obstaculo e melhorar essa parte */
             case 'd':
-                this.mover(1, 0, velocidadeatual);
+                this.mover(1, 0, this.velocidadeatual);
                 break;
             case 'q':
                 this.velocidadeatual += 1;
-                System.out.println("Velocidade aumentada para: " + velocidadeatual);
+                System.out.println("Velocidade aumentada para: " + this.velocidadeatual);
                 break;
             case 'x':
                 System.out.println("Encerrando movimentação...");
@@ -43,4 +42,5 @@ public class RoboTerrestre extends Robo{
                 System.out.println("Comando inválido! Use a, d, q ou x");
         }
     }
+}
 }

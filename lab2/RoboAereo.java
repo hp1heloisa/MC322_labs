@@ -12,6 +12,10 @@ class RoboAereo extends Robo{
     public void explicar_movimentacao(){
         System.out.println("Digite w para subir, s para descer, n para criar um novo robô e x para sair");
     }
+    @Override
+    public void movimentacao(){
+        System.out.printf("Provisorio\n");
+    }
     public void subir(){
         if (altitude+1 <= altitudeMaxima){
             altitude++;

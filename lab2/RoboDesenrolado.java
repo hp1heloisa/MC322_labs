@@ -1,4 +1,4 @@
-class RoboDesenrolado extends RoboTerrestre{
+public class RoboDesenrolado extends RoboTerrestre{
     private String modo_desvio;
     public RoboDesenrolado(){
         super();

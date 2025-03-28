@@ -19,7 +19,7 @@ public class TiposRobos{
         return this.aereos();
         
     }
-    public RoboAereo aereos() {
+    private RoboAereo aereos() {
         System.out.println("Digite o número do robô escolhido:");
         for (int i=0; i < listAereos.length; i++)
             System.out.println((i+1) + ". " + listAereos[i]);
@@ -30,7 +30,7 @@ public class TiposRobos{
             return new RoboTopeira();
 
     }
-    public RoboTerrestre terrestres() {
+    private RoboTerrestre terrestres() {
         System.out.println("Digite o número do robô escolhido:");
         for (int i=0; i < listTerrestre.length; i++)
             System.out.println((i+1) + ". " + listTerrestre[i]);
