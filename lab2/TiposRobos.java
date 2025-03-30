@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TiposRobos{
     Scanner scanner = new Scanner(System.in);
-    private static String[] listAereos = {"Robô Destruidor"}; 
+    private static String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"}; 
     private static String[] listTerrestre = {"Robô Desenrolado", "Robô Transportador"};
     int robo_escolhido; 
     public TiposRobos(){
@@ -27,7 +27,7 @@ public class TiposRobos{
         if (robo_escolhido == 1)
             return new RoboDestruidor(ambiente);
         else
-            return new RoboDestruidor(ambiente);
+            return new RoboTeletransportador(ambiente);
 
     }
     private RoboTerrestre terrestres(Ambiente ambiente) {

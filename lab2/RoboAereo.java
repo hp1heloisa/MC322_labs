@@ -3,8 +3,7 @@ class RoboAereo extends Robo{
     protected int altitudeMaxima;
     public RoboAereo(Ambiente ambiente){
         super(ambiente);
-        System.out.println("Em qual altidude o seu robô se encontra?");
-        altitude = scanner.nextInt();
+        altitude = 0;
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
         altitudeMaxima = scanner.nextInt();
     }
@@ -21,7 +20,7 @@ class RoboAereo extends Robo{
     public int posicaoZ() {
         return altitude;
     }
-
+    @Override
     public void identificarArea(int alt) {
         for (int y=5; y>-5; y--){
             if (posicaoY+y < 0) continue;
@@ -41,7 +40,7 @@ class RoboAereo extends Robo{
             System.out.println("");
           }
       }
-
+    @Override
     public void identificarObstaculo() {
         for (int z=-5; z<5; z++){
             if (altitude+z < 0)
@@ -50,7 +49,7 @@ class RoboAereo extends Robo{
             identificarArea(altitude+z);
         }
       }
-
+    @Override
     public void mover(int deltaX, int deltaY) {
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
         if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, altitude) ){
@@ -101,18 +100,18 @@ class RoboAereo extends Robo{
 
       }
 
-    public void subir(){
+    public void subir(int deltah){
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        boolean dentroDosLimites = ambiente.dentroDosLimites(posicaoX,  posicaoY, altitude+1);
+        boolean dentroDosLimites = ambiente.dentroDosLimites(posicaoX,  posicaoY, altitude+deltah);
         if (dentroDosLimites){
-            if (altitude+1 <= altitudeMaxima){
-                if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+1)){
-                    if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+1)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+1);
+            if (altitude+deltah < altitudeMaxima){
+                if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
+                    if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+ deltah)) {
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+deltah);
                         return;
                     }
                     else{
-                        altitude++;
+                        altitude+= deltah;
                     }
                 }else 
                     System.out.println("Há um obtáculo nessa posição!");
@@ -123,16 +122,16 @@ class RoboAereo extends Robo{
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
         atualizarAmbiente(c_0, c);
     }
-    public void descer(){
+    public void descer(int deltah){
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        if (altitude-1 >= 0){
-            if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude-1)){
-                if (ambiente.tem_robo(posicaoX,  posicaoY, altitude-1)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude-1);
+        if (altitude+deltah >= 0){
+            if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
+                if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+deltah)) {
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+deltah);
                         return;
                     }
                 else{
-                    altitude--;
+                    altitude+=deltah;
                 }
             }else 
                 System.out.println("Há um obtáculo nessa posição!");
@@ -145,7 +144,7 @@ class RoboAereo extends Robo{
     @Override
     public char movimentacao(){
         char movimento_robo = ' ';
-        System.out.printf("Teste\n");
+        System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
             switch(movimento_robo) {
@@ -162,10 +161,10 @@ class RoboAereo extends Robo{
                 this.mover(0, -1);
                 break;
             case 'u':
-                subir();
+                subir(1);
                 break;
             case 'j':
-                descer();
+                descer(1);
                 break;
             case 'p':
                 identificarObstaculo();

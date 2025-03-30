@@ -1,46 +1,38 @@
-class RoboDestruidor extends RoboAereo {
-    public RoboDestruidor(Ambiente ambiente){
+
+class RoboTeletransportador extends RoboAereo{
+    public RoboTeletransportador(Ambiente ambiente){
         super(ambiente);
     }
     @Override
     public void explicar_movimentacao(){
         super.explicar_movimentacao();
-        System.out.println("k -> para destruir o obstáculo");
+        System.out.printf("k - > para teletransportar de altitude\n");
+    }
+    @Override
+    public void subir(int deltah){
+        super.subir(deltah);
+    }
+    @Override
+    public void descer(int deltah){
+        super.descer(deltah);
     }
 
-    public void destruir() {
-        System.out.println("Indique a direção do obstáculo: a, d, w, s, u ou j?");
-        char direcao = scanner.next().charAt(0);
-        switch (direcao) {
-            case 'a':
-                ambiente.eliminaObstaculo(posicaoX-1, posicaoY, altitude);
-                break;
-            case 'd':
-                ambiente.eliminaObstaculo(posicaoX+1, posicaoY, altitude);
-                break;
-            case 'w':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY+1, altitude);
-                break;
-            case 's':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY-1, altitude);
-                break;
-            case 'u':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY, altitude+1);
-                break;
-            case 'j':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY, altitude-1);
-                break;
-            default:
-                System.out.println("Direção inválida! Use w, s, a, d, u ou j");
-                break;
+    private void teletransportar(){
+        System.out.println("Indique a posição z para qual o robô irá se teletransportar?");
+        int novaaltitude = scanner.nextInt();
+        int deltah = novaaltitude - altitude;
+        if(deltah > 0){
+            this.subir(deltah);
         }
+        else if(deltah < 0){
+            this.descer(-deltah);
+        }
+        
 
     }
-
     @Override
     public char movimentacao(){
         char movimento_robo = ' ';
-        System.out.printf("Teste\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
             switch(movimento_robo) {
@@ -63,7 +55,7 @@ class RoboDestruidor extends RoboAereo {
                 descer(1);
                 break;
             case 'k': 
-                destruir();
+                teletransportar();
                 break;
             case 'p':
                 identificarObstaculo();
@@ -80,5 +72,4 @@ class RoboDestruidor extends RoboAereo {
         }
         return movimento_robo;
     }
-    
 }

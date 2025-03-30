@@ -11,7 +11,7 @@ public abstract class Robo {
     System.out.printf("Diga qual é o nome do seu robô\n");
     nome = scanner.nextLine();
     System.out.printf("Em que direção %s se encontra? Norte, Leste, Sul ou Oeste? \n", nome);
-    System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = 0)\n");
+    System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
     posicaoX = 0;
     posicaoY = 0;
   }

@@ -22,7 +22,7 @@ public class RoboTerrestre extends Robo{
     @Override
     public char movimentacao(){
         char movimento_robo = ' ';
-        System.out.printf("Teste\n");
+        System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
             switch(movimento_robo) {
