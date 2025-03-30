@@ -46,7 +46,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 | s     | Mover para trás     | Todos                   |
 | d     | Mover para direita  | Todos                   |
 | q     | Aumentar velocidade | Terrestres              |
-| k     | Ativar habilidade   | Guindaste/Destruidor    |
+| k     | Ativar habilidade   | Todos menos o Limitado
 | u     | Subir               | Aéreos                  |
 | j     | Descer              | Aéreos                  |
 | p     | Scanear área        | Todos                   |
@@ -79,5 +79,3 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 - O ambiente é gerado aleatoriamente com 20% de obstáculos
 - Cada robô possui comportamentos únicos que podem ser explorados
 - O sistema fornece feedback durante a interação
-
-> **Dica
