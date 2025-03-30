@@ -1,82 +1,83 @@
-Seja bem ao código do lab 2! Seguem algumas orientações de explicação do código.
+# Laboratório 2 - Simulação de Robôs Inteligentes
 
-Nós fizemos 2 tipos de robôs: os aéreos e terrestres, com cada categoria possuindo dois representantes.
-Começaremos explicando os terrestres primeiro:
+## Introdução
+Seja bem-vindo ao código do Lab 2! Este projeto simula o comportamento de robôs terrestres e aéreos em um ambiente 3D com obstáculos aleatórios.
 
-Todos os robôs terrestres possuem velocidade máxima de 5km/h, definida por padrão.
-  
-* Robô Limitado: Como o nome diz, ele possui uma movimentação limitada, se restringindo a apenas 
-* movimentaçãoconvencional, nos quadro pontos cardeais, cima, baixo, direita e esquerda.
-    
-* Robô Guindaste: É um robô que possui um Guindaste em sua estrutura. Com esta funcionalidade disponível,
-* ele tem o poder  de remover de sua trajetória um obstáculo que esteja atrapalhando o seu percurso, mas
-* como ele é um robô bastante educado, ele guarda o obstáculo na posição que o robô estava ocupando anteriormente, ou
-* seja, ele troca de posição com o obstáculo.
+## Tipos de Robôs
 
-Chegou a vez dos robôs aéreos. Em relação aos robôs terrestres, os aéreos possuem uma particularidade bastante
-importante de ser lembrada: eles podem voar. Em virtude da liberdade de expressão, permitimos que o usuário escolha
-qual é a altitude máxima que o robô pode atingir. Por fim, os robôs aéreos são:
+### Robôs Terrestres
+Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 
-* Robô Destruidor: Um robô desenvolvido com uma moderna tecnologia que permite destruir apenas os obstáculos em todas
-* as direções. Então, nem perca tempo tentando destruir outros robôs, pois o sistema impedirá tal ação.
+#### Robô Limitado
+- Movimentação restrita aos quatro pontos cardeais (cima, baixo, direita, esquerda)
+- Funcionalidades básicas de movimento
 
-    *Robô Teletransportador: Após assistir ao filme Túmulo dos Vagalumes, o engenheiro de nossa empresa ficou desidratado
-pelas lágrimas derramadas e se propôs a construir uma solução para os civis conseguirem se proteger de bombardeios aéreos.
-Por isso, ele desenvolveu um robô que permite se teletransportar para outra altitude, sem trocar de posição X e Y. Logo, quando estiver vindo um bombardeio, basta que o cidadão se dirija para o céu e espere com que o ataque acabe.
+#### Robô Guindaste
+- Equipado com guindaste para manipulação de obstáculos
+- Pode trocar de posição com obstáculos no caminho
+- Mantém o ambiente organizado reposicionando os obstáculos
 
-Durante a execução do programa, há explicações o que fazer para execução do programa, porém deixo uma entrada de sugestão, porém deixarei a movimentação a cargo do usuário, pois o campo de obstáculo é gerado de forma aleatória:
+### Robôs Aéreos
+- Capacidade de voo com altitude controlável
+- Altitude máxima configurável pelo usuário
 
-1
+#### Robô Destruidor
+- Tecnologia avançada para destruição de obstáculos
+- Pode eliminar obstáculos em todas as direções
+- Sistema de segurança impede danos a outros robôs
 
-1
+#### Robô Teletransportador
+- Capacidade de teletransporte vertical
+- Mantém coordenadas X e Y durante o transporte
+- Ideal para evasão rápida de ameaças aéreas
 
-RoboLimitado
+## Guia de Uso
 
-Norte
+### Como Executar
+1. Execute o programa principal (`Main.java`)
+2. Siga as instruções interativas no console
+3. Selecione o tipo de robô desejado
 
-q  /*Se não colocarmos este q, receberá um aviso, pois o robô não consegue andar com velocidade 0/*
+### Controles Básicos
+| Tecla | Ação                | Robôs Compatíveis       |
+|-------|---------------------|-------------------------|
+| w     | Mover para frente   | Todos                   |
+| a     | Mover para esquerda | Todos                   |
+| s     | Mover para trás     | Todos                   |
+| d     | Mover para direita  | Todos                   |
+| q     | Aumentar velocidade | Terrestres              |
+| k     | Ativar habilidade   | Guindaste/Destruidor    |
+| u     | Subir               | Aéreos                  |
+| j     | Descer              | Aéreos                  |
+| p     | Scanear área        | Todos                   |
+| n     | Novo robô           | Todos                   |
+| x     | Sair                | Todos                   |
 
-/*Movimentação. Sugiro primeiro tentar se movimentar para baixo(tecla s) ou para esquerda(tecla a), pois essa são posições inválidas
-Depois, tentar se movimentar por espaços vazios e se chocar com algum obstáculo.*/
+### Sugestões de Teste
 
-n /*Criar um novo robô*/
+**Robô Limitado:**
+1. Inicie com velocidade (tecla `q`)
+2. Teste movimentos inválidos (`s`/`a` para bordas)
+3. Colida com obstáculos para ver comportamento
 
-1
+**Robô Guindaste:**
+1. Use `k` para ativar o guindaste
+2. Experimente trocar com obstáculos em diferentes posições
+3. Teste limites de velocidade
 
-2
+**Robô Destruidor:**
+1. Ajuste altitude com `u` e `j`
+2. Use `p` para scanear obstáculos
+3. Destrua obstáculos com `k` em várias direções
 
-RoboGuindaste
+**Robô Teletransportador:**
+1. Teste teletransporte (`k`) para várias altitudes
+2. Experimente altitudes extremas (valores negativos ou acima do máximo)
+3. Combine com movimentos horizontais
 
-Leste
+## Observações
+- O ambiente é gerado aleatoriamente com 20% de obstáculos
+- Cada robô possui comportamentos únicos que podem ser explorados
+- O sistema fornece feedback durante a interação
 
-q
-
-/*Movimentação. Sugiro utilizar a tecla k, pois ela é responsável pelo poder do robô guindaste e assim, receberá as instruções necessárias. Também, é interessante, apertar a tecla q mais algumas vezes até ultrapassar o limite de velocidade para ver o que acontece*/
-
-n
-
-2
-
-1
-
-RoboDestruidor
-
-Sul
-
-5
-
-/*Movimentação. Sugiro testar a movimentação em relação a altitude(tecla u--subida e tecla j--descida). OBS: às vezes pode acontecer de ter um obstáculo em cima. Para achar uma posição que o robô possa subir com certeza, basta apertar a tecla p que ela scaneia a área, inclusive as altitudes acima. E também há o poder k de destruir obstáculos. Ao uilizar o poder, o usuário poderá atirar em qualquer direção com as mesmas teclas de movimentação*/
-
-n
-
-2
-
-2
-
-RoboTeletransportador
-
-Oeste
-
-30
-
-/*Movimentação. Para finalizar, de inédito apenas temos o poder de teletransporte que é com a tecla k. Então, teste o teletransporte para várias altitudes, inclusive para altitudes inexistentes, como -20 ou 59*/
+> **Dica
