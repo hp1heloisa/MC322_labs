@@ -1,7 +1,7 @@
 # Laboratório 2 - Simulação de Robôs Inteligentes
 
 ## Introdução
-Seja bem-vindo a explicação dao código do Lab 2!
+Seja bem-vindo a explicação do código do Lab 2!
 
 ## Tipos de Robôs
 
