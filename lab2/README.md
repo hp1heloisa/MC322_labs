@@ -1,7 +1,7 @@
 # Laboratório 2 - Simulação de Robôs Inteligentes
 
 ## Introdução
-Seja bem-vindo ao código do Lab 2! Este projeto simula o comportamento de robôs terrestres e aéreos em um ambiente 3D com obstáculos aleatórios.
+Seja bem-vindo a explicação dao código do Lab 2!
 
 ## Tipos de Robôs
 
