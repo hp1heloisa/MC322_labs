@@ -40,10 +40,9 @@ class RoboDestruidor extends RoboAereo {
     @Override
     public char movimentacao(){
         char movimento_robo = ' ';
-        System.out.printf("Teste\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo !='n')
+            if (movimento_robo != 'x' && movimento_robo !='n' && movimento_robo !='k')
                 explicar_movimentacao();
             switch(movimento_robo) {
             case 'a':

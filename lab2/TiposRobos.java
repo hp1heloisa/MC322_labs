@@ -5,9 +5,10 @@ public class TiposRobos{
     private static String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"}; 
     private static String[] listTerrestre = {"Robô Limitado", "Robô Guindaste"};
     int robo_escolhido; 
-    public TiposRobos(){
+    public TiposRobos(){ //função construtora
     }
     
+    /**Método responsável por retornar qual é a classe do nosso robô, se é aéreo ou se é terrestre */
     public Robo definir_robo(Ambiente ambiente) {
         System.out.println("Qual tipo de robô você quer criar?");
         System.out.println("1. terrestre");
@@ -19,6 +20,7 @@ public class TiposRobos{
         return this.aereos(ambiente);
         
     }
+    /**Método responsável por selecionar qual é o tipo de robô aéreo selecionado*/
     private RoboAereo aereos(Ambiente ambiente) {
         System.out.println("Digite o número do robô escolhido:");
         for (int i=0; i < listAereos.length; i++)
@@ -30,6 +32,7 @@ public class TiposRobos{
             return new RoboTeletransportador(ambiente);
 
     }
+    /**Método responsável por selecionar qual é o tipo de robô terrestre selecionado*/
     private RoboTerrestre terrestres(Ambiente ambiente) {
         System.out.println("Digite o número do robô escolhido:");
         for (int i=0; i < listTerrestre.length; i++)

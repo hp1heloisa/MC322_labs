@@ -1,9 +1,11 @@
 public class RoboTerrestre extends Robo{
     protected int velocidadeMax;
-    protected int velocidadeatual;
+    protected int velocidadeatual=0;
     
     public RoboTerrestre(Ambiente ambiente){
-        super(ambiente);   
+        super(ambiente);
+        System.out.println("Qual será a velocidade máxima do seu robô? Seu robô será iniciado com velocidade 0");
+        velocidadeMax = scanner.nextInt();
     }
     @Override
     public void explicar_movimentacao(){
@@ -15,10 +17,22 @@ public class RoboTerrestre extends Robo{
     }
     protected void mover(int deltaX, int deltaY, int velocidade){ 
         if (velocidade <= velocidadeMax){
-            super.mover(deltaX, deltaY);
+            if (velocidadeatual == 0)
+                System.out.println("Seu robô se encontra com velocidade 0, digite q para aumentar sua velocidade e começar a movê-lo");
+            else
+                super.mover(deltaX, deltaY);
       }
 
     }
+
+    protected void setVelocidade(int vel) {
+        if (vel <= velocidadeMax) {
+            velocidadeatual = vel;
+            System.out.println("Velocidade atualizada para: " + velocidadeatual);
+        } else 
+        System.out.printf("Não foi possível atualizar sua velocidade, pois a velocidade máxima é de %d! Sua atual velocidade é %d\n", velocidadeMax, velocidadeatual);
+    }
+
     @Override
     public char movimentacao(){
         char movimento_robo = ' ';
@@ -41,8 +55,7 @@ public class RoboTerrestre extends Robo{
                 this.mover(0, -1, this.velocidadeatual);
                 break;
             case 'q':
-                this.velocidadeatual += 1;
-                System.out.println("Velocidade aumentada para: " + this.velocidadeatual);
+                setVelocidade(velocidadeatual+1);
                 break;
             case 'p':
                 identificarObstaculo();
