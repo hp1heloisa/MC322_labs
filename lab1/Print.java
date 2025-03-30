@@ -13,7 +13,7 @@ class Print{
         for(int i = 0; i < num_robos; i++){
             lista_Robos[i].exibirNome();
             lista_Robos[i].exibirPosicao();
-            if(ambiente.dentroDosLimites(lista_Robos[i].posicaoX(), lista_Robos[i].posicaoY()))
+            if(ambiente.dentroDosLimites(lista_Robos[i].getposicaoX(), lista_Robos[i].getposicaoY()))
                 System.out.println("O robô está dentro dos limites\n");
             else
                 System.out.println("O robô não está dentro dos limites\n");

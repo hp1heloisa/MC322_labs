@@ -1,14 +1,25 @@
-class RoboAereo extends Robo{
+
+class RoboAereo extends Robo {
+
     protected int altitude;
     protected int altitudeMaxima;
-    public RoboAereo(Ambiente ambiente){
+
+    /**
+     * Função construtura que herda do ambiente, definimos como padrão a
+     * altitude como 0 e perguntamos qual será a altitude máxima
+     */
+    public RoboAereo(Ambiente ambiente) {
         super(ambiente);
         altitude = 0;
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
         altitudeMaxima = scanner.nextInt();
     }
+
+    /**
+     * Função que explica a movimentação do robô aéreo
+     */
     @Override
-    public void explicar_movimentacao(){
+    public void explicar_movimentacao() {
         System.out.println("Você pode movimentar seu robô usando os seguintes comandos: ");
         System.out.println("w -> ir para frente; s -> ir para trás");
         System.out.println("d -> ir para direita; a -> ir para a esqueda");
@@ -17,57 +28,71 @@ class RoboAereo extends Robo{
         System.out.println("n -> criar um novo robô; x -> para sair");
     }
 
-    public int posicaoZ() {
+    public int getposicaoZ() {
         return altitude;
     }
+
     @Override
     public void identificarArea(int alt) {
-        for (int y=5; y>-5; y--){
-            if (posicaoY+y < 0) continue;
-            for (int x=-5; x<5; x++){
-                if (posicaoX+x < 0) continue;
-                if (ambiente.dentroDosLimites(posicaoX + x,  posicaoY + y, alt) && ambiente.tem_obstaculo(posicaoX + x,  posicaoY + y, alt)){
+        for (int y = 5; y > -5; y--) {
+            if (posicaoY + y < 0) {
+                continue;
+            }
+            for (int x = -5; x < 5; x++) {
+                if (posicaoX + x < 0) {
+                    continue;
+                }
+                if (ambiente.dentroDosLimites(posicaoX + x, posicaoY + y, alt) && ambiente.tem_obstaculo(posicaoX + x, posicaoY + y, alt)) {
                     System.out.printf("X");
-                }else {
-                  if (x==0 && y==0 && alt == altitude)
-                    System.out.printf("R");
-                  else 
-                    if (ambiente.tem_robo(posicaoX + x,  posicaoY + y, alt))
+                } else {
+                    if (x == 0 && y == 0 && alt == altitude) {
+                        System.out.printf("R");
+                    } else if (ambiente.tem_robo(posicaoX + x, posicaoY + y, alt)) {
                         System.out.printf("r");
-                    else System.out.printf("*");
+                    } else {
+                        System.out.printf("*");
+                    }
                 }
             }
             System.out.println("");
-          }
-      }
-    @Override
-    public void identificarObstaculo() {
-        for (int z=-5; z<5; z++){
-            if (altitude+z < 0)
-                continue;
-            System.out.printf("Mapa dos obstáculos encontrados em um raio de 5m na altitude %d\n", altitude+z);
-            identificarArea(altitude+z);
         }
-      }
+    }
+
+    /**
+     * Método que identifica os obstaculos em um raio de 5m e no caso do robô
+     * aéreo, ele identifica os obstaculos no raio de 5 altitudes também
+     */
+    @Override
+
+    public void identificarObstaculo() {
+        for (int z = -5; z < 5; z++) {
+            if (altitude + z < 0) {
+                continue;
+            }
+            System.out.printf("Mapa dos obstáculos encontrados em um raio de 5m na altitude %d\n", altitude + z);
+            identificarArea(altitude + z);
+        }
+    }
+
     @Override
     public void mover(int deltaX, int deltaY) {
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, altitude) ){
+        if (ambiente.dentroDosLimites(posicaoX + deltaX, posicaoY + deltaY, altitude)) {
             int passo = 1;
             if (deltaX < 0) {
                 deltaX *= -1;
                 passo = -1;
-            } 
-            while (deltaX > 0){
-                if (ambiente.tem_obstaculo(posicaoX + passo,  posicaoY, altitude)){
-                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", posicaoX+passo, posicaoY, altitude);
+            }
+            while (deltaX > 0) {
+                if (ambiente.tem_obstaculo(posicaoX + passo, posicaoY, altitude)) {
+                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", posicaoX + passo, posicaoY, altitude);
                     return;
-                }else {
-                    if (ambiente.tem_robo(posicaoX + passo,  posicaoY, altitude)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX+passo, posicaoY, altitude);
+                } else {
+                    if (ambiente.tem_robo(posicaoX + passo, posicaoY, altitude)) {
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX + passo, posicaoY, altitude);
                         return;
-                    }else{
-                        posicaoX+=passo;
+                    } else {
+                        posicaoX += passo;
                         deltaX--;
                     }
                 }
@@ -77,114 +102,126 @@ class RoboAereo extends Robo{
                 deltaY *= -1;
                 passo = -1;
             }
-            while (deltaY > 0){
-                if (ambiente.tem_obstaculo(posicaoX, posicaoY+passo, altitude)){
-                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", posicaoX, posicaoY+passo, altitude);
+            while (deltaY > 0) {
+                if (ambiente.tem_obstaculo(posicaoX, posicaoY + passo, altitude)) {
+                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", posicaoX, posicaoY + passo, altitude);
                     return;
-                }else {
-                    if (ambiente.tem_robo(posicaoX,  posicaoY+passo, altitude)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY+passo, altitude);
+                } else {
+                    if (ambiente.tem_robo(posicaoX, posicaoY + passo, altitude)) {
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY + passo, altitude);
                         return;
-                    }
-                    else{
-                        posicaoY+=passo;
+                    } else {
+                        posicaoY += passo;
                         deltaY--;
                     }
-                    
+
                 }
             }
-        } else
-          System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-        Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
-        atualizarAmbiente(c_0, c);
-
-      }
-
-    public void subir(int deltah){
-        Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        boolean dentroDosLimites = ambiente.dentroDosLimites(posicaoX,  posicaoY, altitude+deltah);
-        if (dentroDosLimites){
-            if (altitude+deltah <= altitudeMaxima){
-                if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
-                    if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+ deltah)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+deltah);
-                        return;
-                    }
-                    else{
-                        altitude+= deltah;
-                    }
-                }else 
-                    System.out.println("Há um obtáculo nessa posição!");
-            }
-            else {
+        } else {
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
         }
-        } 
-        
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
-        System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
+
     }
-    public void descer(int deltah){ 
+
+    /**
+     * Método que sube a altitude de um robô aéreo
+     */
+    public void subir(int deltah) {
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        if (altitude+deltah >= 0){
-            if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
-                if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+deltah)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+deltah);
+        boolean dentroDosLimites = ambiente.dentroDosLimites(posicaoX, posicaoY, altitude + deltah);
+        if (dentroDosLimites) {
+            if (altitude + deltah <= altitudeMaxima) {
+                if (!ambiente.tem_obstaculo(posicaoX, posicaoY, altitude + deltah)) {
+                    if (ambiente.tem_robo(posicaoX, posicaoY, altitude + deltah)) {
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude + deltah);
                         return;
+                    } else {
+                        altitude += deltah;
                     }
-                else{
-                    altitude+=deltah;
+                } else {
+                    System.out.println("Há um obtáculo nessa posição!");
                 }
-            }else 
-                System.out.println("Há um obtáculo nessa posição!");
-        } else 
-            System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+            } else {
+                System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+            }
+        }
+
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
         System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
     }
 
+    /**
+     * Método que faz o movimento de diminuição de altitude do robô
+     */
+    public void descer(int deltah) {
+        Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
+        if (altitude + deltah >= 0) {
+            if (!ambiente.tem_obstaculo(posicaoX, posicaoY, altitude + deltah)) {
+                if (ambiente.tem_robo(posicaoX, posicaoY, altitude + deltah)) {
+                    System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude + deltah);
+                    return;
+                } else {
+                    altitude += deltah;
+                }
+            } else {
+                System.out.println("Há um obtáculo nessa posição!");
+            }
+        } else {
+            System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+        }
+        Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
+        System.out.printf("Altitude atual: %d\n", altitude);
+        atualizarAmbiente(c_0, c);
+    }
+
+    /**
+     * Implementação da movimentação do robô aéreo
+     */
     @Override
-    public char movimentacao(){
+    public char movimentacao() {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
-        while(movimento_robo != 'x' && movimento_robo != 'n'){
+        while (movimento_robo != 'x' && movimento_robo != 'n') {
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo !='n')
+            if (movimento_robo != 'x' && movimento_robo != 'n') {
                 explicar_movimentacao();
-            switch(movimento_robo) {
-            case 'a':
-                this.mover(-1, 0);
-                break;   
-            case 'd':
-                this.mover(1, 0);
-                break;
-            case 'w':
-                this.mover(0, 1);
-                break;
-            case 's':
-                this.mover(0, -1);
-                break;
-            case 'u':
-                subir(1);
-                break;
-            case 'j':
-                descer(-1);
-                break;
-            case 'p':
-                identificarObstaculo();
-                break;
-            case 'x':
-                System.out.println("Encerrando movimentação...");
-                break;
-            case 'n':
-                break;
-            default:
-                System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo !='n')
+            switch (movimento_robo) {
+                case 'a':
+                    this.mover(-1, 0);
+                    break;
+                case 'd':
+                    this.mover(1, 0);
+                    break;
+                case 'w':
+                    this.mover(0, 1);
+                    break;
+                case 's':
+                    this.mover(0, -1);
+                    break;
+                case 'u':
+                    subir(1);
+                    break;
+                case 'j':
+                    descer(-1);
+                    break;
+                case 'p':
+                    identificarObstaculo();
+                    break;
+                case 'x':
+                    System.out.println("Encerrando movimentação...");
+                    break;
+                case 'n':
+                    break;
+                default:
+                    System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
+            }
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n') {
                 identificarArea(altitude);
+            }
         }
         return movimento_robo;
     }
