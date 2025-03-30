@@ -1,7 +1,6 @@
 import java.util.Scanner;
 public abstract class Robo {
   protected String nome;
-  protected String direcao;
   protected int posicaoX;
   protected int posicaoY;
   protected Scanner scanner = new Scanner(System.in);
@@ -12,7 +11,6 @@ public abstract class Robo {
     System.out.printf("Diga qual é o nome do seu robô\n");
     nome = scanner.nextLine();
     System.out.printf("Em que direção %s se encontra? Norte, Leste, Sul ou Oeste? \n", nome);
-    direcao = scanner.nextLine();
     System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = 0)\n");
     posicaoX = 0;
     posicaoY = 0;
@@ -23,6 +21,7 @@ public abstract class Robo {
 
   protected void mover(int deltaX, int deltaY) {
     Coordenada c_0 = new Coordenada(posicaoX, posicaoY, 0);
+    this.explicar_movimentacao();
     if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, 0) ){
       int passo = 1;
       if (deltaX < 0) {
