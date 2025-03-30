@@ -25,7 +25,10 @@ class RoboTeletransportador extends RoboAereo{
             this.subir(deltah);
         }
         else if(deltah < 0){
-            this.descer(-deltah);
+            this.descer(deltah);
+        }
+        else{
+            System.out.printf("Mesma posição que o robô se encontrava anteriormente.\n");
         }
         
 
@@ -52,7 +55,7 @@ class RoboTeletransportador extends RoboAereo{
                 subir(1);
                 break;
             case 'j':
-                descer(1);
+                descer(-1);
                 break;
             case 'k': 
                 teletransportar();

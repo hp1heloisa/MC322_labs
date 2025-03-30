@@ -52,6 +52,7 @@ class RoboAereo extends Robo{
     @Override
     public void mover(int deltaX, int deltaY) {
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
+        this.explicar_movimentacao();
         if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, altitude) ){
             int passo = 1;
             if (deltaX < 0) {
@@ -104,7 +105,7 @@ class RoboAereo extends Robo{
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
         boolean dentroDosLimites = ambiente.dentroDosLimites(posicaoX,  posicaoY, altitude+deltah);
         if (dentroDosLimites){
-            if (altitude+deltah < altitudeMaxima){
+            if (altitude+deltah <= altitudeMaxima){
                 if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
                     if (ambiente.tem_robo(posicaoX,  posicaoY, altitude+ deltah)) {
                         System.out.printf("Há um robô na posição: (%d,%d,%d)\n", posicaoX, posicaoY, altitude+deltah);
@@ -116,13 +117,17 @@ class RoboAereo extends Robo{
                 }else 
                     System.out.println("Há um obtáculo nessa posição!");
             }
-        } else {
+            else {
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
         }
+        } 
+        
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
+        System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
+        this.explicar_movimentacao();
     }
-    public void descer(int deltah){
+    public void descer(int deltah){ 
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
         if (altitude+deltah >= 0){
             if (!ambiente.tem_obstaculo(posicaoX,  posicaoY, altitude+deltah)){
@@ -138,7 +143,9 @@ class RoboAereo extends Robo{
         } else 
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
+        System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
+        this.explicar_movimentacao();
     }
 
     @Override

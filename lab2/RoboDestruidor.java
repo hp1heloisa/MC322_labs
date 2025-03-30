@@ -60,7 +60,7 @@ class RoboDestruidor extends RoboAereo {
                 subir(1);
                 break;
             case 'j':
-                descer(1);
+                descer(-1);
                 break;
             case 'k': 
                 destruir();

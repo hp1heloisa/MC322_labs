@@ -1,6 +1,6 @@
-import java.util.Random;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 
 class Ambiente{
   private int comprimentoX,comprimentoY, altura ;
