@@ -25,6 +25,8 @@ public class RoboTerrestre extends Robo{
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
+            if (movimento_robo != 'x' && movimento_robo !='n')
+                explicar_movimentacao();
             switch(movimento_robo) {
                 case 'a':
                 this.mover(-1, 0, this.velocidadeatual);
@@ -53,7 +55,8 @@ public class RoboTerrestre extends Robo{
             default:
                 System.out.println("Comando inválido! Use a, d, q ou x");
             }
-            identificarArea(0);
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo !='n')
+                identificarArea(0);
         }
         return movimento_robo;
     }

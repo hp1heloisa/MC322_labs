@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class TiposRobos{
     Scanner scanner = new Scanner(System.in);
     private static String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"}; 
-    private static String[] listTerrestre = {"Robô Desenrolado", "Robô Transportador"};
+    private static String[] listTerrestre = {"Robô Limitado", "Robô Guindaste"};
     int robo_escolhido; 
     public TiposRobos(){
     }
@@ -36,8 +36,8 @@ public class TiposRobos{
             System.out.println((i+1) + ". " + listTerrestre[i]);
         robo_escolhido = scanner.nextInt();
         if (robo_escolhido == 1)
-            return new RoboDesenrolado(ambiente);
+            return new RoboLimitado(ambiente);
         else 
-            return new RoboTransportador(ambiente);
+            return new RoboGuindaste(ambiente);
     }
 }

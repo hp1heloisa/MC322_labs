@@ -21,7 +21,6 @@ public abstract class Robo {
 
   protected void mover(int deltaX, int deltaY) {
     Coordenada c_0 = new Coordenada(posicaoX, posicaoY, 0);
-    this.explicar_movimentacao();
     if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, 0) ){
       int passo = 1;
       if (deltaX < 0) {

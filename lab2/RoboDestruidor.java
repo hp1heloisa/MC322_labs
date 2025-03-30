@@ -43,6 +43,8 @@ class RoboDestruidor extends RoboAereo {
         System.out.printf("Teste\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
+            if (movimento_robo != 'x' && movimento_robo !='n')
+                explicar_movimentacao();
             switch(movimento_robo) {
             case 'a':
                 this.mover(-1, 0);
@@ -76,7 +78,8 @@ class RoboDestruidor extends RoboAereo {
             default:
                 System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
             }
-            identificarArea(altitude);
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo !='n')
+                identificarArea(altitude);
         }
         return movimento_robo;
     }

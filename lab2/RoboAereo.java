@@ -52,7 +52,6 @@ class RoboAereo extends Robo{
     @Override
     public void mover(int deltaX, int deltaY) {
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
-        this.explicar_movimentacao();
         if (ambiente.dentroDosLimites(posicaoX + deltaX,  posicaoY + deltaY, altitude) ){
             int passo = 1;
             if (deltaX < 0) {
@@ -125,7 +124,6 @@ class RoboAereo extends Robo{
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
         System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
-        this.explicar_movimentacao();
     }
     public void descer(int deltah){ 
         Coordenada c_0 = new Coordenada(posicaoX, posicaoY, altitude);
@@ -145,7 +143,6 @@ class RoboAereo extends Robo{
         Coordenada c = new Coordenada(posicaoX, posicaoY, altitude);
         System.out.printf("Altitude atual: %d\n", altitude);
         atualizarAmbiente(c_0, c);
-        this.explicar_movimentacao();
     }
 
     @Override
@@ -154,6 +151,8 @@ class RoboAereo extends Robo{
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while(movimento_robo != 'x' && movimento_robo != 'n'){
             movimento_robo = scanner.next().charAt(0);
+            if (movimento_robo != 'x' && movimento_robo !='n')
+                explicar_movimentacao();
             switch(movimento_robo) {
             case 'a':
                 this.mover(-1, 0);
@@ -171,7 +170,7 @@ class RoboAereo extends Robo{
                 subir(1);
                 break;
             case 'j':
-                descer(1);
+                descer(-1);
                 break;
             case 'p':
                 identificarObstaculo();
@@ -184,7 +183,8 @@ class RoboAereo extends Robo{
             default:
                 System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
             }
-            identificarArea(altitude);
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo !='n')
+                identificarArea(altitude);
         }
         return movimento_robo;
     }
