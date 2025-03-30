@@ -4,21 +4,21 @@ Nós fizemos 2 tipos de robôs: os aéreos e terrestres, com cada categoria poss
 Começaremos explicando os terrestres primeiro:
 
 Todos os robôs terrestres possuem velocidade máxima de 5km/h, definida por padrão.
+  
+* Robô Limitado: Como o nome diz, ele possui uma movimentação limitada, se restringindo a apenas 
+* movimentaçãoconvencional, nos quadro pontos cardeais, cima, baixo, direita e esquerda.
     
-    *Robô Limitado: Como o nome diz, ele possui uma movimentação limitada, se restringindo a apenas a movimentação
-convencional, nos quadro pontos cardeais, cima, baixo, direita e esquerda.
-    
-    * Robô Guindaste: É um robô que possui um Guindaste em sua estrutura. Com esta funcionalidade disponível,
-ele tem o poder  de remover de sua trajetória um obstáculo que esteja atrapalhando o seu percurso, mas
-como ele é um robô bastante educado, ele guarda o obstáculo na posição que o robô estava ocupando anteriormente, ou
-seja, ele troca de posição com o obstáculo.
+* Robô Guindaste: É um robô que possui um Guindaste em sua estrutura. Com esta funcionalidade disponível,
+* ele tem o poder  de remover de sua trajetória um obstáculo que esteja atrapalhando o seu percurso, mas
+* como ele é um robô bastante educado, ele guarda o obstáculo na posição que o robô estava ocupando anteriormente, ou
+* seja, ele troca de posição com o obstáculo.
 
 Chegou a vez dos robôs aéreos. Em relação aos robôs terrestres, os aéreos possuem uma particularidade bastante
 importante de ser lembrada: eles podem voar. Em virtude da liberdade de expressão, permitimos que o usuário escolha
 qual é a altitude máxima que o robô pode atingir. Por fim, os robôs aéreos são:
 
-    *Robô Destruidor: Um robô desenvolvido com uma moderna tecnologia que permite destruir apenas os obstáculos em todas
-as direções. Então, nem perca tempo tentando destruir outros robôs, pois o sistema impedirá tal ação.
+* Robô Destruidor: Um robô desenvolvido com uma moderna tecnologia que permite destruir apenas os obstáculos em todas
+* as direções. Então, nem perca tempo tentando destruir outros robôs, pois o sistema impedirá tal ação.
 
     *Robô Teletransportador: Após assistir ao filme Túmulo dos Vagalumes, o engenheiro de nossa empresa ficou desidratado
 pelas lágrimas derramadas e se propôs a construir uma solução para os civis conseguirem se proteger de bombardeios aéreos.
