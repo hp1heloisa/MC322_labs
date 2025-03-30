@@ -1,7 +1,7 @@
 public class RoboDesenrolado extends RoboTerrestre{
     private String modo_desvio;
-    public RoboDesenrolado(){
-        super();
+    public RoboDesenrolado(Ambiente ambiente){
+        super(ambiente);
         System.out.printf("A velocidade máxima do robô Desenrolado é de 100 km/h\n");
         velocidadeMax = 100;
         System.out.println("Diga a forma de como o seu robô irá desviar dos obstáculos. Seja criativo, por exemplo, pulando de estrelinha");
@@ -17,8 +17,8 @@ public class RoboDesenrolado extends RoboTerrestre{
         super.explicar_movimentacao();
     }   
     @Override
-    public void movimentacao(){
-        super.movimentacao();
+    public char movimentacao(){
+        return super.movimentacao();
     }
 }
     

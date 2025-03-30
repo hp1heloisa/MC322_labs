@@ -1,7 +1,7 @@
 class RoboTransportador extends RoboTerrestre{
     private String area_atuacao;
-    public RoboTransportador(){
-        super();
+    public RoboTransportador(Ambiente ambiente){
+        super(ambiente);
         System.err.println("Qual será a area de atuação do robô?");
         area_atuacao = scanner.nextLine();
         scanner.nextLine();
