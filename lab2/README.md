@@ -34,7 +34,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 ## Guia de Uso
 
 ### Como Executar
-1. Execute o programa principal (`Main.java`)
+1. Execute o programa principal
 2. Siga as instruções interativas no console
 3. Selecione o tipo de robô desejado
 
@@ -66,16 +66,11 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 3. Teste limites de velocidade
 
 **Robô Destruidor:**
-1. Ajuste altitude com `u` e `j`
+1. Ajuste altitude com `u`(para cima) e `j`(para baixo)
 2. Use `p` para scanear obstáculos
 3. Destrua obstáculos com `k` em várias direções
 
 **Robô Teletransportador:**
-1. Teste teletransporte (`k`) para várias altitudes
+1. Teste teletransporte (tecla `k`) para várias altitudes
 2. Experimente altitudes extremas (valores negativos ou acima do máximo)
 3. Combine com movimentos horizontais
-
-## Observações
-- O ambiente é gerado aleatoriamente com 20% de obstáculos
-- Cada robô possui comportamentos únicos que podem ser explorados
-- O sistema fornece feedback durante a interação
