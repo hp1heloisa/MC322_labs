@@ -28,13 +28,13 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 
 #### Robô Teletransportador
 - Capacidade de teletransporte vertical
-- Mantém coordenadas X e Y durante o transporte
+- Mantém coordenadas X e Y durante o teletransporte
 - Ideal para evasão rápida de ameaças aéreas
 
 ## Guia de Uso
 
 ### Como Executar
-1. Execute o programa principal
+1. Execute o programa principal, rodando `./script.sh` no terminal
 2. Siga as instruções interativas no console
 3. Selecione o tipo de robô desejado
 
@@ -66,7 +66,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 3. Teste limites de velocidade
 
 **Robô Destruidor:**
-1. Ajuste altitude com `u`(para cima) e `j`(para baixo)
+1. Ajuste altitude com `u` (para cima) e `j` (para baixo)
 2. Use `p` para scanear obstáculos
 3. Destrua obstáculos com `k` em várias direções
 
