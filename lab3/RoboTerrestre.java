@@ -1,7 +1,7 @@
 
 public class RoboTerrestre extends Robo {
 
-    protected int velocidadeMax;
+    protected int velocidadeMax = 100;
     protected int velocidadeatual = 0;
 
     /**

@@ -1,14 +1,14 @@
 
+import java.io.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 
 class Ambiente {
 
-    private int comprimentoX, comprimentoY, altura, largura;
+    private int comprimentoX, comprimentoY, altura;
     private char[][][] ambiente;
     private ArrayList<Robo> listaRobos;
-    private ArrayList<Obstaculo> obstaculos;
 
     /**
      * Função construtura que define os comprimentos iniciais do ambiente,
@@ -23,15 +23,61 @@ class Ambiente {
         /**
          * aleatorio, pois a chance de ter um obstáculo ou é de 10%
          */
-       /**  Random aleatorio = new Random();
-       **/
+        Random aleatorio = new Random();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
-                    ambiente[i][j][k] = '*';
+                    ambiente[i][j][k] = (aleatorio.nextDouble() < 0.1) ? 'X' : '*';
+
                 }
             }
         }
+        /**
+         * Chance de 10 % de ter Obstáculo = X, campo livre = *
+         */
+    }
+
+    public Ambiente(String arq) throws IOException {
+        listaRobos = new ArrayList<>();
+        carregar_o_ambiente(arq);
+    }
+
+    public void salvar_o_ambiente(String ambiente_padrao) throws IOException {
+        BufferedWriter arq = new BufferedWriter(new FileWriter("arq.txt"));
+        arq.write(comprimentoX + " " + comprimentoY + " " + altura + "\n");
+        for (int k = 0; k < altura; k++) {
+            for (int j = 0; j < comprimentoY; j++) {
+                for (int i = 0; i < comprimentoX; i++) {
+                    arq.write(ambiente[i][j][k]);
+                }
+                arq.write("\n");
+            }
+            arq.write("---\n");
+        }
+        arq.close();
+    }
+
+    public final void carregar_o_ambiente(String arquivo) throws IOException {
+        BufferedReader arq = new BufferedReader(new FileReader("arq.txt"));
+        String[] dimensoes = arq.readLine().split(" ");
+
+        comprimentoX = Integer.parseInt(dimensoes[0]);
+        comprimentoY = Integer.parseInt(dimensoes[1]);
+        altura = Integer.parseInt(dimensoes[2]);
+
+        ambiente = new char[comprimentoX][comprimentoY][altura];
+
+        for (int z = 0; z < altura; z++) {
+            for (int y = 0; y < comprimentoY; y++) {
+                String linha = arq.readLine();
+                for (int x = 0; x < comprimentoX; x++) {
+                    ambiente[x][y][z] = linha.charAt(x);
+                }
+            }
+            arq.readLine(); /** Para ler a separação (---) */
+        }
+
+        arq.close();
     }
 
     /**

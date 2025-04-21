@@ -1,8 +1,11 @@
 
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
-        Ambiente ambiente = new Ambiente(30, 40, 100);
+    public static void main(String[] args) throws IOException {
+        Ambiente ambiente = new Ambiente("arq.txt");
+        
         TiposRobos tiposRobos = new TiposRobos();
         Robo robo;
         char estado = ' ';
