@@ -19,22 +19,22 @@ class RoboDestruidor extends RoboAereo {
         char direcao = scanner.next().charAt(0);
         switch (direcao) {
             case 'a':
-                ambiente.eliminaObstaculo(posicaoX - 1, posicaoY, altitude);
+                ambiente.eliminaObstaculo(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
                 break;
             case 'd':
-                ambiente.eliminaObstaculo(posicaoX + 1, posicaoY, altitude);
+                ambiente.eliminaObstaculo(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
                 break;
             case 'w':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY + 1, altitude);
+                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
                 break;
             case 's':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY - 1, altitude);
+                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
                 break;
             case 'u':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY, altitude + 1);
+                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + 1);
                 break;
             case 'j':
-                ambiente.eliminaObstaculo(posicaoX, posicaoY, altitude - 1);
+                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() - 1);
                 break;
             default:
                 System.out.println("Direção inválida! Use w, s, a, d, u ou j");
@@ -85,7 +85,7 @@ class RoboDestruidor extends RoboAereo {
                     System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n') {
-                identificarArea(altitude);
+                identificarArea(coordenada.getz());
             }
         }
         return movimento_robo;

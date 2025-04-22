@@ -109,7 +109,7 @@ class Ambiente {
                 break;
             }
         }
-        ambiente[r.posicaoX][r.posicaoY][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
+        ambiente[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
     }
 
     /**
@@ -174,21 +174,17 @@ class Ambiente {
      * Método que retorna um boolenao se o robô Guidandaste que é responsável
      * por trocar a sua posição com um obstáculo, pode fazer tal operação
      */
-    public boolean trocarObstaculo(Coordenada robo, Coordenada obstaculo) {
+    public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
         if (dentroDosLimites(obstaculo.getx(), obstaculo.gety(), obstaculo.getz())) {
-            if (tem_robo(obstaculo.getx(), obstaculo.gety(), obstaculo.getz())) {
-                System.out.println("Não é possível mover outros robôs, seja educado e peça licença!");
-                return false;
-            } else {
-                ambiente[robo.getx()][robo.gety()][robo.getz()] = 'X';
+                this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
                 ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
                 return true;
             }
-        } else {
-            System.out.println("Essa posiçao encontra-se fora dos limites!");
-            return false;
+        
+        System.out.println("Essa posiçao encontra-se fora dos limites!");
+        return false;
         }
-    }
+
 
     public void print_coordenada(int x,int y,int z){
         System.out.printf("%c", this.ambiente[x][y][z]);

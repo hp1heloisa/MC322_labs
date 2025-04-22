@@ -38,4 +38,13 @@ public class Coordenada {
     public int getz() {
         return z;
     }
+    public void setx(int x){
+        this.x = x;
+    }
+    public void sety(int y){
+        this.y = y;
+    }
+    public void setz(int z){
+        this.z = z;
+    }
 }

@@ -28,7 +28,7 @@ class RoboTeletransportador extends RoboAereo {
     private void teletransportar() {
         System.out.println("Indique a posição z para qual o robô irá se teletransportar?");
         int novaaltitude = scanner.nextInt();
-        int deltah = novaaltitude - altitude;
+        int deltah = novaaltitude - coordenada.getz();
         if (deltah > 0) {
             this.subir(deltah);
         } else if (deltah < 0) {
@@ -81,7 +81,7 @@ class RoboTeletransportador extends RoboAereo {
                     System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n') {
-                identificarArea(altitude);
+                identificarArea(coordenada.getz());
             }
         }
         return movimento_robo;
