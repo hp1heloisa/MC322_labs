@@ -189,5 +189,14 @@ class Ambiente {
     public void print_coordenada(int x,int y,int z){
         System.out.printf("%c", this.ambiente[x][y][z]);
     }
+    public String mostrar_obstaculo(int pos_x, int pos_y, int altitude){
+        for(TipoObstaculo obs : TipoObstaculo.values()){
+            if(this.ambiente[pos_x][pos_y][altitude] == obs.get_inicial()){
+                return obs.getDescricao();
+            }
+            
+        }
+        return "X";
+    }
 
 }

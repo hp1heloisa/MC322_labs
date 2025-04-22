@@ -45,56 +45,6 @@ class RoboAereo extends Robo {
         }
     }
 
-    @Override
-    public void mover(int deltaX, int deltaY) {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        if (ambiente.dentroDosLimites(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz())) {
-            int passo = 1;
-            if (deltaX < 0) {
-                deltaX *= -1;
-                passo = -1;
-            }
-            while (deltaX > 0) {
-                if (ambiente.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
-                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
-                    return;
-                } else {
-                    if (ambiente.tem_robo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
-                        return;
-                    } else {
-                        coordenada.setx(passo + coordenada.getx());
-                        deltaX--;
-                    }
-                }
-            }
-            passo = 1;
-            if (deltaY < 0) {
-                deltaY *= -1;
-                passo = -1;
-            }
-            while (deltaY > 0) {
-                if (ambiente.tem_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
-                    System.out.printf("Há um obstáculo na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
-                    return;
-                } else {
-                    if (ambiente.tem_robo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
-                        return;
-                    } else {
-                        coordenada.sety(passo + coordenada.gety());
-                        deltaY--;
-                    }
-
-                }
-            }
-        } else {
-            System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-        }
-        Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        atualizarAmbiente(c_0, c);
-
-    }
 
     /**
      * Método que sube a altitude de um robô aéreo
