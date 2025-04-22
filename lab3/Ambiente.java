@@ -27,8 +27,16 @@ class Ambiente {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
-                    ambiente[i][j][k] = (aleatorio.nextDouble() < 0.1) ? 'X' : '*';
-
+                    if(ambiente[i][j][k] != '\u0000'){
+                        continue;
+                    }
+                    else if (aleatorio.nextDouble() < 0.01) {
+                        TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)];
+                        Obstaculo obstaculo = new Obstaculo(i, j, k, tipoObstaculo);
+                        obstaculo.introduzir_obs_ambiente(this.ambiente, this);
+                    } else {
+                        ambiente[i][j][k] = '*';
+                    }
                 }
             }
         }
@@ -43,7 +51,7 @@ class Ambiente {
     }
 
     public void salvar_o_ambiente(String ambiente_padrao) throws IOException {
-        BufferedWriter arq = new BufferedWriter(new FileWriter("arq.txt"));
+        BufferedWriter arq = new BufferedWriter(new FileWriter("ambiente.txt"));
         arq.write(comprimentoX + " " + comprimentoY + " " + altura + "\n");
         for (int k = 0; k < altura; k++) {
             for (int j = 0; j < comprimentoY; j++) {
@@ -74,12 +82,17 @@ class Ambiente {
                     ambiente[x][y][z] = linha.charAt(x);
                 }
             }
-            arq.readLine(); /** Para ler a separação (---) */
+            arq.readLine();
+            /**
+             * Para ler a separação (---)
+             */
         }
 
         arq.close();
     }
+    private void adicionarobstaculo(){
 
+    }
     /**
      * Método que adicionar os robôs no mapa
      */
@@ -125,6 +138,16 @@ class Ambiente {
     public boolean tem_robo(int x, int y, int z) {
         return ambiente[x][y][z] == 'r' ? true : false;
     }
+    public int get_comprimentoX(){
+        return comprimentoX;
+    }
+    public int get_comprimentoY(){
+        return comprimentoY;
+    }
+    public int get_altura(){
+        return altura;
+    }
+
 
     /**
      * Método que elim ina um obstáculo do mapa
