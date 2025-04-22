@@ -16,7 +16,6 @@ public class Obstaculo {
             for (int j = this.posicaoY1; j < this.posicaoY1 + tipo.get_comprimento() && j < ambiente.get_comprimentoY() ; j++) {
                 if (matriz_ambiente[this.posicaoX][j][i] == '\u0000' || matriz_ambiente[this.posicaoX][j][i] == '*') {
                     matriz_ambiente[this.posicaoX][j][i] = this.tipo.get_inicial();
-                    System.out.printf("Caractere: %c\n", this.tipo.get_inicial());
                 }
             }
         }

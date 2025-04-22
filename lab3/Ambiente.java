@@ -30,7 +30,7 @@ class Ambiente {
                     if(ambiente[i][j][k] != '\u0000'){
                         continue;
                     }
-                    else if (aleatorio.nextDouble() < 0.01) {
+                    else if (aleatorio.nextDouble() < 0.1) {
                         TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)];
                         Obstaculo obstaculo = new Obstaculo(i, j, k, tipoObstaculo);
                         obstaculo.introduzir_obs_ambiente(this.ambiente, this);
@@ -65,21 +65,20 @@ class Ambiente {
         arq.close();
     }
 
-    public final void carregar_o_ambiente(String arquivo) throws IOException {
-        BufferedReader arq = new BufferedReader(new FileReader("arq.txt"));
+    private final void carregar_o_ambiente(String arquivo) throws IOException {
+        BufferedReader arq = new BufferedReader(new FileReader("ambiente.txt"));
         String[] dimensoes = arq.readLine().split(" ");
 
-        comprimentoX = Integer.parseInt(dimensoes[0]);
-        comprimentoY = Integer.parseInt(dimensoes[1]);
-        altura = Integer.parseInt(dimensoes[2]);
-
-        ambiente = new char[comprimentoX][comprimentoY][altura];
+        this.comprimentoX = Integer.parseInt(dimensoes[0]);
+        this.comprimentoY = Integer.parseInt(dimensoes[1]);
+        this.altura = Integer.parseInt(dimensoes[2]);
+        this.ambiente = new char[comprimentoX][comprimentoY][altura];
 
         for (int z = 0; z < altura; z++) {
             for (int y = 0; y < comprimentoY; y++) {
                 String linha = arq.readLine();
                 for (int x = 0; x < comprimentoX; x++) {
-                    ambiente[x][y][z] = linha.charAt(x);
+                    this.ambiente[x][y][z] = linha.charAt(x);
                 }
             }
             arq.readLine();
@@ -129,7 +128,7 @@ class Ambiente {
      * Método que retorna um boolean se há um obstáculo
      */
     public boolean tem_obstaculo(int x, int y, int z) {
-        return ambiente[x][y][z] == 'X' ? true : false;
+        return ambiente[x][y][z] == '*' ? false : true;
     }
 
     /**
@@ -189,6 +188,10 @@ class Ambiente {
             System.out.println("Essa posiçao encontra-se fora dos limites!");
             return false;
         }
+    }
+
+    public void print_coordenada(int x,int y,int z){
+        System.out.printf("%c", this.ambiente[x][y][z]);
     }
 
 }

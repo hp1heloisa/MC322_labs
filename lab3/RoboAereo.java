@@ -32,32 +32,8 @@ class RoboAereo extends Robo {
         return altitude;
     }
 
-    @Override
-    public void identificarArea(int alt) {
-        for (int y = 5; y > -5; y--) {
-            if (posicaoY + y < 0) {
-                continue;
-            }
-            for (int x = -5; x < 5; x++) {
-                if (posicaoX + x < 0) {
-                    continue;
-                }
-                if (ambiente.dentroDosLimites(posicaoX + x, posicaoY + y, alt) && ambiente.tem_obstaculo(posicaoX + x, posicaoY + y, alt)) {
-                    System.out.printf("X");
-                } else {
-                    if (x == 0 && y == 0 && alt == altitude) {
-                        System.out.printf("R");
-                    } else if (ambiente.tem_robo(posicaoX + x, posicaoY + y, alt)) {
-                        System.out.printf("r");
-                    } else {
-                        System.out.printf("*");
-                    }
-                }
-            }
-            System.out.println("");
-        }
-    }
-
+    
+   
     /**
      * Método que identifica os obstaculos em um raio de 5m e no caso do robô
      * aéreo, ele identifica os obstaculos no raio de 5 altitudes também
@@ -227,3 +203,4 @@ class RoboAereo extends Robo {
     }
 
 }
+ 

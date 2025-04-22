@@ -130,18 +130,9 @@ public abstract class Robo {
                 if (posicaoX + x < 0) {
                     continue;
                 }
-                if (ambiente.dentroDosLimites(posicaoX + x, posicaoY + y, alt) && ambiente.tem_obstaculo(posicaoX + x, posicaoY + y, alt)) {
-                    System.out.printf("X");
-                } else {
-                    if (x == 0 && y == 0) {
-                        System.out.printf("R"); 
-                    }else if (ambiente.tem_robo(posicaoX + x, posicaoY + y, alt)) {
-                        System.out.printf("r"); 
-                    }else {
-                        System.out.printf("*");
-                    }
-
-                }
+                if (ambiente.dentroDosLimites(posicaoX + x, posicaoY + y, alt)) {
+                    ambiente.print_coordenada(posicaoX+x, posicaoY + y, alt);
+                } 
             }
             System.out.println("");
         }
