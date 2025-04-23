@@ -42,7 +42,7 @@ public abstract class Robo {
      * obstáculo
      */
     protected void mover(int deltaX, int deltaY) {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), 0);
+        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         if (ambiente.dentroDosLimites(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz())) {
             int passo = 1;
             if (deltaX < 0) {
@@ -50,7 +50,7 @@ public abstract class Robo {
                 passo = -1;//negativo, pois o robô irá descer em altitude
             }
             while (deltaX > 0) {
-                if (ambiente.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), 0)) {
+                if (ambiente.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
                     System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", ambiente.mostrar_obstaculo(coordenada.getx()+ passo, coordenada.gety() + passo, coordenada.getz()),coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
                     return;
                 } else {
@@ -74,7 +74,7 @@ public abstract class Robo {
                     return;
                 } else {
                     if (ambiente.tem_robo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety() + passo, 0);
+                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
                         return;
                     } else {
                         coordenada.sety(coordenada.gety() + passo);
