@@ -73,7 +73,6 @@ class RoboGuindaste extends RoboTerrestre {
                     guindastiando();
                     break;
                 case 'p':
-                    //TODO: sensor
                     identificarObstaculo();
                     break;
                 case 'q':
@@ -90,7 +89,7 @@ class RoboGuindaste extends RoboTerrestre {
                     System.out.println("Comando inválido! Use w, s, a, d, k ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                identificarArea(0);
+                sensorPlano.identificarArea(coordenada);
             }
         }
         return movimento_robo;

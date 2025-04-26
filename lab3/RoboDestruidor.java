@@ -74,7 +74,6 @@ class RoboDestruidor extends RoboAereo {
                     destruir();
                     break;
                 case 'p':
-                    //TODO: sensor
                     identificarObstaculo();
                     break;
                 case 'x':
@@ -87,9 +86,8 @@ class RoboDestruidor extends RoboAereo {
                 default:
                     System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
             }
-            //TODO: sensor
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                identificarArea(coordenada.getz());
+                sensorPlano.identificarArea(coordenada);
             }
         }
         return movimento_robo;

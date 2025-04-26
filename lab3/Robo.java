@@ -11,12 +11,14 @@ public abstract class Robo {
     protected String direcao;
     protected Scanner scanner = new Scanner(System.in);
     protected Ambiente ambiente;
+    protected SensorPlano sensorPlano;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
      * e pergunta ao qual a direção ele está
      */
     public Robo(Ambiente ambiente) {
+        sensorPlano = new SensorPlano(5, ambiente);
         this.ambiente = ambiente;
         System.out.printf("Diga qual é o nome do seu robô\n");
         nome = scanner.nextLine();
@@ -50,13 +52,12 @@ public abstract class Robo {
                 deltaX *= -1; //Sempre vamos trabalhar com o módulo do numero]
                 passo = -1;//negativo, pois o robô irá descer em altitude
             }
-            //TODO: criar um sensor para isso
             while (deltaX > 0) {
-                if (ambiente.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", ambiente.mostrar_obstaculo(coordenada.getx()+ passo, coordenada.gety() + passo, coordenada.getz()),coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
+                if (sensorPlano.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
+                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", sensorPlano.mostrar_obstaculo(coordenada.getx()+ passo, coordenada.gety() + passo, coordenada.getz()),coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
                     return;
                 } else {
-                    if (ambiente.tem_robo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
+                    if (sensorPlano.tem_robo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
                         System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
                         return;
                     } else {
@@ -72,11 +73,11 @@ public abstract class Robo {
             }
             //Sensor aqui
             while (deltaY > 0) {
-                if (ambiente.tem_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", ambiente.mostrar_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz()), coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
+                if (sensorPlano.tem_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
+                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", sensorPlano.mostrar_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz()), coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
                     return;
                 } else {
-                    if (ambiente.tem_robo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
+                    if (sensorPlano.tem_robo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
                         System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
                         return;
                     } else {
@@ -91,10 +92,8 @@ public abstract class Robo {
         Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         atualizarAmbiente(c_0, c);
     }
-    //TODO: Sensor
     public void identificarObstaculo() {
-        System.out.println("Obstáculos identificados em um raio de 5m: ");
-        identificarArea(0);
+        sensorPlano.identificarArea(coordenada);
     }
 
     public void getPosicao() {
@@ -122,23 +121,7 @@ public abstract class Robo {
      * Método que identifica a área em um um raio de 5m, os obstáculos, robôs e
      * espaços livres
      */
-    //TODO: Sensor aqui 
-    public void identificarArea(int alt) {
-        for (int y = 5; y > -5; y--) {
-            if (coordenada.gety() + y < 0) {
-                continue;
-            }
-            for (int x = -5; x < 5; x++) {
-                if (coordenada.getx() + x < 0) {
-                    continue;
-                }
-                if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, alt)) {
-                    ambiente.print_coordenada(coordenada.getx()+x, coordenada.gety() + y, alt);
-                } 
-            }
-            System.out.println("");
-        }
-    }
+    
 
     /**
      * Método que atualiza o ambiente de acordo com a movimentação do robô

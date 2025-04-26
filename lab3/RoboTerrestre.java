@@ -67,7 +67,6 @@ public class RoboTerrestre extends Robo {
                     setVelocidade(velocidadeatual + 1);
                     break;
                 case 'p':
-                    //TODO: sensor
                     identificarObstaculo();
                     break;
                 case 'x':
@@ -80,9 +79,8 @@ public class RoboTerrestre extends Robo {
                 default:
                     System.out.println("Comando inválido! Use a, d, q ou x");
             }
-            //TODO: sensor
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                identificarArea(0);
+                sensorPlano.identificarArea(coordenada);            
             }
         }
         return movimento_robo;

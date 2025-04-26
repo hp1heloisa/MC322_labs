@@ -1,6 +1,7 @@
 
 class RoboAereo extends Robo {
 
+    protected SensorAltitude sensorAltitude = new SensorAltitude(5, super.ambiente);
     protected int altitudeMaxima;
 
     /**
@@ -34,15 +35,9 @@ class RoboAereo extends Robo {
      * aéreo, ele identifica os obstaculos no raio de 5 altitudes também
      */
     @Override
-    //TODO: sensor
     public void identificarObstaculo() {
-        for (int z = -5; z < 5; z++) {
-            if (coordenada.getz() + z < 0) {
-                continue;
-            }
-            System.out.printf("Mapa dos obstáculos encontrados em um raio de 5m na altitude %d\n", coordenada.getz() + z);
-            identificarArea(coordenada.getz() + z);
-        }
+        super.identificarObstaculo();
+        sensorAltitude.identificarArea(coordenada);
     }
 
 
@@ -54,15 +49,17 @@ class RoboAereo extends Robo {
         boolean dentroDosLimites = ambiente.dentroDosLimites(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah);
         if (dentroDosLimites) {
             if (coordenada.getz() + deltah <= altitudeMaxima) {
-                if (!ambiente.tem_obstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
-                    if (ambiente.tem_robo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
+                if (!sensorPlano.tem_obstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
+                    if (sensorPlano.tem_robo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
                         System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah);
                         return;
                     } else {
                         coordenada.setz(coordenada.getz() + deltah);
                     }
                 } else {
-                    System.out.println("Há um obtáculo nessa posição!");
+                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
+                        sensorPlano.mostrar_obstaculo(coordenada.getx(), coordenada.gety(),coordenada.getz() + deltah),
+                        coordenada.getx(), coordenada.gety(), coordenada.getz()+deltah);
                 }
             } else {
                 System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
@@ -80,15 +77,17 @@ class RoboAereo extends Robo {
     public void descer(int deltah) {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         if (coordenada.getz() + deltah >= 0) {
-            if (!ambiente.tem_obstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
-                if (ambiente.tem_robo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
+            if (!sensorPlano.tem_obstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
+                if (sensorPlano.tem_robo(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah)) {
                     System.out.printf("Há um robô na posição: (%d,%d,%d)\n", coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah);
                     return;
                 } else {
                     coordenada.setz(deltah + coordenada.getz());
                 }
             } else {
-                System.out.println("Há um obtáculo nessa posição!");
+                System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
+                    sensorPlano.mostrar_obstaculo(coordenada.getx(), coordenada.gety(),coordenada.getz() + deltah),
+                    coordenada.getx(), coordenada.gety(), coordenada.getz()+deltah);
             }
         } else {
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
@@ -143,7 +142,7 @@ class RoboAereo extends Robo {
                     System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                identificarArea(coordenada.getz());
+                sensorPlano.identificarArea(coordenada);
             }
         }
         return movimento_robo;

@@ -157,18 +157,14 @@ class Ambiente {
     /**
      * Método que retorna um boolean se há um obstáculo
      */
-    //TODO: fazer isso no sensor
-    public boolean tem_obstaculo(int x, int y, int z) {
-        return ambiente[x][y][z] == '*' ? false : true;
+
+    public char getElemento(int x, int y, int z) {
+        return ambiente[x][y][z];
     }
 
     /**
      * Método que retorna um boolean se há um robô
      */
-    //TODO: fazer isso no sensor 
-    public boolean tem_robo(int x, int y, int z) {
-        return ambiente[x][y][z] == 'r' ? true : false;
-    }
     public int get_comprimentoX(){
         return comprimentoX;
     }
@@ -185,7 +181,7 @@ class Ambiente {
      */
     public void eliminaObstaculo(int x, int y, int z) {
         if (dentroDosLimites(x, y, z)) {
-            if (tem_robo(x, y, z)) {
+            if (ambiente[x][y][z] == 'r') {
                 System.out.println("É proibibido matar outros robôs");
             } else {
                 ambiente[x][y][z] = '*';
@@ -220,16 +216,6 @@ class Ambiente {
 
     public void print_coordenada(int x,int y,int z){
         System.out.printf("%c", this.ambiente[x][y][z]);
-    }
-    //TODO: juntar com sensor
-    public String mostrar_obstaculo(int pos_x, int pos_y, int altitude){
-        for(TipoObstaculo obs : TipoObstaculo.values()){
-            if(this.ambiente[pos_x][pos_y][altitude] == obs.get_inicial()){
-                return obs.getDescricao();
-            }
-            
-        }
-        return "X";
     }
 
 }
