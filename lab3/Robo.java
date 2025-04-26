@@ -4,6 +4,7 @@ import java.util.Scanner;
 public abstract class Robo {
 
     protected String nome;
+    protected String tipo;
     // protected int coordenada.getx();
     // protected int coordenada.gety();
     protected Coordenada coordenada;
@@ -49,6 +50,7 @@ public abstract class Robo {
                 deltaX *= -1; //Sempre vamos trabalhar com o módulo do numero]
                 passo = -1;//negativo, pois o robô irá descer em altitude
             }
+            //TODO: criar um sensor para isso
             while (deltaX > 0) {
                 if (ambiente.tem_obstaculo(coordenada.getx() + passo, coordenada.gety(), coordenada.getz())) {
                     System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", ambiente.mostrar_obstaculo(coordenada.getx()+ passo, coordenada.gety() + passo, coordenada.getz()),coordenada.getx() + passo, coordenada.gety(), coordenada.getz());
@@ -68,6 +70,7 @@ public abstract class Robo {
                 deltaY *= -1;
                 passo = -1;
             }
+            //Sensor aqui
             while (deltaY > 0) {
                 if (ambiente.tem_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz())) {
                     System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", ambiente.mostrar_obstaculo(coordenada.getx(), coordenada.gety() + passo, coordenada.getz()), coordenada.getx(), coordenada.gety() + passo, coordenada.getz());
@@ -88,7 +91,7 @@ public abstract class Robo {
         Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         atualizarAmbiente(c_0, c);
     }
-
+    //TODO: Sensor
     public void identificarObstaculo() {
         System.out.println("Obstáculos identificados em um raio de 5m: ");
         identificarArea(0);
@@ -103,6 +106,14 @@ public abstract class Robo {
         return nome;
     }
 
+    //@Override 
+    public String toString(){
+        return nome + " - " + tipo;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
 
 
    
@@ -111,6 +122,7 @@ public abstract class Robo {
      * Método que identifica a área em um um raio de 5m, os obstáculos, robôs e
      * espaços livres
      */
+    //TODO: Sensor aqui 
     public void identificarArea(int alt) {
         for (int y = 5; y > -5; y--) {
             if (coordenada.gety() + y < 0) {

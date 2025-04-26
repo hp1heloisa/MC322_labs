@@ -22,8 +22,8 @@ class RoboAereo extends Robo {
         System.out.println("w -> ir para frente; s -> ir para trás");
         System.out.println("d -> ir para direita; a -> ir para a esqueda");
         System.out.println("u -> para subir; j -> para descer");
-        System.out.println("p -> para scanear a área");
-        System.out.println("n -> criar um novo robô; x -> para sair");
+        System.out.println("p -> para scanear a área; n -> criar um novo robô");
+        System.out.println("c -> remover ou trocar de robô; x -> para sair");
     }
 
 
@@ -34,7 +34,7 @@ class RoboAereo extends Robo {
      * aéreo, ele identifica os obstaculos no raio de 5 altitudes também
      */
     @Override
-
+    //TODO: sensor
     public void identificarObstaculo() {
         for (int z = -5; z < 5; z++) {
             if (coordenada.getz() + z < 0) {
@@ -105,9 +105,9 @@ class RoboAereo extends Robo {
     public char movimentacao() {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
-        while (movimento_robo != 'x' && movimento_robo != 'n') {
+        while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 explicar_movimentacao();
             }
             switch (movimento_robo) {
@@ -137,10 +137,12 @@ class RoboAereo extends Robo {
                     break;
                 case 'n':
                     break;
+                case 'c':
+                    break;
                 default:
                     System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 identificarArea(coordenada.getz());
             }
         }

@@ -38,9 +38,13 @@ public class TiposRobos {
         }
         robo_escolhido = scanner.nextInt();
         if (robo_escolhido == 1) {
-            return new RoboDestruidor(ambiente); 
+            RoboAereo robo = new RoboDestruidor(ambiente); 
+            robo.setTipo("RoboDestruidor");
+            return robo;
         }else {
-            return new RoboTeletransportador(ambiente);
+            RoboAereo robo = new RoboTeletransportador(ambiente);
+            robo.setTipo("RoboTeletransportador");
+            return robo;
         }
 
     }
@@ -55,9 +59,13 @@ public class TiposRobos {
         }
         robo_escolhido = scanner.nextInt();
         if (robo_escolhido == 1) {
-            return new RoboLimitado(ambiente); 
+            RoboTerrestre robo = new RoboLimitado(ambiente); 
+            robo.setTipo("Robô Limitado");
+            return robo;
         }else {
-            return new RoboGuindaste(ambiente);
+            RoboTerrestre robo = new RoboGuindaste(ambiente);
+            robo.setTipo("Robo Guindaste");
+            return robo;
         }
     }
 }

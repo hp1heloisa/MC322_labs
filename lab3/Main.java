@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 import java.io.IOException;
 
 public class Main {
@@ -6,18 +6,48 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Ambiente ambiente = new Ambiente(30,40,100);
         // ambiente.salvar_o_ambiente("ambiente.txt");
+        Scanner scanner = new Scanner(System.in);
         Ambiente ambiente = new Ambiente("ambiente.txt");
         
         TiposRobos tiposRobos = new TiposRobos();
         Robo robo;
         char estado = ' ';
+        int indexRobo;
 
         while (estado != 'x') {
-            robo = tiposRobos.definir_robo(ambiente);
-            ambiente.adicionarRobo(robo);
-            System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
-            robo.explicar_movimentacao();
-            estado = robo.movimentacao();
+            switch (estado) {
+                case 'c':
+                    System.out.println("Você gostaria de trocar de robô ou remover algum robo? (m para mudar e r para remover)");
+                    estado = scanner.next().charAt(0);
+                    break;
+                case 'm':
+                    ambiente.getRobos();
+                    System.out.println("Qual deles você escolhe?");
+                    indexRobo = scanner.nextInt() - 1;
+                    robo = ambiente.getRobo(indexRobo);
+                    System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
+                    robo.explicar_movimentacao();
+                    estado = robo.movimentacao();
+                    break;
+                case 'r':
+                    ambiente.getRobos();
+                    System.out.println("Qual deles você gostaria de remover?");
+                    indexRobo = scanner.nextInt() - 1;
+                    ambiente.removerRobo(indexRobo);
+                    System.out.println("Para remover outro robô digite r, escolher um robô digite m e para criar um novo digite n:");
+                    estado = scanner.next().charAt(0);
+                    break;
+                default:
+                    robo = tiposRobos.definir_robo(ambiente);
+                    ambiente.adicionarRobo(robo);
+                    System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
+                    robo.explicar_movimentacao();
+                    estado = robo.movimentacao();
+                    break;
+            }
+          
         }
+
+        
     }
 }

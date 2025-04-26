@@ -51,9 +51,9 @@ class RoboGuindaste extends RoboTerrestre {
     @Override
     public char movimentacao() {
         char movimento_robo = ' ';
-        while (movimento_robo != 'x' && movimento_robo != 'n') {
+        while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
                 explicar_movimentacao();
             }
             switch (movimento_robo) {
@@ -73,6 +73,7 @@ class RoboGuindaste extends RoboTerrestre {
                     guindastiando();
                     break;
                 case 'p':
+                    //TODO: sensor
                     identificarObstaculo();
                     break;
                 case 'q':
@@ -83,10 +84,12 @@ class RoboGuindaste extends RoboTerrestre {
                     break;
                 case 'n':
                     break;
+                case 'c':
+                    break;
                 default:
                     System.out.println("Comando inválido! Use w, s, a, d, k ou x");
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 identificarArea(0);
             }
         }

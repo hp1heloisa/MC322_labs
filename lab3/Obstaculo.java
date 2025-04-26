@@ -22,3 +22,8 @@ public class Obstaculo {
     }
 
 }
+
+//TODO: se o robor não tiver sensor de temperatura vai tentar passar pelo fogo e morrer queimado
+//TODO: se não tiver sensor de humidade vai passar pela agua e morrer de curto
+//TODO: pra passar pela mata tem que cortar
+//TODO: predio explodir 

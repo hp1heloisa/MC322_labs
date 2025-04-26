@@ -89,6 +89,7 @@ class Ambiente {
 
         arq.close();
     }
+    //TODO: implementar essa função
     private void adicionarobstaculo(){
 
     }
@@ -111,6 +112,35 @@ class Ambiente {
         }
         ambiente[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
     }
+    
+    public void removerRobo(int i) {
+        Class<?> classe = listaRobos.get(i).getClass(); // Obtém a classe
+        boolean existe = false;
+        for (Method metodo : classe.getDeclaredMethods()) {
+            if (metodo.getName().equals("posicaoZ")) {
+                /**
+                 * Se a classe do nosso robô possui posição z, então a pos z
+                 * existe
+                 */
+                existe = true;
+                break;
+            }
+        }
+        ambiente[listaRobos.get(i).getPosicaoX()][listaRobos.get(i).getPosicaoY()][(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = '*';
+        String removRob = listaRobos.get(i).toString(); 
+        listaRobos.remove(i);
+        System.out.printf("O robô %s foi removido com sucesso!", removRob);
+    }
+
+    public void getRobos() {
+        System.out.println("Você tem os seguintes robôs: ");
+        for (int i=0; i<listaRobos.size(); i++)
+            System.out.printf("%d. %s\n",i+1, listaRobos.get(i));
+    }
+
+    public Robo getRobo(int i) {
+        return listaRobos.get(i);
+    }
 
     /**
      * Método que retorna um booleano se a nova posição do robô está dentro dos
@@ -127,6 +157,7 @@ class Ambiente {
     /**
      * Método que retorna um boolean se há um obstáculo
      */
+    //TODO: fazer isso no sensor
     public boolean tem_obstaculo(int x, int y, int z) {
         return ambiente[x][y][z] == '*' ? false : true;
     }
@@ -134,6 +165,7 @@ class Ambiente {
     /**
      * Método que retorna um boolean se há um robô
      */
+    //TODO: fazer isso no sensor 
     public boolean tem_robo(int x, int y, int z) {
         return ambiente[x][y][z] == 'r' ? true : false;
     }
@@ -189,6 +221,7 @@ class Ambiente {
     public void print_coordenada(int x,int y,int z){
         System.out.printf("%c", this.ambiente[x][y][z]);
     }
+    //TODO: juntar com sensor
     public String mostrar_obstaculo(int pos_x, int pos_y, int altitude){
         for(TipoObstaculo obs : TipoObstaculo.values()){
             if(this.ambiente[pos_x][pos_y][altitude] == obs.get_inicial()){
