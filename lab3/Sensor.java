@@ -13,7 +13,7 @@ public class Sensor {
 
     public boolean tem_obstaculo(int x, int y, int z) {
         char element = ambiente.getElemento(x, y, z);
-        return element == '*' ? false : true;
+        return (element == '*' || element=='F' || element=='A') ? false : true;
     }
 
     public String mostrar_obstaculo(int x, int y, int z){

@@ -32,8 +32,9 @@ public class Main {
                 case 'r':
                     ambiente.getRobos();
                     System.out.println("Qual deles você gostaria de remover?");
-                    indexRobo = scanner.nextInt() - 1;
-                    ambiente.removerRobo(indexRobo);
+                    indexRobo = scanner.nextInt() - 1;        
+                    String removRob = ambiente.removerRobo(indexRobo);
+                    System.out.printf("O robô %s foi removido com sucesso!", removRob);
                     System.out.println("Para remover outro robô digite r, escolher um robô digite m e para criar um novo digite n:");
                     estado = scanner.next().charAt(0);
                     break;

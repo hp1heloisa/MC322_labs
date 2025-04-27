@@ -47,6 +47,7 @@ class RoboDestruidor extends RoboAereo {
     public char movimentacao() {
         char movimento_robo = ' ';
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             movimento_robo = scanner.next().charAt(0);
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
                 explicar_movimentacao();

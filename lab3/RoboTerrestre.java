@@ -46,6 +46,7 @@ public class RoboTerrestre extends Robo {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             movimento_robo = scanner.next().charAt(0);
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 explicar_movimentacao();

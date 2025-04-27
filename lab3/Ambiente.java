@@ -113,7 +113,8 @@ class Ambiente {
         ambiente[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
     }
     
-    public void removerRobo(int i) {
+    public String removerRobo(int i) {
+        System.out.println(i);
         Class<?> classe = listaRobos.get(i).getClass(); // Obtém a classe
         boolean existe = false;
         for (Method metodo : classe.getDeclaredMethods()) {
@@ -126,10 +127,12 @@ class Ambiente {
                 break;
             }
         }
-        ambiente[listaRobos.get(i).getPosicaoX()][listaRobos.get(i).getPosicaoY()][(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = '*';
+        ambiente[listaRobos.get(i).getPosicaoX()]
+                [listaRobos.get(i).getPosicaoY()]
+                [(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = '*';
         String removRob = listaRobos.get(i).toString(); 
         listaRobos.remove(i);
-        System.out.printf("O robô %s foi removido com sucesso!", removRob);
+        return removRob;
     }
 
     public void getRobos() {
@@ -142,6 +145,16 @@ class Ambiente {
         return listaRobos.get(i);
     }
 
+    public int getIndexOfRobo(String robo){
+        int index = -1;
+        for (int i=0; i<listaRobos.size(); i++) {
+            if (listaRobos.get(i).toString().equals(robo)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
     /**
      * Método que retorna um booleano se a nova posição do robô está dentro dos
      * limites possíveis
