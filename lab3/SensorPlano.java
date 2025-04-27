@@ -9,10 +9,11 @@ public class SensorPlano extends Sensor{
                 continue;
             }
             for (int x = -super.raio; x < super.raio; x++) {
-                if (coordenada.getx() + x < 0) {
+                Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety(), coordenada.getz());
+                if (nova_c.getx() < 0) {
                     continue;
                 }
-                if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz())) {
+                if (ambiente.dentroDosLimites(nova_c)) {
                     ambiente.print_coordenada(coordenada.getx()+x, coordenada.gety() + y, coordenada.getz());
                 } 
             }

@@ -46,57 +46,54 @@ class RoboAereo extends Robo {
     /**
      * Método que sube a altitude de um robô aéreo
      */
-    public void subir(int deltah) {
+    public void alterar_altitude(int deltah) {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        boolean dentroDosLimites = ambiente.dentroDosLimites(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah);
+        Coordenada nova_c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()+ deltah);
+        boolean dentroDosLimites = ambiente.dentroDosLimites(nova_c);
         if (dentroDosLimites) {
-            if (c.getz() + deltah <= altitudeMaxima) {
-                if (!sensorPlano.tem_obstaculo(c.getx(), c.gety(), c.getz() + deltah)) {
-                    if (sensorPlano.tem_robo(c.getx(), c.gety(), c.getz() + deltah)) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety(), c.getz() + deltah);
+                if (!sensorPlano.tem_obstaculo(nova_c)) {
+                    if (sensorPlano.tem_robo(nova_c)) {
+                        System.out.printf("Há um robô na posição: %s\n", nova_c);
                         return;
-                    } else {
-                        c.setz(c.getz() + deltah);
                     }
                 } else {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
-                        sensorPlano.mostrar_obstaculo(c.getx(), c.gety(),c.getz() + deltah),
-                        c.getx(), c.gety(), c.getz()+deltah);
+                    System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", nova_c); 
+                        sensorPlano.mostrar_obstaculo(nova_c);
                 }
             } else {
                 System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+                return;
             }
-        }
-        System.out.printf("Altitude atual: %d\n", c.getz());
-        atualizarAmbiente(c_0, c);
+    
+        System.out.printf("Altitude atual: %d\n", nova_c.getz());
+        atualizarAmbiente(c_0, nova_c);
     }
 
     /**
      * Método que faz o movimento de diminuição de altitude do robô
      */
-    public void descer(int deltah) {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        if (c.getz() + deltah >= 0) {
-            if (!sensorPlano.tem_obstaculo(c.getx(), c.gety(), c.getz() + deltah)) {
-                if (sensorPlano.tem_robo(c.getx(), c.gety(), c.getz() + deltah)) {
-                    System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety(), c.getz() + deltah);
-                    return;
-                } else {
-                    c.setz(deltah + c.getz());
-                }
-            } else {
-                System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
-                    sensorPlano.mostrar_obstaculo(c.getx(), c.gety(),c.getz() + deltah),
-                    c.getx(), c.gety(), c.getz()+deltah);
-            }
-        } else {
-            System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-        }
-        System.out.printf("Altitude atual: %d\n", c.getz());
-        atualizarAmbiente(c_0, c);
-    }
+    // public void descer(int deltah) {
+    //     Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
+    //     Coordenada nova_c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()+ deltah);
+    //     if (c.getz() + deltah >= 0) {
+    //         if (!sensorPlano.tem_obstaculo(c.getx(), c.gety(), c.getz() + deltah)) {
+    //             if (sensorPlano.tem_robo(c.getx(), c.gety(), c.getz() + deltah)) {
+    //                 System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety(), c.getz() + deltah);
+    //                 return;
+    //             } else {
+    //                 c.setz(deltah + c.getz());
+    //             }
+    //         } else {
+    //             System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
+    //                 sensorPlano.mostrar_obstaculo(c.getx(), c.gety(),c.getz() + deltah),
+    //                 c.getx(), c.gety(), c.getz()+deltah);
+    //         }
+    //     } else {
+    //         System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+    //     }
+    //     System.out.printf("Altitude atual: %d\n", c.getz());
+    //     atualizarAmbiente(c_0, c);
+    // }
 
     /**
      * Implementação da movimentação do robô aéreo
@@ -125,10 +122,10 @@ class RoboAereo extends Robo {
                     this.mover(0, -1);
                     break;
                 case 'u':
-                    subir(1);
+                    alterar_altitude(1);
                     break;
                 case 'j':
-                    descer(-1);
+                    alterar_altitude(-1);
                     break;
                 case 'p':
                     identificarObstaculo();
@@ -144,7 +141,7 @@ class RoboAereo extends Robo {
                     System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                sensorPlano.identificarArea(coordenada);
+                this.print_sensores();
             }
         }
         return movimento_robo;

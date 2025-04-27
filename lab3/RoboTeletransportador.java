@@ -10,16 +10,18 @@ class RoboTeletransportador extends RoboAereo {
         super.explicar_movimentacao();
         System.out.printf("k - > para teletransportar de altitude\n");
     }
-
-    @Override
-    public void subir(int deltah) {
-        super.subir(deltah);
+    public void alterar_altitude(int deltah){
+        super.alterar_altitude(deltah);
     }
+    // @Override
+    // public void subir(int deltah) {
+    //     super.subir(deltah);
+    // }
 
-    @Override
-    public void descer(int deltah) {
-        super.descer(deltah);
-    }
+    // @Override
+    // public void descer(int deltah) {
+    //     super.descer(deltah);
+    // }
 
     /**
      * Método especial do robô teletransportador, em que le pode ir para
@@ -29,12 +31,11 @@ class RoboTeletransportador extends RoboAereo {
         System.out.println("Indique a posição z para qual o robô irá se teletransportar?");
         int novaaltitude = scanner.nextInt();
         int deltah = novaaltitude - coordenada.getz();
-        if (deltah > 0) {
-            this.subir(deltah);
-        } else if (deltah < 0) {
-            this.descer(deltah);
-        } else {
+        if(deltah == 0) {
             System.out.printf("Mesma posição que o robô se encontrava anteriormente.\n");
+        }
+        else{
+            alterar_altitude(deltah);
         }
 
     }
@@ -62,10 +63,10 @@ class RoboTeletransportador extends RoboAereo {
                     this.mover(0, -1);
                     break;
                 case 'u':
-                    subir(1);
+                    alterar_altitude(1);
                     break;
                 case 'j':
-                    descer(-1);
+                    alterar_altitude(-1);
                     break;
                 case 'k':
                     teletransportar();
@@ -84,7 +85,7 @@ class RoboTeletransportador extends RoboAereo {
                     System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                sensorPlano.identificarArea(coordenada);
+                this.print_sensores();
             }
         }
         return movimento_robo;

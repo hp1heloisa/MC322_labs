@@ -1,3 +1,5 @@
+
+
 public class SensorHumidade extends Sensor {
     protected int altitude;
     public SensorHumidade(int r, int h, Ambiente ambiente){
@@ -22,16 +24,14 @@ public class SensorHumidade extends Sensor {
                         continue;
                     }
                     if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z)) {
-                        char elemento = ambiente.getElemento(coordenada.getx()+x, coordenada.gety() + y, coordenada.getz() + z);
+                        Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z);
+                        char elemento = ambiente.getElemento(nova_c);
                         double elem_hum = 0;
-                        if (elemento=='A'){
-                            elem_hum = TipoObstaculo.AGUA.get_humidade();
-                        } else if (elemento=='F'){
-                            elem_hum = TipoObstaculo.FOGO.get_humidade();
-                        } else if (elemento=='P'){
-                            elem_hum = TipoObstaculo.PAREDE.get_humidade();
-                        }else if (elemento=='V'){
-                            elem_hum = TipoObstaculo.ARBUSTO.get_humidade();
+                        for(TipoObstaculo obs : TipoObstaculo.values()){
+                            if(obs.get_inicial() == elemento){
+                                elem_hum = obs.get_humidade();
+                                break;
+                            }
                         }
                         if (Math.sqrt(x*x + y*y + z*z) > 0) humidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));
                         else humidade += elem_hum;

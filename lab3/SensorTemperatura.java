@@ -1,3 +1,5 @@
+
+
 public class SensorTemperatura extends Sensor {
     protected int altitude;
     public SensorTemperatura(int r, int h, Ambiente ambiente){
@@ -12,6 +14,7 @@ public class SensorTemperatura extends Sensor {
     public double calcula_temperatura(Coordenada coordenada) {
        double temp = 0;
        int z = altitude;
+       double elem_temp = 0;
         do {
             for (int y = super.raio; y > -super.raio; y--) {
                 if (coordenada.gety() + y < 0) {
@@ -21,25 +24,22 @@ public class SensorTemperatura extends Sensor {
                     if (coordenada.getx() + x < 0) {
                         continue;
                     }
-                    if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z)) {
-                        char elemento = ambiente.getElemento(coordenada.getx()+x, coordenada.gety() + y, coordenada.getz() + z);
-                        double elem_temp = 0;
-                        if (elemento=='A'){
-                            elem_temp = TipoObstaculo.AGUA.get_temperatura();
-                        } else if (elemento=='F'){
-                            elem_temp = TipoObstaculo.FOGO.get_temperatura();
-                        } else if (elemento=='P'){
-                            elem_temp = TipoObstaculo.PAREDE.get_temperatura();
-                        }else if (elemento=='V'){
-                            elem_temp = TipoObstaculo.ARBUSTO.get_temperatura();
+                    Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z); //talvez somar com altitude??? Não entendi
+                    if (ambiente.dentroDosLimites(nova_c)) {
+                        char elemento = ambiente.getElemento(nova_c);
+                        for(TipoObstaculo obs: TipoObstaculo.values()){
+                            if(obs.get_inicial() == elemento )
+                              elem_temp = obs.get_temperatura();
                         }
+                    }
                         if (Math.sqrt(x*x + y*y + z*z) > 0) temp += elem_temp/(Math.sqrt(x*x + y*y + z*z));
                         else temp += elem_temp;
                     } 
                 }
-            }
+            
+    
             z--;
-        } while (z >= -altitude);
+        } while(z >= -altitude);
         System.out.printf("Temperatura atual: %.2fºC. Preste atenção nos F ao longo do caminho.\n", temp );
         return temp;
     }

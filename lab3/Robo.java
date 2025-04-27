@@ -30,8 +30,6 @@ public abstract class Robo {
         direcao = scanner.nextLine();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
-        // coordenada.getx() = 0;
-        // coordenada.gety() = 0;
     }
 
     /**
@@ -51,51 +49,62 @@ public abstract class Robo {
     protected void mover(int deltaX, int deltaY) {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
+        Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz());
 
-        if (ambiente.dentroDosLimites(c.getx() + deltaX, c.gety() + deltaY, c.getz())) {
-            int passo = 1;
-            if (deltaX < 0) {
-                deltaX *= -1; //Sempre vamos trabalhar com o módulo do numero]
-                passo = -1;//negativo, pois o robô irá descer em altitude
-            }
-            while (deltaX > 0) {
-                if (sensorPlano.tem_obstaculo(c.getx() + passo, c.gety(), c.getz())) {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", sensorPlano.mostrar_obstaculo(c.getx()+ passo, c.gety() + passo, c.getz()),c.getx() + passo, c.gety(), c.getz());
+        if (ambiente.dentroDosLimites(nova_pos)) {
+            // int passo = 1;
+            // if (deltaX < 0) {
+            //     deltaX *= -1; //Sempre vamos trabalhar com o módulo do numero]
+            //     passo = -1;//negativo, pois o robô irá descer em altitude
+            // }
+            // while (deltaX > 0) {
+                
+
+                if (sensorPlano.tem_obstaculo(nova_pos)) {
+
+                    System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(nova_pos), nova_pos);
                     return;
-                } else {
-                    if (sensorPlano.tem_robo(c.getx() + passo, c.gety(), c.getz())) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx() + passo, c.gety(), c.getz());
+                } else if (sensorPlano.tem_robo(nova_pos)) {
+                        System.out.printf("Há um robô na posição: (%s)\n", nova_pos);
                         return;
-                    } else {
-                        c.setx(c.getx()+ passo);
-                        deltaX--;
-                    }
+                    // } else {
+                    //     c.setx(c.getx()+ passo);
+                    //     deltaX--;
+                    // }
                 }
-            } // separamos em x e y, pois o enunciado diz para criar um método mover com parâmetros x e y. Se não
-            passo = 1; // faríamos um mover_x e mover_y, pois o nosso robô não move na diagonal.
-            if (deltaY < 0) {
-                deltaY *= -1;
-                passo = -1;
-            }
+                
+           // }  separamos em x e y, pois o enunciado diz para criar um método mover com parâmetros x e y. Se não
+            // passo = 1; // faríamos um mover_x e mover_y, pois o nosso robô não move na diagonal.
+            // if (deltaY < 0) {
+            //     deltaY *= -1;
+            //     passo = -1;
+            // }
             //Sensor aqui
-            while (deltaY > 0) {
-                if (sensorPlano.tem_obstaculo(c.getx(), c.gety() + passo, c.getz())) {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", sensorPlano.mostrar_obstaculo(c.getx(), c.gety() + passo, c.getz()), c.getx(), c.gety() + passo, c.getz());
-                    return;
-                } else {
-                    if (sensorPlano.tem_robo(c.getx(), c.gety() + passo, c.getz())) {
-                        System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety() + passo, c.getz());
-                        return;
-                    } else {
-                        c.sety(c.gety() + passo);
-                        deltaY--;
-                    }
-                }
-            }
+            // while (deltaY > 0) {
+            //     if (sensorPlano.tem_obstaculo(nova_pos)) {
+            //         System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(c.getx(), c.gety() + passo, c.getz()), c.getx(), c.gety() + passo, c.getz());
+            //         return;
+            //     } else {
+            //         if (sensorPlano.tem_robo(c.getx(), c.gety() + passo, c.getz())) {
+            //             System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety() + passo, c.getz());
+            //             return;
+            //         } else {
+            //             c.sety(c.gety() + passo);
+            //             deltaY--;
+            //         }
+            //     }
+            // }
         } else {
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
+            return;
         }
-        atualizarAmbiente(c_0, c);
+        atualizarAmbiente(c_0, nova_pos);
+    }
+
+    public void print_sensores(){
+        sensorTemperatura.calcula_temperatura(coordenada);
+        sensorHumidade.calcula_humidade(coordenada);
+        sensorPlano.identificarArea(coordenada);
     }
     public void identificarObstaculo() {
         sensorTemperatura.calcula_temperatura(coordenada);
@@ -138,7 +147,7 @@ public abstract class Robo {
      * Método que atualiza o ambiente de acordo com a movimentação do robô
      */
     public void atualizarAmbiente(Coordenada c_0, Coordenada c) {
-        char obs = ambiente.getElemento(c.getx(),c.gety(),c.getz());
+        char obs = ambiente.getElemento(c);
         if (obs == 'A' || obs == 'F') {
             String text = obs == 'A'  ? "Sentimos muito, mas %s morreu afogado!\n" :  "Sentimos muito, mas %s morreu queimado!\n";
             System.out.printf(text, nome);

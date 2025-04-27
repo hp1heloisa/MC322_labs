@@ -159,10 +159,18 @@ class Ambiente {
      * Método que retorna um booleano se a nova posição do robô está dentro dos
      * limites possíveis
      */
+    public boolean dentroDosLimites(Coordenada coordenada) {
+        if (coordenada.getx() < 0 || coordenada.gety() < 0 || coordenada.getz() < 0 || coordenada.getx() > comprimentoX || coordenada.gety() > comprimentoY || coordenada.getz() > altura) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public boolean dentroDosLimites(int x, int y, int z) {
         if (x < 0 || y < 0 || z < 0 || x > comprimentoX || y > comprimentoY || z > altura) {
             return false;
-        } else {
+        }
+        else{
             return true;
         }
     }
@@ -171,8 +179,8 @@ class Ambiente {
      * Método que retorna um boolean se há um obstáculo
      */
 
-    public char getElemento(int x, int y, int z) {
-        return ambiente[x][y][z];
+    public char getElemento(Coordenada coordenada) {
+        return ambiente[coordenada.getx()][coordenada.gety()][coordenada.getz()];
     }
 
     /**
@@ -216,7 +224,7 @@ class Ambiente {
      * por trocar a sua posição com um obstáculo, pode fazer tal operação
      */
     public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
-        if (dentroDosLimites(obstaculo.getx(), obstaculo.gety(), obstaculo.getz())) {
+        if (dentroDosLimites(obstaculo)) {
                 this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
                 ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
                 return true;

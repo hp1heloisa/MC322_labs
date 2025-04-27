@@ -81,7 +81,7 @@ public class RoboTerrestre extends Robo {
                     System.out.println("Comando inválido! Use a, d, q ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                sensorPlano.identificarArea(coordenada);            
+                this.print_sensores();            
             }
         }
         return movimento_robo;

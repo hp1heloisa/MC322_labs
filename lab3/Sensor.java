@@ -10,19 +10,19 @@ public class Sensor {
         raio = r;
     }
 
-    public boolean tem_robo(int x, int y, int z) {
-        char element = ambiente.getElemento(x, y, z);
+    public boolean tem_robo(Coordenada coordenada) {
+        char element = ambiente.getElemento(coordenada);
         return element == 'r' ? true : false;
     }
 
-    public boolean tem_obstaculo(int x, int y, int z) {
-        char element = ambiente.getElemento(x, y, z);
+    public boolean tem_obstaculo(Coordenada coordenada) {
+        char element = ambiente.getElemento(coordenada);
         return (element == '*' || element=='F' || element=='A') ? false : true;
     }
 
-    public String mostrar_obstaculo(int x, int y, int z){
+    public String mostrar_obstaculo(Coordenada coordenada){
         for(TipoObstaculo obs : TipoObstaculo.values()){
-            if(ambiente.getElemento(x, y, z) == obs.get_inicial()){
+            if(ambiente.getElemento(coordenada) == obs.get_inicial()){
                 return obs.getDescricao();
             }
             

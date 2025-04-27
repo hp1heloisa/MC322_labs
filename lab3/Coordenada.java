@@ -15,7 +15,7 @@ public class Coordenada {
      */
     @Override
     public String toString() {
-        return String.format("(%d, %d, %d)", x, y, z);
+        return String.format("(%d, %d, %d)",    x, y, z);
     }
 
     /**
