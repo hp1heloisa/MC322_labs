@@ -10,7 +10,8 @@ class RoboAereo extends Robo {
      */
     public RoboAereo(Ambiente ambiente) {
         super(ambiente);
-        sensorTemperatura = new SensorTemperatura(5, ambiente);
+        sensorTemperatura.setAltitude(5);
+        sensorHumidade.setAltitude(5);
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
         altitudeMaxima = scanner.nextInt();
     }

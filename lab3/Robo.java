@@ -13,6 +13,7 @@ public abstract class Robo {
     protected Ambiente ambiente;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
+    protected SensorHumidade sensorHumidade;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
@@ -20,7 +21,8 @@ public abstract class Robo {
      */
     public Robo(Ambiente ambiente) {
         sensorPlano = new SensorPlano(5, ambiente);
-        sensorTemperatura = new SensorTemperatura(0, ambiente);
+        sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
+        sensorHumidade = new SensorHumidade(5, 0, ambiente);
         this.ambiente = ambiente;
         System.out.printf("Diga qual é o nome do seu robô\n");
         nome = scanner.nextLine();
@@ -97,6 +99,7 @@ public abstract class Robo {
     }
     public void identificarObstaculo() {
         sensorTemperatura.calcula_temperatura(coordenada);
+        sensorHumidade.calcula_humidade(coordenada);
         sensorPlano.identificarArea(coordenada);
     }
 

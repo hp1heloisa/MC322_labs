@@ -1,22 +1,24 @@
 public enum TipoObstaculo {
-    PAREDE("Parede sólida",'P', 3, 5, 0),
-    AGUA("Área de água", 'A', 2, 3, 0),
-    FOGO("Chamas", 'F', 2, 2, 400),
-    ARBUSTO("Vegetação densa",'V', 1, 6,0);
+    PAREDE("Parede sólida",'P', 3, 5, 0, 0),
+    AGUA("Área de água", 'A', 2, 3, -100, 100),
+    FOGO("Chamas", 'F', 2, 2, 100, -100),
+    ARBUSTO("Vegetação densa",'V', 1, 6,0, 50);
 
     private final String descricao;
     private final char inicial;
     private final int altura;
     private final int comprimento;
     private final int temperatura;
+    private final int humidade;
     
 
-TipoObstaculo(String descricao, char inicial, int altura, int comprimento, int temperatura) {
+TipoObstaculo(String descricao, char inicial, int altura, int comprimento, int temperatura, int humidade) {
     this.descricao = descricao;
     this.inicial = inicial;
     this.altura = altura;
     this.comprimento = comprimento;
     this.temperatura = temperatura;
+    this.humidade = humidade;
 }
 
 public String getDescricao() {
@@ -36,5 +38,8 @@ public int get_temperatura(){
     return temperatura;
 }
 
+public int get_humidade() {
+    return humidade;
+}
 
 }

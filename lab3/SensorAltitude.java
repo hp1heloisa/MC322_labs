@@ -2,6 +2,7 @@ public class SensorAltitude extends Sensor{
     public SensorAltitude(int r, Ambiente ambiente){
         super(r, ambiente);
     }
+    
     public void identificarArea(Coordenada coordenada) {
         int min =  coordenada.getz() - super.raio;
         int max = coordenada.getz() + super.raio;

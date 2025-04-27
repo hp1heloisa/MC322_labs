@@ -6,6 +6,10 @@ public class Sensor {
         this.ambiente = ambiente;
     }
 
+    public void setRaio(int r) {
+        raio = r;
+    }
+
     public boolean tem_robo(int x, int y, int z) {
         char element = ambiente.getElemento(x, y, z);
         return element == 'r' ? true : false;

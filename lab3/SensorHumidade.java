@@ -1,6 +1,6 @@
-public class SensorTemperatura extends Sensor {
+public class SensorHumidade extends Sensor {
     protected int altitude;
-    public SensorTemperatura(int r, int h, Ambiente ambiente){
+    public SensorHumidade(int r, int h, Ambiente ambiente){
         super(r, ambiente);
         altitude = h;
     }
@@ -9,8 +9,8 @@ public class SensorTemperatura extends Sensor {
         altitude = h;
     }
 
-    public double calcula_temperatura(Coordenada coordenada) {
-       double temp = 0;
+    public double calcula_humidade(Coordenada coordenada) {
+       double humidade = 0;
        int z = altitude;
         do {
             for (int y = super.raio; y > -super.raio; y--) {
@@ -23,24 +23,24 @@ public class SensorTemperatura extends Sensor {
                     }
                     if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z)) {
                         char elemento = ambiente.getElemento(coordenada.getx()+x, coordenada.gety() + y, coordenada.getz() + z);
-                        double elem_temp = 0;
+                        double elem_hum = 0;
                         if (elemento=='A'){
-                            elem_temp = TipoObstaculo.AGUA.get_temperatura();
+                            elem_hum = TipoObstaculo.AGUA.get_humidade();
                         } else if (elemento=='F'){
-                            elem_temp = TipoObstaculo.FOGO.get_temperatura();
+                            elem_hum = TipoObstaculo.FOGO.get_humidade();
                         } else if (elemento=='P'){
-                            elem_temp = TipoObstaculo.PAREDE.get_temperatura();
+                            elem_hum = TipoObstaculo.PAREDE.get_humidade();
                         }else if (elemento=='V'){
-                            elem_temp = TipoObstaculo.ARBUSTO.get_temperatura();
+                            elem_hum = TipoObstaculo.ARBUSTO.get_humidade();
                         }
-                        if (Math.sqrt(x*x + y*y + z*z) > 0) temp += elem_temp/(Math.sqrt(x*x + y*y + z*z));
-                        else temp += elem_temp;
+                        if (Math.sqrt(x*x + y*y + z*z) > 0) humidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));
+                        else humidade += elem_hum;
                     } 
                 }
             }
             z--;
         } while (z >= -altitude);
-        System.out.printf("Temperatura atual: %.2fºC. Preste atenção nos F ao longo do caminho.\n", temp );
-        return temp;
+        System.out.printf("Humidade atual: %.2f%%. Preste atenção nos A ao longo do caminho.\n", humidade );
+        return humidade;
     }
 }
