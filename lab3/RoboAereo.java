@@ -14,6 +14,7 @@ class RoboAereo extends Robo {
         sensorHumidade.setAltitude(5);
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
         altitudeMaxima = scanner.nextInt();
+        scanner.nextLine();
     }
 
     /**
@@ -57,8 +58,7 @@ class RoboAereo extends Robo {
                         return;
                     }
                 } else {
-                    System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", nova_c); 
-                        sensorPlano.mostrar_obstaculo(nova_c);
+                    System.out.printf("Há um obstáculo do tipo %s na posição: %s\n",  sensorPlano.mostrar_obstaculo(nova_c), nova_c);
                 }
             } else {
                 System.out.println("Essa posição encontra-se fora dos limites do ambiente!");

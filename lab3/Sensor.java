@@ -17,7 +17,7 @@ public class Sensor {
 
     public boolean tem_obstaculo(Coordenada coordenada) {
         char element = ambiente.getElemento(coordenada);
-        return (element == '*' || element=='F' || element=='A') ? false : true;
+        return (element == '*' || element=='F' || element=='L') ? false : true;
     }
 
     public String mostrar_obstaculo(Coordenada coordenada){

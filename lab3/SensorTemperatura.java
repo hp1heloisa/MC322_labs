@@ -15,6 +15,7 @@ public class SensorTemperatura extends Sensor {
        double temp = 0;
        int z = altitude;
        double elem_temp = 0;
+       int quant = 0;
         do {
             for (int y = super.raio; y > -super.raio; y--) {
                 if (coordenada.gety() + y < 0) {
@@ -28,8 +29,11 @@ public class SensorTemperatura extends Sensor {
                     if (ambiente.dentroDosLimites(nova_c)) {
                         char elemento = ambiente.getElemento(nova_c);
                         for(TipoObstaculo obs: TipoObstaculo.values()){
-                            if(obs.get_inicial() == elemento )
-                              elem_temp = obs.get_temperatura();
+                            if(obs.get_inicial() == elemento ){
+                                elem_temp = obs.get_temperatura();
+                                quant++;
+                                break;
+                            }
                         }
                     }
                         if (Math.sqrt(x*x + y*y + z*z) > 0) temp += elem_temp/(Math.sqrt(x*x + y*y + z*z));
@@ -40,6 +44,7 @@ public class SensorTemperatura extends Sensor {
     
             z--;
         } while(z >= -altitude);
+        if (quant > 0) temp /= quant;
         System.out.printf("Temperatura atual: %.2fºC. Preste atenção nos F ao longo do caminho.\n", temp );
         return temp;
     }

@@ -14,6 +14,7 @@ public class SensorHumidade extends Sensor {
     public double calcula_humidade(Coordenada coordenada) {
        double humidade = 0;
        int z = altitude;
+       int quant = 0;
         do {
             for (int y = super.raio; y > -super.raio; y--) {
                 if (coordenada.gety() + y < 0) {
@@ -30,6 +31,7 @@ public class SensorHumidade extends Sensor {
                         for(TipoObstaculo obs : TipoObstaculo.values()){
                             if(obs.get_inicial() == elemento){
                                 elem_hum = obs.get_humidade();
+                                quant++;
                                 break;
                             }
                         }
@@ -40,7 +42,8 @@ public class SensorHumidade extends Sensor {
             }
             z--;
         } while (z >= -altitude);
-        System.out.printf("Humidade atual: %.2f%%. Preste atenção nos A ao longo do caminho.\n", humidade );
+        if (quant > 0) humidade /= quant;
+        System.out.printf("Humidade atual: %.2f%%. Preste atenção nos L ao longo do caminho.\n", humidade );
         return humidade;
     }
 }

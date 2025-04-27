@@ -1,8 +1,8 @@
 public enum TipoObstaculo {
-    PAREDE("Parede sólida",'P', 3, 5, 0, 0),
-    AGUA("Área de água", 'A', 2, 3, -100, 100),
-    FOGO("Chamas", 'F', 2, 2, 100, -100),
-    ARBUSTO("Vegetação densa",'V', 1, 6,0, 50);
+    MURALHA("Longa muralha bloqueando a passagem",'M', 3, 5, 0, 0),
+    LAGO("Área de água", 'L', 2, 3, -100, 100),
+    FOGO("Área incendiada", 'F', 2, 2, 100, -100),
+    VEGETACAO("Vegetação densa",'V', 1, 6,0, 50);
 
     private final String descricao;
     private final char inicial;

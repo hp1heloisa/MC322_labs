@@ -20,6 +20,7 @@ public class TiposRobos {
         System.out.println("1. terrestre");
         System.out.println("2. aéreo");
         int robo_escolhido = scanner.nextInt();
+        scanner.nextLine();
         this.robo_escolhido = robo_escolhido;
         if (robo_escolhido == 1) {
             return this.terrestres(ambiente);
@@ -37,6 +38,7 @@ public class TiposRobos {
             System.out.println((i + 1) + ". " + listAereos[i]);
         }
         robo_escolhido = scanner.nextInt();
+        scanner.nextLine();
         if (robo_escolhido == 1) {
             RoboAereo robo = new RoboDestruidor(ambiente); 
             robo.setTipo("RoboDestruidor");
@@ -58,6 +60,7 @@ public class TiposRobos {
             System.out.println((i + 1) + ". " + listTerrestre[i]);
         }
         robo_escolhido = scanner.nextInt();
+        scanner.nextLine();
         if (robo_escolhido == 1) {
             RoboTerrestre robo = new RoboLimitado(ambiente); 
             robo.setTipo("Robô Limitado");

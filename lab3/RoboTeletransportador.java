@@ -30,6 +30,7 @@ class RoboTeletransportador extends RoboAereo {
     private void teletransportar() {
         System.out.println("Indique a posição z para qual o robô irá se teletransportar?");
         int novaaltitude = scanner.nextInt();
+        scanner.nextLine();
         int deltah = novaaltitude - coordenada.getz();
         if(deltah == 0) {
             System.out.printf("Mesma posição que o robô se encontrava anteriormente.\n");

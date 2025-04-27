@@ -25,7 +25,9 @@ public abstract class Robo {
         sensorHumidade = new SensorHumidade(5, 0, ambiente);
         this.ambiente = ambiente;
         System.out.printf("Diga qual é o nome do seu robô\n");
+        System.out.println("oiiiiii");
         nome = scanner.nextLine();
+        System.out.println(nome);
         System.out.printf("Em que direção %s se encontra? Norte, Leste, Sul ou Oeste? \n", nome);
         direcao = scanner.nextLine();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
@@ -148,8 +150,8 @@ public abstract class Robo {
      */
     public void atualizarAmbiente(Coordenada c_0, Coordenada c) {
         char obs = ambiente.getElemento(c);
-        if (obs == 'A' || obs == 'F') {
-            String text = obs == 'A'  ? "Sentimos muito, mas %s morreu afogado!\n" :  "Sentimos muito, mas %s morreu queimado!\n";
+        if (obs == 'L' || obs == 'F') {
+            String text = obs == 'L'  ? "Sentimos muito, mas %s morreu afogado!\n" :  "Sentimos muito, mas %s morreu queimado!\n";
             System.out.printf(text, nome);
             ambiente.removerRobo(ambiente.getIndexOfRobo(toString()));
             setNome(null);
