@@ -28,7 +28,7 @@ public class Main {
                     robo = ambiente.getRobo(indexRobo);
                     System.out.printf("Você agora está no mundo do robô %s!\n", robo.getNome());
                     robo.getPosicao();
-                    robo.identificarObstaculo();
+                    robo.print_sensores();
                     estado = robo.movimentacao();
                     break;
                 case 'r':

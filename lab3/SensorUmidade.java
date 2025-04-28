@@ -1,8 +1,8 @@
 
 
-public class SensorHumidade extends Sensor {
+public class SensorUmidade extends Sensor {
     protected int altitude;
-    public SensorHumidade(int r, int h, Ambiente ambiente){
+    public SensorUmidade(int r, int h, Ambiente ambiente){
         super(r, ambiente);
         altitude = h;
     }
@@ -11,8 +11,8 @@ public class SensorHumidade extends Sensor {
         altitude = h;
     }
 
-    public double calcula_humidade(Coordenada coordenada) {
-       double humidade = 0;
+    public double calcula_umidade(Coordenada coordenada) {
+       double umidade = 0;
        int z = altitude;
        int quant = 0;
         do {
@@ -35,15 +35,15 @@ public class SensorHumidade extends Sensor {
                                 break;
                             }
                         }
-                        if (Math.sqrt(x*x + y*y + z*z) > 0) humidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));
-                        else humidade += elem_hum;
+                        if (Math.sqrt(x*x + y*y + z*z) > 0) umidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));
+                        else umidade += elem_hum;
                     } 
                 }
             }
             z--;
         } while (z >= -altitude);
-        if (quant > 0) humidade /= quant;
-        System.out.printf("Humidade atual: %.2f%%. Preste atenção nos L ao longo do caminho.\n", humidade );
-        return humidade;
+        if (quant > 0) umidade /= quant;
+        System.out.printf("Umidade atual: %.2f%%. Preste atenção nos L ao longo do caminho.\n", umidade );
+        return umidade;
     }
 }

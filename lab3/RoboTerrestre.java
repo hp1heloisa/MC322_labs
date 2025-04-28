@@ -33,6 +33,7 @@ public class RoboTerrestre extends Robo {
 
     }
 
+    /**Função que atualiza a velocidade, não permitindo que a velocidade atual ultrapasse a velocidade máxima */
     protected void setVelocidade(int vel) {
         if (vel <= velocidadeMax) {
             velocidadeatual = vel;
@@ -69,7 +70,7 @@ public class RoboTerrestre extends Robo {
                     setVelocidade(velocidadeatual + 1);
                     break;
                 case 'p':
-                    identificarObstaculo();
+                    print_sensores();
                     break;
                 case 'x':
                     System.out.println("Encerrando movimentação...");

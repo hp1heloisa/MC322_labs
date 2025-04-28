@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class RoboLimitado extends RoboTerrestre {
 
+    /**Função construtora do robô limitado */
     public RoboLimitado(Ambiente ambiente, Scanner scanner) {
         super(ambiente, scanner);
         System.out.printf("A velocidade máxima do robô Limitado é de 5 km/h\n");

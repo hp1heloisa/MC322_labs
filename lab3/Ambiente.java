@@ -12,7 +12,7 @@ class Ambiente {
 
     /**
      * Função construtura que define os comprimentos iniciais do ambiente,
-     * definindo onde temos obstáculos e não, de forma aleatória
+     * definindo onde temos obstáculos e não, de forma aleatória 
      */
     public Ambiente(int x, int y, int z) {
         comprimentoX = x;
@@ -20,19 +20,17 @@ class Ambiente {
         altura = z;
         ambiente = new char[x][y][z];
         listaRobos = new ArrayList<>();
-        /**
-         * aleatorio, pois a chance de ter um obstáculo ou é de 10%
-         */
+
         Random aleatorio = new Random();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
-                    if(ambiente[i][j][k] != '\u0000'){
+                    if(ambiente[i][j][k] != '\u0000'){ // Se há algum elemento, pule
                         continue;
                     }
-                    else if (aleatorio.nextDouble() < 0.1) {
-                        TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)];
-                        Obstaculo obstaculo = new Obstaculo(i, j, k, tipoObstaculo);
+                    else if (aleatorio.nextDouble() < 0.1) { //Se a chance for menor do que 10 %, vamos colocar um obstáculo
+                        TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)]; // Vamos selecionar um tipo de obstáculo
+                        Obstaculo obstaculo = new Obstaculo(i, j, k, tipoObstaculo);                                            //aleatoriamente
                         obstaculo.introduzir_obs_ambiente(this.ambiente, this);
                     } else {
                         ambiente[i][j][k] = '*';
@@ -40,16 +38,13 @@ class Ambiente {
                 }
             }
         }
-        /**
-         * Chance de 10 % de ter Obstáculo = X, campo livre = *
-         */
     }
-
+    /**Método construtor utilizado quando queremos usar um ambiente pré-definido*/ 
     public Ambiente(String arq) throws IOException {
         listaRobos = new ArrayList<>();
         carregar_o_ambiente(arq);
     }
-
+    /**Método que escreve o ambiente em um arquivo txt, para uso futuro. */
     public void salvar_o_ambiente(String ambiente_padrao) throws IOException {
         BufferedWriter arq = new BufferedWriter(new FileWriter("ambiente.txt"));
         arq.write(comprimentoX + " " + comprimentoY + " " + altura + "\n");
@@ -64,7 +59,7 @@ class Ambiente {
         }
         arq.close();
     }
-
+    /**Método que carrega o ambiente a partir do arquivo txt */
     private final void carregar_o_ambiente(String arquivo) throws IOException {
         BufferedReader arq = new BufferedReader(new FileReader("ambiente.txt"));
         String[] dimensoes = arq.readLine().split(" ");
@@ -89,10 +84,7 @@ class Ambiente {
 
         arq.close();
     }
-    //TODO: implementar essa função
-    private void adicionarobstaculo(){
 
-    }
     /**
      * Método que adicionar os robôs no mapa
      */
@@ -112,7 +104,7 @@ class Ambiente {
         }
         ambiente[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
     }
-    
+    /**Método que remove um robô */
     public String removerRobo(int i) {
         Class<?> classe = listaRobos.get(i).getClass(); // Obtém a classe
         boolean existe = false;
@@ -133,17 +125,17 @@ class Ambiente {
         listaRobos.remove(i);
         return removRob;
     }
-
+    /**Método que imprime os tipos de robôs que possuímos */
     public void getRobos() {
         System.out.println("Você tem os seguintes robôs: ");
         for (int i=0; i<listaRobos.size(); i++)
             System.out.printf("%d. %s\n",i+1, listaRobos.get(i));
     }
-
+    /**Método que seleciona um robô específico da nossa lista de robôs */
     public Robo getRobo(int i) {
         return listaRobos.get(i);
     }
-
+    /**Método que retorna a posição do nosso robô dentro da lista de robôs */
     public int getIndexOfRobo(String robo){
         int index = -1;
         for (int i=0; i<listaRobos.size(); i++) {
@@ -156,7 +148,7 @@ class Ambiente {
     }
     /**
      * Método que retorna um booleano se a nova posição do robô está dentro dos
-     * limites possíveis
+     * limites possíveis usando como parâmetro a classe coordenada do robô
      */
     public boolean dentroDosLimites(Coordenada coordenada) {
         if (coordenada.getx() < 0 || coordenada.gety() < 0 || coordenada.getz() < 0 || coordenada.getx() > comprimentoX || coordenada.gety() > comprimentoY || coordenada.getz() > altura) {
@@ -165,6 +157,9 @@ class Ambiente {
             return true;
         }
     }
+
+    /**Método que retorna um booleano se a nova posição do robô está dentro dos
+     * limites possíveis limites possíveis usando como parâmetro os inteiros de coordenada do robô */
     public boolean dentroDosLimites(int x, int y, int z) {
         if (x < 0 || y < 0 || z < 0 || x > comprimentoX || y > comprimentoY || z > altura) {
             return false;
@@ -183,21 +178,23 @@ class Ambiente {
     }
 
     /**
-     * Método que retorna um boolean se há um robô
+     * Método que retorna o comprimento X do ambiente
      */
     public int get_comprimentoX(){
         return comprimentoX;
     }
+    /**Método que retorna o comprimento Y do ambiente */
     public int get_comprimentoY(){
         return comprimentoY;
     }
+    /**Método que retorna a altura do ambiente */
     public int get_altura(){
         return altura;
     }
 
 
     /**
-     * Método que elim ina um obstáculo do mapa
+     * Método que elimina um obstáculo do mapa
      */
     public void eliminaObstaculo(int x, int y, int z) {
         if (dentroDosLimites(x, y, z)) {
@@ -246,7 +243,7 @@ class Ambiente {
         return false;
         }
 
-
+    /**Método que printa uma coordenada */
     public void print_coordenada(int x,int y,int z){
         System.out.printf("%c", this.ambiente[x][y][z]);
     }

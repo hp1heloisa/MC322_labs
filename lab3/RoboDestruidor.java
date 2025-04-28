@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 class RoboDestruidor extends RoboAereo {
 
+    /**Função construtora do robô destruidor */
     public RoboDestruidor(Ambiente ambiente, Scanner scanner) {
         super(ambiente, scanner);
     }
@@ -76,7 +77,7 @@ class RoboDestruidor extends RoboAereo {
                     destruir();
                     break;
                 case 'p':
-                    identificarObstaculo();
+                    print_sensores();
                     break;
                 case 'x':
                     System.out.println("Encerrando movimentação...");

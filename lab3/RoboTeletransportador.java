@@ -74,7 +74,7 @@ class RoboTeletransportador extends RoboAereo {
                     teletransportar();
                     break;
                 case 'p':
-                    identificarObstaculo();
+                    print_sensores();
                     break;
                 case 'x':
                     System.out.println("Encerrando movimentação...");

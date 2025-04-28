@@ -5,15 +5,13 @@ public abstract class Robo {
 
     protected String nome;
     protected String tipo;
-    // protected int coordenada.getx();
-    // protected int coordenada.gety();
     protected Coordenada coordenada;
     protected String direcao;
     protected Scanner scanner;
     protected Ambiente ambiente;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
-    protected SensorHumidade sensorHumidade;
+    protected SensorUmidade sensorHumidade;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
@@ -23,7 +21,7 @@ public abstract class Robo {
         this.scanner = scanner;
         sensorPlano = new SensorPlano(5, ambiente);
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
-        sensorHumidade = new SensorHumidade(5, 0, ambiente);
+        sensorHumidade = new SensorUmidade(5, 0, ambiente);
         this.ambiente = ambiente;
         System.out.printf("Diga qual é o nome do seu robô\n");
         nome = scanner.nextLine();
@@ -48,19 +46,10 @@ public abstract class Robo {
      * obstáculo
      */
     protected void mover(int deltaX, int deltaY) {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        Coordenada c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz());
+        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()); // Coordenada inicial do robô
+        Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz()); // Nova coordenada do robô
 
         if (ambiente.dentroDosLimites(nova_pos)) {
-            // int passo = 1;
-            // if (deltaX < 0) {
-            //     deltaX *= -1; //Sempre vamos trabalhar com o módulo do numero]
-            //     passo = -1;//negativo, pois o robô irá descer em altitude
-            // }
-            // while (deltaX > 0) {
-                
-
                 if (sensorPlano.tem_obstaculo(nova_pos)) {
 
                     System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(nova_pos), nova_pos);
@@ -68,81 +57,46 @@ public abstract class Robo {
                 } else if (sensorPlano.tem_robo(nova_pos)) {
                         System.out.printf("Há um robô na posição: (%s)\n", nova_pos);
                         return;
-                    // } else {
-                    //     c.setx(c.getx()+ passo);
-                    //     deltaX--;
-                    // }
                 }
-                
-           // }  separamos em x e y, pois o enunciado diz para criar um método mover com parâmetros x e y. Se não
-            // passo = 1; // faríamos um mover_x e mover_y, pois o nosso robô não move na diagonal.
-            // if (deltaY < 0) {
-            //     deltaY *= -1;
-            //     passo = -1;
-            // }
-            //Sensor aqui
-            // while (deltaY > 0) {
-            //     if (sensorPlano.tem_obstaculo(nova_pos)) {
-            //         System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(c.getx(), c.gety() + passo, c.getz()), c.getx(), c.gety() + passo, c.getz());
-            //         return;
-            //     } else {
-            //         if (sensorPlano.tem_robo(c.getx(), c.gety() + passo, c.getz())) {
-            //             System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety() + passo, c.getz());
-            //             return;
-            //         } else {
-            //             c.sety(c.gety() + passo);
-            //             deltaY--;
-            //         }
-            //     }
-            // }
         } else {
             System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
             return;
         }
         atualizarAmbiente(c_0, nova_pos);
+        System.out.printf("\n");
     }
 
+    /**Método que printa as informações dos sensores */
     public void print_sensores(){
         sensorTemperatura.calcula_temperatura(coordenada);
-        sensorHumidade.calcula_humidade(coordenada);
-        sensorPlano.identificarArea(coordenada);
-    }
-    public void identificarObstaculo() {
-        sensorTemperatura.calcula_temperatura(coordenada);
-        sensorHumidade.calcula_humidade(coordenada);
+        sensorHumidade.calcula_umidade(coordenada);
         sensorPlano.identificarArea(coordenada);
     }
 
+    /**Método que retorna a posição do robô */
     public void getPosicao() {
         System.out.printf("%s se encontra na posição: %s\n", nome, coordenada);
     }
 
+    /**Método que retorna o nome do robô */
     public String getNome() {
         System.out.printf("O nome do seu robo é: %s\n", nome);
         return nome;
     }
 
-    //@Override 
     public String toString(){
         return nome + " - " + tipo;
     }
 
+    /**Método que define o tipo do robô. EX: robô destruidor, robô limitado, etc*/
     public void setTipo(String tipo){
         this.tipo = tipo;
     }
-
+    /**Método que define o nome do robô */
     public void setNome(String n){
         nome = n;
     }
 
-
-   
-
-    /**
-     * Método que identifica a área em um um raio de 5m, os obstáculos, robôs e
-     * espaços livres
-     */
-    
 
     /**
      * Método que atualiza o ambiente de acordo com a movimentação do robô
@@ -163,12 +117,15 @@ public abstract class Robo {
         }
         
     }
+    /**Método que retorna a posiçãoX do robô */
     public int getPosicaoX(){
         return coordenada.getx();
     }
+    /**Método que retorna a posição Y do robô */
     public int getPosicaoY(){
         return coordenada.gety();
     }
+    /**Método que retorna a posição Z do robô */
     public int getposicaoZ(){
         return coordenada.getz();
     }

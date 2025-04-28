@@ -1,3 +1,3 @@
 rm *.class
 javac Main.java
-java Main #< input.txt
+java Main < input.txt

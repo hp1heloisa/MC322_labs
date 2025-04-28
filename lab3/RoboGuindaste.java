@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 class RoboGuindaste extends RoboTerrestre {
 
+    /**Função construtora do robô guindaste */
     public RoboGuindaste(Ambiente ambiente, Scanner scanner) {
         super(ambiente, scanner);
     }
@@ -75,7 +76,7 @@ class RoboGuindaste extends RoboTerrestre {
                     guindastiando();
                     break;
                 case 'p':
-                    identificarObstaculo();
+                    print_sensores();
                     break;
                 case 'q':
                     setVelocidade(velocidadeatual + 1);

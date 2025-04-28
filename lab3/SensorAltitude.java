@@ -3,6 +3,7 @@ public class SensorAltitude extends Sensor{
         super(r, ambiente);
     }
     
+    /** Sensor que identifica o ambiente nas posições acima do robô dentro do raio pré-determinado */
     public void identificarArea(Coordenada coordenada) {
         int min =  coordenada.getz() - super.raio;
         int max = coordenada.getz() + super.raio;

@@ -39,14 +39,14 @@ class RoboAereo extends Robo {
      * aéreo, ele identifica os obstaculos no raio de 5 altitudes também
      */
     @Override
-    public void identificarObstaculo() {
-        super.identificarObstaculo();
+    public void print_sensores() {
+        super.print_sensores();
         sensorAltitude.identificarArea(coordenada);
     }
 
 
     /**
-     * Método que sube a altitude de um robô aéreo
+     * Método que altera a altitude de um robô aéreo, podendo subir ou descer.
      */
     public void alterar_altitude(int deltah) {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
@@ -70,31 +70,6 @@ class RoboAereo extends Robo {
         atualizarAmbiente(c_0, nova_c);
     }
 
-    /**
-     * Método que faz o movimento de diminuição de altitude do robô
-     */
-    // public void descer(int deltah) {
-    //     Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-    //     Coordenada nova_c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()+ deltah);
-    //     if (c.getz() + deltah >= 0) {
-    //         if (!sensorPlano.tem_obstaculo(c.getx(), c.gety(), c.getz() + deltah)) {
-    //             if (sensorPlano.tem_robo(c.getx(), c.gety(), c.getz() + deltah)) {
-    //                 System.out.printf("Há um robô na posição: (%d,%d,%d)\n", c.getx(), c.gety(), c.getz() + deltah);
-    //                 return;
-    //             } else {
-    //                 c.setz(deltah + c.getz());
-    //             }
-    //         } else {
-    //             System.out.printf("Há um obstáculo do tipo %s na posição: (%d,%d,%d)\n", 
-    //                 sensorPlano.mostrar_obstaculo(c.getx(), c.gety(),c.getz() + deltah),
-    //                 c.getx(), c.gety(), c.getz()+deltah);
-    //         }
-    //     } else {
-    //         System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-    //     }
-    //     System.out.printf("Altitude atual: %d\n", c.getz());
-    //     atualizarAmbiente(c_0, c);
-    // }
 
     /**
      * Implementação da movimentação do robô aéreo
@@ -129,7 +104,7 @@ class RoboAereo extends Robo {
                     alterar_altitude(-1);
                     break;
                 case 'p':
-                    identificarObstaculo();
+                    print_sensores();
                     break;
                 case 'x':
                     System.out.println("Encerrando movimentação...");

@@ -38,12 +38,22 @@ public class Coordenada {
     public int getz() {
         return z;
     }
+
+    /**
+     * Método set para retornar a pos x
+     */
     public void setx(int x){
         this.x = x;
     }
+    /**
+     * Método set para retornar a pos y
+     */
     public void sety(int y){
         this.y = y;
     }
+    /**
+     * Método set para retornar a pos z
+     */
     public void setz(int z){
         this.z = z;
     }
