@@ -1,8 +1,9 @@
+import java.util.Scanner;
 
 class RoboGuindaste extends RoboTerrestre {
 
-    public RoboGuindaste(Ambiente ambiente) {
-        super(ambiente);
+    public RoboGuindaste(Ambiente ambiente, Scanner scanner) {
+        super(ambiente, scanner);
     }
 
     @Override

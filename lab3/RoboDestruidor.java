@@ -1,8 +1,9 @@
+import java.util.Scanner;
 
 class RoboDestruidor extends RoboAereo {
 
-    public RoboDestruidor(Ambiente ambiente) {
-        super(ambiente);
+    public RoboDestruidor(Ambiente ambiente, Scanner scanner) {
+        super(ambiente, scanner);
     }
 
     @Override

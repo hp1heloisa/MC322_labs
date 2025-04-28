@@ -6,10 +6,14 @@ import java.util.Scanner;
  */
 public class TiposRobos {
 
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
     private static String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"};
     private static String[] listTerrestre = {"Robô Limitado", "Robô Guindaste"};
     int robo_escolhido;
+
+    public TiposRobos(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     /**
      * Método responsável por retornar qual é a classe do nosso robô, se é aéreo
@@ -40,11 +44,11 @@ public class TiposRobos {
         robo_escolhido = scanner.nextInt();
         scanner.nextLine();
         if (robo_escolhido == 1) {
-            RoboAereo robo = new RoboDestruidor(ambiente); 
+            RoboAereo robo = new RoboDestruidor(ambiente, scanner); 
             robo.setTipo("RoboDestruidor");
             return robo;
         }else {
-            RoboAereo robo = new RoboTeletransportador(ambiente);
+            RoboAereo robo = new RoboTeletransportador(ambiente, scanner);
             robo.setTipo("RoboTeletransportador");
             return robo;
         }
@@ -62,11 +66,11 @@ public class TiposRobos {
         robo_escolhido = scanner.nextInt();
         scanner.nextLine();
         if (robo_escolhido == 1) {
-            RoboTerrestre robo = new RoboLimitado(ambiente); 
+            RoboTerrestre robo = new RoboLimitado(ambiente, scanner); 
             robo.setTipo("Robô Limitado");
             return robo;
         }else {
-            RoboTerrestre robo = new RoboGuindaste(ambiente);
+            RoboTerrestre robo = new RoboGuindaste(ambiente, scanner);
             robo.setTipo("Robo Guindaste");
             return robo;
         }

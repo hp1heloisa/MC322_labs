@@ -6,15 +6,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Ambiente ambiente = new Ambiente(30,40,100);
         // ambiente.salvar_o_ambiente("ambiente.txt");
-        Scanner scanner = new Scanner(System.in);
         Ambiente ambiente = new Ambiente("ambiente.txt");
-        
-        TiposRobos tiposRobos = new TiposRobos();
+
+        Scanner scanner = new Scanner(System.in);
+        TiposRobos tiposRobos = new TiposRobos(scanner);
         Robo robo;
         char estado = ' ';
         int indexRobo;
 
-        while (estado != 'x') {
+            while (estado != 'x') {
             switch (estado) {
                 case 'c':
                     System.out.println("Você gostaria de trocar de robô ou remover algum robo? (m para mudar e r para remover)");
@@ -24,18 +24,16 @@ public class Main {
                     ambiente.getRobos();
                     System.out.println("Qual deles você escolhe?");
                     indexRobo = scanner.nextInt();
-                    scanner.nextLine();
                     indexRobo--;
                     robo = ambiente.getRobo(indexRobo);
-                    System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
-                    robo.explicar_movimentacao();
+                    System.out.printf("Você agora está no mundo do robô %s!\n", robo.getNome());
+                    robo.getPosicao();
                     estado = robo.movimentacao();
                     break;
                 case 'r':
                     ambiente.getRobos();
                     System.out.println("Qual deles você gostaria de remover?");
                     indexRobo = scanner.nextInt();
-                    scanner.nextLine();        
                     indexRobo--;
                     String removRob = ambiente.removerRobo(indexRobo);
                     System.out.printf("O robô %s foi removido com sucesso!", removRob);

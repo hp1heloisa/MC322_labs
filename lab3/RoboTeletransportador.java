@@ -1,8 +1,9 @@
+import java.util.Scanner;
 
 class RoboTeletransportador extends RoboAereo {
 
-    public RoboTeletransportador(Ambiente ambiente) {
-        super(ambiente);
+    public RoboTeletransportador(Ambiente ambiente, Scanner scanner) {
+        super(ambiente, scanner);
     }
 
     @Override

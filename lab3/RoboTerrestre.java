@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class RoboTerrestre extends Robo {
 
@@ -7,8 +8,8 @@ public class RoboTerrestre extends Robo {
     /**
      * Função construtora do robô terrestre
      */
-    public RoboTerrestre(Ambiente ambiente) {
-        super(ambiente);
+    public RoboTerrestre(Ambiente ambiente, Scanner scanner) {
+        super(ambiente, scanner);
     }
 
     @Override

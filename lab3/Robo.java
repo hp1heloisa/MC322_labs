@@ -9,7 +9,7 @@ public abstract class Robo {
     // protected int coordenada.gety();
     protected Coordenada coordenada;
     protected String direcao;
-    protected Scanner scanner = new Scanner(System.in);
+    protected Scanner scanner;
     protected Ambiente ambiente;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
@@ -19,15 +19,14 @@ public abstract class Robo {
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
      * e pergunta ao qual a direção ele está
      */
-    public Robo(Ambiente ambiente) {
+    public Robo(Ambiente ambiente, Scanner scanner) {
+        this.scanner = scanner;
         sensorPlano = new SensorPlano(5, ambiente);
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
         sensorHumidade = new SensorHumidade(5, 0, ambiente);
         this.ambiente = ambiente;
         System.out.printf("Diga qual é o nome do seu robô\n");
-        System.out.println("oiiiiii");
         nome = scanner.nextLine();
-        System.out.println(nome);
         System.out.printf("Em que direção %s se encontra? Norte, Leste, Sul ou Oeste? \n", nome);
         direcao = scanner.nextLine();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
@@ -115,7 +114,7 @@ public abstract class Robo {
     }
 
     public void getPosicao() {
-        System.out.printf("%s se encontra na posição: (%d,%d)\n", nome, coordenada.getx(), coordenada.gety());
+        System.out.printf("%s se encontra na posição: %s\n", nome, coordenada);
     }
 
     public String getNome() {
