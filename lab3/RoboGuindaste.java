@@ -23,19 +23,19 @@ class RoboGuindaste extends RoboTerrestre {
         boolean pode_mover = false;
         switch (direcao) {
             case 'a':
-                pos_obstaculo = new Coordenada(coordenada.getx() - 1, coordenada.gety(), 0);
+                pos_obstaculo = new Coordenada(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
                 pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
                 break;
             case 'd':
-                pos_obstaculo = new Coordenada(coordenada.getx() + 1, coordenada.gety(), 0);
+                pos_obstaculo = new Coordenada(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
                 pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
                 break;
             case 'w':
-                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() + 1, 0);
+                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
                 pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
                 break;
             case 's':
-                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() - 1, 0);
+                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
                 pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
                 break;
             default:

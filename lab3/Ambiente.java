@@ -224,13 +224,22 @@ class Ambiente {
      */
     public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
         if (dentroDosLimites(obstaculo)) {
-               if (ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] == 'r'){
+               if (ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] == 'r'){
                 System.out.println("Não é possível mover outro robô!");
                 return false;
                }
-               this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
-               ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
-               return true;
+               for(TipoObstaculo obs : TipoObstaculo.values()){
+                    if(obs.get_inicial() == this.getElemento(obstaculo)){
+                        this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
+                        ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
+                        System.out.printf("%s movido(a) com sucesso!\n", obs.getDescricao());
+                        return true;
+                    }
+               }
+
+               System.out.println("Ops! O guindaste acabou não encontrando nenhum obstáculo.");
+               return false;
+               
         }
         
         System.out.println("Essa posição encontra-se fora dos limites!");
