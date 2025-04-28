@@ -114,7 +114,6 @@ class Ambiente {
     }
     
     public String removerRobo(int i) {
-        System.out.println(i);
         Class<?> classe = listaRobos.get(i).getClass(); // Obtém a classe
         boolean existe = false;
         for (Method metodo : classe.getDeclaredMethods()) {
@@ -203,7 +202,7 @@ class Ambiente {
     public void eliminaObstaculo(int x, int y, int z) {
         if (dentroDosLimites(x, y, z)) {
             if (ambiente[x][y][z] == 'r') {
-                System.out.println("É proibibido matar outros robôs");
+                System.out.println("É proibido matar outros robôs");
             } else {
                 ambiente[x][y][z] = '*';
             }
@@ -225,12 +224,16 @@ class Ambiente {
      */
     public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
         if (dentroDosLimites(obstaculo)) {
-                this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
-                ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
-                return true;
-            }
+               if (ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] == 'r'){
+                System.out.println("Não é possível mover outro robô!");
+                return false;
+               }
+               this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
+               ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
+               return true;
+        }
         
-        System.out.println("Essa posiçao encontra-se fora dos limites!");
+        System.out.println("Essa posição encontra-se fora dos limites!");
         return false;
         }
 
