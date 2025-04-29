@@ -1,7 +1,11 @@
-# Laboratório 2 - Simulação de Robôs Inteligentes
+# Laboratório 3 - Relacionamentos
 
 ## Introdução
-Seja bem-vindo a explicação do código do Lab 2!
+Seja bem-vindo a explicação do código do Lab 3!
+
+Após alguns anos de paz, algumas coisas fugiram de controle: Os robôs descobriram que podem morrer agora. Por isso, eles estão desesperados. A fim de contornar tal situação, os engenheiros desonvolveram uma nova ferramenta -- o Piloto Automático. Com essa nova funcionalidade, os robôs minimizam sua chance de morte, porém como ainda está em períodos de testes, ainda ocorrem alguns deslizes. Então, vamos testar essa nova funcionalidade!
+
+OBS: o nosso diagrama é o arquivo diagrama.jpg
 
 ## Tipos de Robôs
 
@@ -24,19 +28,50 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 #### Robô Destruidor
 - Tecnologia avançada para destruição de obstáculos
 - Pode eliminar obstáculos em todas as direções
-- Sistema de segurança impede danos a outros robôs
+
 
 #### Robô Teletransportador
 - Capacidade de teletransporte vertical
 - Mantém coordenadas X e Y durante o teletransporte
 - Ideal para evasão rápida de ameaças aéreas
 
+## Tipos de obstáculos
+
+### Muralha
+- Possui um grande comprimento e altura.
+- Foi desenvolvida para bloquear o percurso do robô
+
+### Lago
+- Essencial para a melhoria de umidade do ambiente
+- Tome cuidado! O robô pode morrer afogado.
+
+### Fogo
+- Contribui para o aumento de temperatura e prejudicar o funcionamento do robô.
+- Pode acabar queimando o robô.
+
+### Vegetação
+- Possui o maior comprimento de todos os obstáculos
+- Fornece um pouco de umidade.
+
+## Sensores 
+### Sensor Plano
+- Mostra os objetos próximos no mesmo plano em um raio r, definido pelo sensor
+
+### Sensor Altitude
+- Ele mostra os objetos próximos em relação até uma altura r, definida pelo sensor.
+
+### Sensor Temperatura
+- Mostra a temperatura da coordenada, utilizando a distância eucliadiana entre vários obstáculos e realizando uma média entre todos.
+
+### Sensor Altitude
+- Mesma lógica do sensor temperatura.
 ## Guia de Uso
 
 ### Como Executar
 1. Execute o programa principal, rodando `./script.sh` no terminal
-2. Siga as instruções interativas no console
-3. Selecione o tipo de robô desejado
+2. Se quiser controlar os robôs basta escrever a terceira linha  do arquivo script.sh assim("java Main #< input.txt"), se não o programa irá ler a nossa entrada pré-definida
+3. Se estiver usando o input.txt, apenas aguarde e veja amanhã, se não siga as instruções interativas no console
+4. Selecione o tipo de robô desejado
 
 ### Controles Básicos
 | Tecla | Ação                | Robôs Compatíveis       |
@@ -52,25 +87,31 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 | p     | Scanear área        | Todos                   |
 | n     | Novo robô           | Todos                   |
 | x     | Sair                | Todos                   |
+| c     | Remover/trocar robô | Todos
 
-### Sugestões de Teste
-
-**Robô Limitado:**
-1. Inicie com velocidade (tecla `q`)
-2. Teste movimentos inválidos (`s`/`a` para bordas)
-3. Colida com obstáculos para ver comportamento
+### Os nossos testes
+ O piloto automático é a nossa entrada padrão, o arquivo "input.txt". Se quiserem rodar o `./script.sh`, sem alterações, ele irá funcionar direitinho. Sugiro que se teste copiando algumas partes, pois o teste irá vir diversas linhas de uma vez.
+**Primeiro robô:**
+#### Robô limitado:
+- Nome: Link
+- Começamos tentando mover para cima("w" -- linha 6 da entrada), e acabamos chocando com uma Vegetação densa. Por isso, o robô não anda.
+- Nos próximos moviemntos, o robô acaba andando aleatoriamente e criamos um novo robô.
 
 **Robô Guindaste:**
-1. Use `k` para ativar o guindaste
-2. Experimente trocar com obstáculos em diferentes posições
-3. Teste limites de velocidade
+1. Vamos criar um novo robô: o guindaste, chamado de Bob.
+2. Nós trocamos alguns obstáculos durante o caminho, para testar o seu guindaste
+3. Agora, o nosso robô não morreu. Apenas criamos um novo.
 
 **Robô Destruidor:**
-1. Ajuste altitude com `u` (para cima) e `j` (para baixo)
-2. Use `p` para scanear obstáculos
-3. Destrua obstáculos com `k` em várias direções
+1. Robô chamado de Exterminador.
+2. Destruímos vários obstáculos durante o percurso
+3. Subimos e descemos usando os comandos("u" e "j")
 
 **Robô Teletransportador:**
-1. Teste teletransporte (tecla `k`) para várias altitudes
-2. Experimente altitudes extremas (valores negativos ou acima do máximo)
-3. Combine com movimentos horizontais
+1. Nome é Spock
+2. Movemos alguns movimentos aleatórios e usamos o seu poder de teletransportar para a altitude 5.
+3. Acabamos usando o comando c(linha 76), para trocar ou mudar o nosso robô de controle.
+
+**Trocas de robô**
+1. Agora usamos "m", que significa mudar o robô e trocamos para o robô Link, e fazemos com que ele morra afogado no lago.
+2. E depois trocamos para o Spock e Bob que acabam se movendo sem incidentes.

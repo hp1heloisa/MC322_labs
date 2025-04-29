@@ -11,19 +11,14 @@ public class SensorUmidade extends Sensor {
         altitude = h;
     }
 
+    /**Método que calcula a umidade de um determinado ponto usando a média das distancias eucliadianas */
     public double calcula_umidade(Coordenada coordenada) {
        double umidade = 0;
        int z = altitude;
        int quant = 0;
         do {
-            for (int y = super.raio; y > -super.raio; y--) {
-                if (coordenada.gety() + y < 0) {
-                    continue;
-                }
-                for (int x = -super.raio; x < super.raio; x++) {
-                    if (coordenada.getx() + x < 0) {
-                        continue;
-                    }
+            for (int y = -super.raio; y <= +super.raio; y++) {
+                for (int x = -super.raio; x <= super.raio; x++) {
                     if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z)) {
                         Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z);
                         char elemento = ambiente.getElemento(nova_c);
@@ -35,8 +30,9 @@ public class SensorUmidade extends Sensor {
                                 break;
                             }
                         }
-                        if (Math.sqrt(x*x + y*y + z*z) > 0) umidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));
-                        else umidade += elem_hum;
+                        if (Math.sqrt(x*x + y*y + z*z) > 0) umidade += elem_hum/(Math.sqrt(x*x + y*y + z*z));// Calcula a umidade
+                        else umidade += elem_hum;                                                      // usando a distância euclidiana da coordenada original
+                        
                     } 
                 }
             }

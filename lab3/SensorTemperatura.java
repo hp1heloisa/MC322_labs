@@ -11,6 +11,7 @@ public class SensorTemperatura extends Sensor {
         altitude = h;
     }
 
+    /**Método que calcula a temperatura de um determinado ponto usando a média das distancias eucliadianas */
     public double calcula_temperatura(Coordenada coordenada) {
        double temp = 0;
        int z = altitude;
