@@ -118,4 +118,5 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 
 **Trocas de robô**
 1. Agora usamos "m", que significa mudar o robô e trocamos para o robô Link, e fazemos com que ele morra afogado no lago.
-2. E depois trocamos para o Spock e Bob que acabam se movendo sem incidentes.
+2. Depois entramos no mundo do Spock e fizemos com que ele morresse queimado nas chamas.
+3. E depois trocamos para o Bob que acaba se movendo sem incidentes.
