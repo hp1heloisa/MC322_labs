@@ -38,18 +38,22 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 ## Tipos de obstáculos
 
 ### Muralha
+- Inicial: M
 - Possui um grande comprimento e altura.
 - Foi desenvolvida para bloquear o percurso do robô
 
 ### Lago
+- Inicial: L
 - Essencial para a melhoria de umidade do ambiente
 - Tome cuidado! O robô pode morrer afogado.
 
 ### Fogo
+- Inicial: F
 - Contribui para o aumento de temperatura e prejudicar o funcionamento do robô.
 - Pode acabar queimando o robô.
 
 ### Vegetação
+- Inicial: V
 - Possui o maior comprimento de todos os obstáculos
 - Fornece um pouco de umidade.
 
@@ -94,7 +98,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 **Primeiro robô:**
 #### Robô limitado:
 - Nome: Link
-- Começamos tentando mover para cima("w" -- linha 6 da entrada), e acabamos chocando com uma Vegetação densa. Por isso, o robô não anda.
+- Começamos tentando mover para frente("w" -- linha 6 da entrada), e acabamos chocando com uma Vegetação densa. Por isso, o robô não anda.
 - Nos próximos moviemntos, o robô acaba andando aleatoriamente e criamos um novo robô.
 
 **Robô Guindaste:**
