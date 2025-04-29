@@ -5,7 +5,7 @@ Seja bem-vindo a explicação do código do Lab 3!
 
 Após alguns anos de paz, algumas coisas fugiram de controle: Os robôs descobriram que podem morrer agora. Por isso, eles estão desesperados. A fim de contornar tal situação, os engenheiros desonvolveram uma nova ferramenta -- o Piloto Automático. Com essa nova funcionalidade, os robôs minimizam sua chance de morte, porém como ainda está em períodos de testes, ainda ocorrem alguns deslizes. Então, vamos testar essa nova funcionalidade!
 
-OBS: o nosso diagrama é o arquivo diagrama.jpg
+OBS: o nosso diagrama é o arquivo relacionamentos.jpg
 
 ## Tipos de Robôs
 
@@ -74,7 +74,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 ### Como Executar
 1. Execute o programa principal, rodando `./script.sh` no terminal
 2. Se quiser controlar os robôs basta escrever a terceira linha  do arquivo script.sh assim("java Main #< input.txt"), se não o programa irá ler a nossa entrada pré-definida
-3. Se estiver usando o input.txt, apenas aguarde e veja amanhã, se não siga as instruções interativas no console
+3. Se estiver usando o input.txt, apenas aguarde e veja o resultado final direto, se não siga as instruções interativas no console
 4. Selecione o tipo de robô desejado
 
 ### Controles Básicos
