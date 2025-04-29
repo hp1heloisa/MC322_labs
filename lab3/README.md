@@ -13,7 +13,7 @@ OBS: o nosso diagrama é o arquivo relacionamentos.jpg
 Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 
 #### Robô Limitado
-- Movimentação restrita aos quatro pontos cardeais (cima, baixo, direita, esquerda)
+- Movimentação restrita aos quatro pontos cardeais (frente, trás, direita, esquerda)
 - Funcionalidades básicas de movimento
 
 #### Robô Guindaste
@@ -99,7 +99,7 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 #### Robô limitado:
 - Nome: Link
 - Começamos tentando mover para frente("w" -- linha 6 da entrada), e acabamos chocando com uma Vegetação densa. Por isso, o robô não anda.
-- Nos próximos moviemntos, o robô acaba andando aleatoriamente e criamos um novo robô.
+- Nos próximos movimentos, o robô acaba andando aleatoriamente e criamos um novo robô.
 
 **Robô Guindaste:**
 1. Vamos criar um novo robô: o guindaste, chamado de Bob.
