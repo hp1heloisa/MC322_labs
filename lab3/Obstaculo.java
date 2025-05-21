@@ -1,5 +1,5 @@
 
-public class Obstaculo {
+public class Obstaculo implements Entidade{
 
     int posicaoX, posicaoY1, posicaoZ1;
     private TipoObstaculo tipo;
@@ -22,6 +22,15 @@ public class Obstaculo {
             }
         }
     }
+    public TipoObstaculo getTipoObstaculo(){
+        return tipo;
+    }
+    @Override
+    public TipoEntidade getTipo(){
+        return TipoEntidade.OBSTACULO;
+    }
+
+
 
 }
 

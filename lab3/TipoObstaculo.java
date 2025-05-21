@@ -46,5 +46,12 @@ public enum TipoObstaculo {
     public int get_humidade() {
         return umidade;
     }
+    public static TipoObstaculo busca_inicial(char caract){
+        for(TipoObstaculo tipo: TipoObstaculo.values()){
+            if(tipo.get_inicial() == caract)
+                return tipo;
+        }
+        return null;
+    }
 
 }

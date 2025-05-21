@@ -7,7 +7,7 @@ import java.util.Random;
 class Ambiente {
 
     private int comprimentoX, comprimentoY, altura;
-    private char[][][] ambiente;
+    private Entidade[][][] mapa;
     private ArrayList<Robo> listaRobos;
 
     /**
@@ -18,22 +18,21 @@ class Ambiente {
         comprimentoX = x;
         comprimentoY = y;
         altura = z;
-        ambiente = new char[x][y][z];
+        mapa = new Entidade[x][y][z];
         listaRobos = new ArrayList<>();
 
         Random aleatorio = new Random();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
-                    if(ambiente[i][j][k] != '\u0000'){ // Se há algum elemento, pule
+                    if(mapa[i][j][k] != null){ // Se há algum elemento, pule
                         continue;
                     }
                     else if (aleatorio.nextDouble() < 0.1) { //Se a chance for menor do que 10 %, vamos colocar um obstáculo
                         TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)]; // Vamos selecionar um tipo de obstáculo
-                        Obstaculo obstaculo = new Obstaculo(i, j, k, tipoObstaculo);                                            //aleatoriamente
-                        obstaculo.introduzir_obs_ambiente(this.ambiente, this);
+                        mapa[i][j][k] = new Obstaculo(i, j, k, tipoObstaculo);                                            //aleatoriamente
                     } else {
-                        ambiente[i][j][k] = '*';
+                        mapa[i][j][k] = new EspacoVazio(i, j, k);
                     }
                 }
             }
@@ -51,7 +50,7 @@ class Ambiente {
         for (int k = 0; k < altura; k++) {
             for (int j = 0; j < comprimentoY; j++) {
                 for (int i = 0; i < comprimentoX; i++) {
-                    arq.write(ambiente[i][j][k]);
+                    arq.write(mapa[i][j][k].getRepresentacao());
                 }
                 arq.write("\n");
             }
@@ -67,13 +66,21 @@ class Ambiente {
         this.comprimentoX = Integer.parseInt(dimensoes[0]);
         this.comprimentoY = Integer.parseInt(dimensoes[1]);
         this.altura = Integer.parseInt(dimensoes[2]);
-        this.ambiente = new char[comprimentoX][comprimentoY][altura];
+        this.mapa = new Entidade[comprimentoX][comprimentoY][altura];
 
         for (int z = 0; z < altura; z++) {
             for (int y = 0; y < comprimentoY; y++) {
                 String linha = arq.readLine();
                 for (int x = 0; x < comprimentoX; x++) {
-                    this.ambiente[x][y][z] = linha.charAt(x);
+                    char caractere = linha.charAt(x);
+                    switch (caractere){
+                        case '*':
+                            mapa[x][y][z] = new EspacoVazio(x, y, z);
+                    default:
+                        TipoObstaculo obst = TipoObstaculo.busca_inicial(caractere);
+                        mapa[x][y][z] = new Obstaculo(x, y, z, obst);
+                        break;
+                    }
                 }
             }
             arq.readLine();
@@ -102,7 +109,7 @@ class Ambiente {
                 break;
             }
         }
-        ambiente[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = 'r';
+        mapa[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = new RoboInativo(r.getPosicaoX(), r.getPosicaoY(), r.getposicaoZ());
     }
     /**Método que remove um robô */
     public String removerRobo(int i) {
