@@ -13,6 +13,14 @@ public class Obstaculo implements Entidade{
         this.tipo = tipo;
         this.coordenada = new Coordenada(x,y1,z1);
     }
+
+    public Obstaculo(int x, int y1, int z1, char caract) {
+        this.posicaoX = x;
+        this.posicaoY1 = y1;
+        this.posicaoZ1 = z1;
+        this.tipo = TipoObstaculo.busca_inicial(caract);
+        this.coordenada = new Coordenada(x,y1,z1);
+    }
      @Override
     public TipoEntidade getTipo(){
         return TipoEntidade.OBSTACULO;

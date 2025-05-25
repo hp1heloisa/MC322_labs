@@ -12,7 +12,7 @@ class Ambiente {
 
     /**
      * Função construtura que define os comprimentos iniciais do ambiente,
-     * definindo onde temos obstáculos e não, de forma aleatória 
+     * definindo onde temos obstáculos e não, de forma aleatória
      */
     public Ambiente(int x, int y, int z) {
         comprimentoX = x;
@@ -25,10 +25,9 @@ class Ambiente {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
-                    if(mapa[i][j][k] != null){ // Se há algum elemento, pule
+                    if (mapa[i][j][k] != null) { // Se há algum elemento, pule
                         continue;
-                    }
-                    else if (aleatorio.nextDouble() < 0.1) { //Se a chance for menor do que 10 %, vamos colocar um obstáculo
+                    } else if (aleatorio.nextDouble() < 0.1) { //Se a chance for menor do que 10 %, vamos colocar um obstáculo
                         TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)]; // Vamos selecionar um tipo de obstáculo
                         mapa[i][j][k] = new Obstaculo(i, j, k, tipoObstaculo);                                            //aleatoriamente
                     } else {
@@ -38,12 +37,18 @@ class Ambiente {
             }
         }
     }
-    /**Método construtor utilizado quando queremos usar um ambiente pré-definido*/ 
+
+    /**
+     * Método construtor utilizado quando queremos usar um ambiente pré-definido
+     */
     public Ambiente(String arq) throws IOException {
         listaRobos = new ArrayList<>();
         carregar_o_ambiente(arq);
     }
-    /**Método que escreve o ambiente em um arquivo txt, para uso futuro. */
+
+    /**
+     * Método que escreve o ambiente em um arquivo txt, para uso futuro.
+     */
     public void salvar_o_ambiente(String ambiente_padrao) throws IOException {
         BufferedWriter arq = new BufferedWriter(new FileWriter("ambiente.txt"));
         arq.write(comprimentoX + " " + comprimentoY + " " + altura + "\n");
@@ -58,7 +63,10 @@ class Ambiente {
         }
         arq.close();
     }
-    /**Método que carrega o ambiente a partir do arquivo txt */
+
+    /**
+     * Método que carrega o ambiente a partir do arquivo txt
+     */
     private final void carregar_o_ambiente(String arquivo) throws IOException {
         BufferedReader arq = new BufferedReader(new FileReader("ambiente.txt"));
         String[] dimensoes = arq.readLine().split(" ");
@@ -73,13 +81,13 @@ class Ambiente {
                 String linha = arq.readLine();
                 for (int x = 0; x < comprimentoX; x++) {
                     char caractere = linha.charAt(x);
-                    switch (caractere){
-                        case '*':
+                    if (caractere == '*'){
                             mapa[x][y][z] = new EspacoVazio(x, y, z);
-                    default:
-                        TipoObstaculo obst = TipoObstaculo.busca_inicial(caractere);
-                        mapa[x][y][z] = new Obstaculo(x, y, z, obst);
-                        break;
+                    }
+                    else{
+                            TipoObstaculo obst = TipoObstaculo.busca_inicial(caractere);
+                            mapa[x][y][z] = new Obstaculo(x, y, z, obst);
+                    
                     }
                 }
             }
@@ -111,7 +119,10 @@ class Ambiente {
         }
         mapa[r.getPosicaoX()][r.getPosicaoY()][(existe && r instanceof RoboAereo) ? ((RoboAereo) r).getposicaoZ() : 0] = new RoboInativo(r.getPosicaoX(), r.getPosicaoY(), r.getposicaoZ());
     }
-    /**Método que remove um robô */
+
+    /**
+     * Método que remove um robô
+     */
     public String removerRobo(int i) {
         Class<?> classe = listaRobos.get(i).getClass(); // Obtém a classe
         boolean existe = false;
@@ -125,34 +136,43 @@ class Ambiente {
                 break;
             }
         }
-        mapa[listaRobos.get(i).getPosicaoX()]
-                [listaRobos.get(i).getPosicaoY()]
-                [(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = new EspacoVazio(listaRobos.get(i).getPosicaoX(), listaRobos.get(i).getPosicaoY() , (existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0);
-        String removRob = listaRobos.get(i).toString(); 
+        mapa[listaRobos.get(i).getPosicaoX()][listaRobos.get(i).getPosicaoY()][(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = new EspacoVazio(listaRobos.get(i).getPosicaoX(), listaRobos.get(i).getPosicaoY(), (existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0);
+        String removRob = listaRobos.get(i).toString();
         listaRobos.remove(i);
         return removRob;
     }
-    /**Método que imprime os tipos de robôs que possuímos */
+
+    /**
+     * Método que imprime os tipos de robôs que possuímos
+     */
     public void getRobos() {
         System.out.println("Você tem os seguintes robôs: ");
-        for (int i=0; i<listaRobos.size(); i++)
-            System.out.printf("%d. %s\n",i+1, listaRobos.get(i));
+        for (int i = 0; i < listaRobos.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, listaRobos.get(i));
+        }
     }
-    /**Método que seleciona um robô específico da nossa lista de robôs */
+
+    /**
+     * Método que seleciona um robô específico da nossa lista de robôs
+     */
     public Robo getRobo(int i) {
         return listaRobos.get(i);
     }
-    /**Método que retorna a posição do nosso robô dentro da lista de robôs */
-    public int getIndexOfRobo(String robo){
+
+    /**
+     * Método que retorna a posição do nosso robô dentro da lista de robôs
+     */
+    public int getIndexOfRobo(String robo) {
         int index = -1;
-        for (int i=0; i<listaRobos.size(); i++) {
-            if (listaRobos.get(i).toString().equals(robo)){
+        for (int i = 0; i < listaRobos.size(); i++) {
+            if (listaRobos.get(i).toString().equals(robo)) {
                 index = i;
                 break;
             }
         }
         return index;
     }
+
     /**
      * Método que retorna um booleano se a nova posição do robô está dentro dos
      * limites possíveis usando como parâmetro a classe coordenada do robô
@@ -165,13 +185,15 @@ class Ambiente {
         }
     }
 
-    /**Método que retorna um booleano se a nova posição do robô está dentro dos
-     * limites possíveis limites possíveis usando como parâmetro os inteiros de coordenada do robô */
+    /**
+     * Método que retorna um booleano se a nova posição do robô está dentro dos
+     * limites possíveis limites possíveis usando como parâmetro os inteiros de
+     * coordenada do robô
+     */
     public boolean dentroDosLimites(int x, int y, int z) {
         if (x < 0 || y < 0 || z < 0 || x > comprimentoX || y > comprimentoY || z > altura) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
@@ -179,7 +201,6 @@ class Ambiente {
     /**
      * Método que retorna um boolean se há um obstáculo
      */
-
     public char getElemento(Coordenada coordenada) {
         return mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()].getRepresentacao();
     }
@@ -187,18 +208,23 @@ class Ambiente {
     /**
      * Método que retorna o comprimento X do ambiente
      */
-    public int get_comprimentoX(){
+    public int get_comprimentoX() {
         return comprimentoX;
     }
-    /**Método que retorna o comprimento Y do ambiente */
-    public int get_comprimentoY(){
+
+    /**
+     * Método que retorna o comprimento Y do ambiente
+     */
+    public int get_comprimentoY() {
         return comprimentoY;
     }
-    /**Método que retorna a altura do ambiente */
-    public int get_altura(){
+
+    /**
+     * Método que retorna a altura do ambiente
+     */
+    public int get_altura() {
         return altura;
     }
-
 
     /**
      * Método que elimina um obstáculo do mapa
@@ -208,7 +234,7 @@ class Ambiente {
             if (mapa[x][y][z].getRepresentacao() == 'r') {
                 System.out.println("É proibido matar outros robôs");
             } else {
-                mapa[x][y][z] = new EspacoVazio(x,y,z);
+                mapa[x][y][z] = new EspacoVazio(x, y, z);
             }
         } else {
             System.out.println("Essa posiçao encontra-se fora dos limites!");
@@ -221,8 +247,9 @@ class Ambiente {
     public void atualizar_espaco_vazio(Coordenada c) {
         mapa[c.getx()][c.gety()][c.getz()] = new EspacoVazio(c.getx(), c.gety(), c.gety());
     }
-    public void atualizar_robo(Coordenada c, Robo robo){
-         mapa[c.getx()][c.gety()][c.getz()] = robo;
+
+    public void atualizar_robo(Coordenada c, Robo robo) {
+        mapa[c.getx()][c.gety()][c.getz()] = robo;
     }
 
     /**
@@ -231,30 +258,32 @@ class Ambiente {
      */
     public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
         if (dentroDosLimites(obstaculo)) {
-               if (mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()].getRepresentacao() == 'r'){
+            if (mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()].getRepresentacao() == 'r') {
                 System.out.println("Não é possível mover outro robô!");
                 return false;
-               }
-               for(TipoObstaculo obs : TipoObstaculo.values()){
-                    if(obs.get_inicial() == this.getElemento(obstaculo)){
-                        this.mapa[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
-                        atualizar_robo(obstaculo, robo);
-                        System.out.printf("%s movido(a) com sucesso!\n", obs.getDescricao());
-                        return true;
-                    }
-               }
+            }
+            for (TipoObstaculo obs : TipoObstaculo.values()) {
+                if (obs.get_inicial() == this.getElemento(obstaculo)) {
+                    this.mapa[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
+                    atualizar_robo(obstaculo, robo);
+                    System.out.printf("%s movido(a) com sucesso!\n", obs.getDescricao());
+                    return true;
+                }
+            }
 
-               System.out.println("Ops! O guindaste acabou não encontrando nenhum obstáculo.");
-               return false;
-               
+            System.out.println("Ops! O guindaste acabou não encontrando nenhum obstáculo.");
+            return false;
+
         }
-        
+
         System.out.println("Essa posição encontra-se fora dos limites!");
         return false;
-        }
+    }
 
-    /**Método que printa uma coordenada */
-    public void print_coordenada(int x,int y,int z){
+    /**
+     * Método que printa uma coordenada
+     */
+    public void print_coordenada(int x, int y, int z) {
         System.out.printf("%c", this.mapa[x][y][z].getRepresentacao());
     }
 
