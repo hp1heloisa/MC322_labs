@@ -8,6 +8,15 @@ class RoboGuindaste extends RoboTerrestre {
     }
 
     @Override
+    public TipoEntidade getTipo(){
+        return TipoEntidade.ROBO_GUINDASTE;
+    }
+    @Override
+    public String getDescricao(){
+        return "Olá! Eu sou o Robô Guindaste, sou uma subclasse do Robô Terrestre! Além de fazer tudo que ele faz, eu posso mover obstáculos de lugar.";
+    }
+
+    @Override
     public void explicar_movimentacao() {
         super.explicar_movimentacao();
         System.out.println("k -> trocar de posição com o obstáculo");
