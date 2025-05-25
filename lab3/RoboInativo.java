@@ -31,5 +31,3 @@ public class RoboInativo implements Entidade{
     }
 }
     
-    
-}

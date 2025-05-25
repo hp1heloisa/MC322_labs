@@ -125,9 +125,9 @@ class Ambiente {
                 break;
             }
         }
-        ambiente[listaRobos.get(i).getPosicaoX()]
+        mapa[listaRobos.get(i).getPosicaoX()]
                 [listaRobos.get(i).getPosicaoY()]
-                [(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = '*';
+                [(existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0] = new EspacoVazio(listaRobos.get(i).getPosicaoX(), listaRobos.get(i).getPosicaoY() , (existe && listaRobos.get(i) instanceof RoboAereo) ? ((RoboAereo) listaRobos.get(i)).getposicaoZ() : 0);
         String removRob = listaRobos.get(i).toString(); 
         listaRobos.remove(i);
         return removRob;
@@ -181,7 +181,7 @@ class Ambiente {
      */
 
     public char getElemento(Coordenada coordenada) {
-        return ambiente[coordenada.getx()][coordenada.gety()][coordenada.getz()];
+        return mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()].getRepresentacao();
     }
 
     /**
@@ -205,10 +205,10 @@ class Ambiente {
      */
     public void eliminaObstaculo(int x, int y, int z) {
         if (dentroDosLimites(x, y, z)) {
-            if (ambiente[x][y][z] == 'r') {
+            if (mapa[x][y][z].getRepresentacao() == 'r') {
                 System.out.println("É proibido matar outros robôs");
             } else {
-                ambiente[x][y][z] = '*';
+                mapa[x][y][z] = new EspacoVazio(x,y,z);
             }
         } else {
             System.out.println("Essa posiçao encontra-se fora dos limites!");
@@ -218,8 +218,11 @@ class Ambiente {
     /**
      * Método que atualiza a coordenada do robô
      */
-    public void atualizar(Coordenada c, char s) {
-        ambiente[c.getx()][c.gety()][c.getz()] = s;
+    public void atualizar_espaco_vazio(Coordenada c) {
+        mapa[c.getx()][c.gety()][c.getz()] = new EspacoVazio(c.getx(), c.gety(), c.gety());
+    }
+    public void atualizar_robo(Coordenada c, Robo robo){
+         mapa[c.getx()][c.gety()][c.getz()] = robo;
     }
 
     /**
@@ -228,14 +231,14 @@ class Ambiente {
      */
     public boolean trocarObstaculo(Robo robo, Coordenada obstaculo) {
         if (dentroDosLimites(obstaculo)) {
-               if (ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] == 'r'){
+               if (mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()].getRepresentacao() == 'r'){
                 System.out.println("Não é possível mover outro robô!");
                 return false;
                }
                for(TipoObstaculo obs : TipoObstaculo.values()){
                     if(obs.get_inicial() == this.getElemento(obstaculo)){
-                        this.ambiente[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
-                        ambiente[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()] = 'r';
+                        this.mapa[robo.coordenada.getx()][robo.coordenada.gety()][robo.coordenada.getz()] = this.mapa[obstaculo.getx()][obstaculo.gety()][obstaculo.getz()];
+                        atualizar_robo(obstaculo, robo);
                         System.out.printf("%s movido(a) com sucesso!\n", obs.getDescricao());
                         return true;
                     }
@@ -252,7 +255,7 @@ class Ambiente {
 
     /**Método que printa uma coordenada */
     public void print_coordenada(int x,int y,int z){
-        System.out.printf("%c", this.ambiente[x][y][z]);
+        System.out.printf("%c", this.mapa[x][y][z].getRepresentacao());
     }
 
 }
