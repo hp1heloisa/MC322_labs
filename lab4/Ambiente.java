@@ -45,6 +45,9 @@ class Ambiente {
         listaRobos = new ArrayList<>();
         carregar_o_ambiente(arq);
     }
+    public ArrayList<Robo> getLista_Robos(){
+        return listaRobos;
+    }
 
     /**
      * Método que escreve o ambiente em um arquivo txt, para uso futuro.
