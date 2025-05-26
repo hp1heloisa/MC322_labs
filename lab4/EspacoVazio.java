@@ -28,4 +28,16 @@ public class EspacoVazio implements Entidade{
     public int getZ(){
         return coordenada.getz();
     }
+    @Override
+    public void setX(int x){
+        coordenada.setx(x);
+    }
+    @Override
+    public void setY(int y){
+        coordenada.sety(y);
+    }
+    @Override
+    public void setZ(int z){
+        coordenada.setz(z);
+    }
 }

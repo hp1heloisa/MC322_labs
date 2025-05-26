@@ -8,10 +8,6 @@ class RoboDestruidor extends RoboAereo {
     }
 
     @Override
-    public TipoEntidade getTipo(){
-        return TipoEntidade.ROBO_DESTRUIDOR;
-    }
-    @Override
     public String getDescricao(){
         return "Olá! Eu sou um Robô Destruidor e eu sou uma subclasse do Robô Aéreo. Além de fazer tudo que ele faz, eu também posso destruir obstáculos que estiverem na minha frente, com exceção de outros robôs!";
     }

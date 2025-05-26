@@ -6,11 +6,7 @@ class RoboGuindaste extends RoboTerrestre {
     public RoboGuindaste(Ambiente ambiente, Scanner scanner) {
         super(ambiente, scanner);
     }
-
-    @Override
-    public TipoEntidade getTipo(){
-        return TipoEntidade.ROBO_GUINDASTE;
-    }
+    
     @Override
     public String getDescricao(){
         return "Olá! Eu sou o Robô Guindaste, sou uma subclasse do Robô Terrestre! Além de fazer tudo que ele faz, eu posso mover obstáculos de lugar.";
@@ -34,19 +30,19 @@ class RoboGuindaste extends RoboTerrestre {
         switch (direcao) {
             case 'a':
                 pos_obstaculo = new Coordenada(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
-                pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
+                pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 'd':
                 pos_obstaculo = new Coordenada(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
-                pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
+                pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 'w':
                 pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
-                pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
+                pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 's':
                 pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
-                pode_mover = ambiente.trocarObstaculo(this, pos_obstaculo);
+                pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             default:
                 System.out.println("Direção inválida! Use w, s, a ou d");

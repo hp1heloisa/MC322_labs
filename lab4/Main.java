@@ -10,7 +10,7 @@
 
             Scanner scanner = new Scanner(System.in);
             TiposRobos tiposRobos = new TiposRobos(scanner);
-            Robo robo;
+            Entidade robo;
             char estado = ' ';
             int indexRobo;
 

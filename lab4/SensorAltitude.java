@@ -11,7 +11,7 @@ public class SensorAltitude extends Sensor{
         if (max > ambiente.get_altura()) max = ambiente.get_altura();
         System.out.printf("Obstáculos identificados nas altitudes de %dm a %dm: \n", min, max);
         for (int z = super.raio; z > -super.raio; z--) {
-            if (ambiente.dentroDosLimites(coordenada.getx(), coordenada.gety(), coordenada.getz() + z)) {
+            if (ambiente.dentroDosLimites(new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz() + z))) {
                 ambiente.print_coordenada(coordenada.getx(), coordenada.gety() , coordenada.getz() + z);
                 System.out.println("");
             } 

@@ -19,10 +19,6 @@ class RoboAereo extends Robo {
     }
 
     @Override
-    public TipoEntidade getTipo(){
-        return TipoEntidade.ROBO_AEREO;
-    }
-    @Override
     public String getDescricao(){
         return "Olá! Eu sou o R0bô Aéreo e eu posso me mover nas coordenadas X, Y e Z!";
     }

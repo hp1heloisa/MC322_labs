@@ -54,6 +54,18 @@
         public int getZ(){
             return coordenada.getz();
         }
+        @Override
+        public void setX(int x){
+            coordenada.setx(x);
+        }
+        @Override
+        public void setY(int y){
+            coordenada.sety(y);
+        }
+        @Override
+        public void setZ(int z){
+            coordenada.setz(z);
+        }
 
         /**
          * Abstrata, pois os robôs têm movimentações distintas
@@ -130,7 +142,7 @@
             if (obs == 'L' || obs == 'F') {
                 String text = obs == 'L'  ? "Sentimos muito, mas %s morreu afogado!\n" :  "Sentimos muito, mas %s morreu queimado!\n";
                 System.out.printf(text, nome);
-                ambiente.removerRobo(ambiente.getIndexOfRobo(toString()));
+                ambiente.removerEntidade(this);
                 setNome(null);
             } else{
                 ambiente.atualizar_espaco_vazio(c_0);

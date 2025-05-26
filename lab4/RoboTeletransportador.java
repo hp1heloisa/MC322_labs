@@ -7,10 +7,6 @@ class RoboTeletransportador extends RoboAereo {
     }
 
     @Override
-    public TipoEntidade getTipo(){
-        return TipoEntidade.ROBO_TELETRANSPORTADOR;
-    }
-    @Override
     public String getDescricao(){
         return "Olá! Eu sou um Robô Teletransportador e eu sou uma subclasse do Robô Aéreo. Além de fazer tudo o que ele faz, eu posso me teletransportar para diferentes alturas, muito maiores ou menores do que a que eu estou!";
     }

@@ -19,7 +19,7 @@ public class SensorUmidade extends Sensor {
         do {
             for (int y = -super.raio; y <= +super.raio; y++) {
                 for (int x = -super.raio; x <= super.raio; x++) {
-                    if (ambiente.dentroDosLimites(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z)) {
+                    if (ambiente.dentroDosLimites(new Coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z))) {
                         Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz() + z);
                         char elemento = ambiente.getElemento(nova_c);
                         double elem_hum = 0;

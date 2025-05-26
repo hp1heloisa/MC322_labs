@@ -21,7 +21,7 @@ public class Obstaculo implements Entidade{
         this.tipo = TipoObstaculo.busca_inicial(caract);
         this.coordenada = new Coordenada(x,y1,z1);
     }
-     @Override
+    @Override
     public TipoEntidade getTipo(){
         return TipoEntidade.OBSTACULO;
 
@@ -45,6 +45,18 @@ public class Obstaculo implements Entidade{
     @Override
     public int getZ(){
         return coordenada.getz();
+    }
+     @Override
+    public void setX(int x){
+        coordenada.setx(x);
+    }
+    @Override
+    public void setY(int y){
+        coordenada.sety(y);
+    }
+    @Override
+    public void setZ(int z){
+        coordenada.setz(z);
     }
     /**Método que é responsável por colocar o obstáculo no ambiente */
     public void introduzir_obs_ambiente(char[][][] matriz_ambiente, Ambiente ambiente) {

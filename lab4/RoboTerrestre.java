@@ -13,10 +13,6 @@ public class RoboTerrestre extends Robo {
     }
 
     @Override
-    public TipoEntidade getTipo(){
-        return TipoEntidade.ROBO_TERRESTRE;
-    }
-    @Override
     public String getDescricao(){
         return "Olá! Eu sou um Robô Terrestre e eu posso me mover nas coordenadas X e Y.";
     }
