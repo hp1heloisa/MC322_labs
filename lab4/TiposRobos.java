@@ -45,11 +45,9 @@ public class TiposRobos {
         scanner.nextLine();
         if (robo_escolhido == 1) {
             RoboAereo robo = new RoboDestruidor(ambiente, scanner); 
-            robo.setTipo("RoboDestruidor");
             return robo;
         }else {
             RoboAereo robo = new RoboTeletransportador(ambiente, scanner);
-            robo.setTipo("RoboTeletransportador");
             return robo;
         }
 
@@ -67,11 +65,9 @@ public class TiposRobos {
         scanner.nextLine();
         if (robo_escolhido == 1) {
             RoboTerrestre robo = new RoboLimitado(ambiente, scanner); 
-            robo.setTipo("Robô Limitado");
             return robo;
         }else {
             RoboTerrestre robo = new RoboGuindaste(ambiente, scanner);
-            robo.setTipo("Robo Guindaste");
             return robo;
         }
     }

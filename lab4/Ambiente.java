@@ -54,6 +54,9 @@ class Ambiente {
         entidades = new ArrayList<>();
         carregar_o_ambiente(arq);
     }
+    public ArrayList<Robo> getLista_Robos(){
+        return listaRobos;
+    }
 
     private char getRepresentacaoEntidade(TipoEntidade tipo, int x, int y, int z) {
         if (tipo == TipoEntidade.OBSTACULO){
