@@ -10,6 +10,15 @@ public class RoboLimitado extends RoboTerrestre {
     }
 
     @Override
+    public TipoEntidade getTipo(){
+        return TipoEntidade.ROBO_LIMITADO;
+    }
+    @Override
+    public String getDescricao(){
+        return "Olá! Eu sou o Robô Limitado, sou uma subclasse do Robô Terrestre! Além de fazer tudo que ele faz, eu posso... ahh espera, é só isso! Por isso me chamam de Limitado!";
+    }
+
+    @Override
     protected void mover(int deltaX, int deltaY, int velocidade) {
         super.mover(deltaX, deltaY, velocidade);
     }

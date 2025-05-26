@@ -18,6 +18,15 @@ class RoboAereo extends Robo {
         scanner.nextLine();
     }
 
+    @Override
+    public TipoEntidade getTipo(){
+        return TipoEntidade.ROBO_AEREO;
+    }
+    @Override
+    public String getDescricao(){
+        return "Olá! Eu sou o R0bô Aéreo e eu posso me mover nas coordenadas X, Y e Z!";
+    }
+
     /**
      * Função que explica a movimentação do robô aéreo
      */
@@ -30,9 +39,6 @@ class RoboAereo extends Robo {
         System.out.println("p -> para scanear a área; n -> criar um novo robô");
         System.out.println("c -> remover ou trocar de robô; x -> para sair");
     }
-
-
-    
    
     /**
      * Método que identifica os obstaculos em um raio de 5m e no caso do robô
@@ -43,7 +49,6 @@ class RoboAereo extends Robo {
         super.print_sensores();
         sensorAltitude.identificarArea(coordenada);
     }
-
 
     /**
      * Método que altera a altitude de um robô aéreo, podendo subir ou descer.
@@ -69,7 +74,6 @@ class RoboAereo extends Robo {
         System.out.printf("Altitude atual: %d\n", nova_c.getz());
         atualizarAmbiente(c_0, nova_c);
     }
-
 
     /**
      * Implementação da movimentação do robô aéreo

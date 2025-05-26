@@ -13,6 +13,15 @@ public class RoboTerrestre extends Robo {
     }
 
     @Override
+    public TipoEntidade getTipo(){
+        return TipoEntidade.ROBO_TERRESTRE;
+    }
+    @Override
+    public String getDescricao(){
+        return "Olá! Eu sou um Robô Terrestre e eu posso me mover nas coordenadas X e Y.";
+    }
+
+    @Override
     public void explicar_movimentacao() {
         System.out.println("Você pode movimentar seu robô usando os seguintes comandos: ");
         System.out.println("w -> ir para frente; s -> ir para trás");
