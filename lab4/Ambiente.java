@@ -1,6 +1,5 @@
 
 import java.io.*;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -54,9 +53,9 @@ class Ambiente {
         entidades = new ArrayList<>();
         carregar_o_ambiente(arq);
     }
-    public ArrayList<Robo> getLista_Robos(){
-        return listaRobos;
-    }
+    // public ArrayList<Robo> getLista_Robos(){
+    //     return listaRobos;
+    // }
 
     private char getRepresentacaoEntidade(TipoEntidade tipo, int x, int y, int z) {
         if (tipo == TipoEntidade.OBSTACULO){
@@ -153,6 +152,7 @@ class Ambiente {
         entidades.remove(e);
         return removEnt;
     }
+    
 
     /**
      * Método que imprime os tipos de robôs que possuímos
@@ -166,16 +166,37 @@ class Ambiente {
 
         }
     }
+    public ArrayList<Robo> getlistRobos(){
+        ArrayList<Robo> listRobos = new ArrayList<>();
+        for(Entidade ent : entidades){
+            if (ent instanceof Robo){
+                listRobos.add((Robo) ent);
+            }
+        }
+        return listRobos;
+    }
+    public Robo get_tipo_Robo(int pos_robo){
+        int cont = 1;
+        for(Entidade ent : entidades){
+            if (ent instanceof Robo){
+                if(cont == pos_robo){
+                    return (Robo) ent;
+                }
+                cont++;
+            }
+        }
+        throw new IndexOutOfBoundsException("Não existe robô na posição " + cont);
+    }
 
     /**
      * Método que seleciona um robô específico da nossa lista de robôs
      */
-    public Entidade getRobo(int i) {
+    public InterfaceRobo getRobo(int i) {
         int quant = 0;
         for (Entidade ent : entidades) {
             if (ent instanceof Robo) {
                 if (quant == i) {
-                    return ent;
+                    return (InterfaceRobo) ent;
                 }
                 quant++;
             }
@@ -363,7 +384,7 @@ class Ambiente {
      * Método que printa uma coordenada
      */
     public void print_coordenada(int x, int y, int z) {
-        System.out.printf("%c", this.mapa[x][y][z]);
+        System.out.printf("%c", this.getRepresentacaoEntidade(this.mapa[x][y][z], x, y, z));
     }
 
 }

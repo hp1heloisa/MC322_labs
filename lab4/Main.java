@@ -10,7 +10,7 @@
 
             Scanner scanner = new Scanner(System.in);
             TiposRobos tiposRobos = new TiposRobos(scanner);
-            Entidade robo;
+            InterfaceRobo robo;
             char estado = ' ';
             int indexRobo;
 
@@ -35,15 +35,16 @@
                         ambiente.getRobos();
                         System.out.println("Qual deles você gostaria de remover?");
                         indexRobo = scanner.nextInt();
+                        Robo roboParaRemover = ambiente.get_tipo_Robo(indexRobo);
                         indexRobo--;
-                        String removRob = ambiente.removerRobo(indexRobo);
+                        String removRob = ambiente.removerEntidade(roboParaRemover);
                         System.out.printf("O robô %s foi removido com sucesso!", removRob);
                         System.out.println("Para remover outro robô digite r, escolher um robô digite m e para criar um novo digite n:");
                         estado = scanner.next().charAt(0);
                         break;
                     default:
                         robo = tiposRobos.definir_robo(ambiente);
-                        ambiente.adicionarRobo(robo);
+                        ambiente.adicionarEntidade(robo);
                         System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
                         robo.explicar_movimentacao();
                         estado = robo.movimentacao();

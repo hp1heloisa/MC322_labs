@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Robo implements Entidade {
+public abstract class Robo implements Entidade, InterfaceRobo {
 
     protected String nome;
     protected TipoEntidade tipo;

@@ -3,4 +3,6 @@ public enum TipoEntidade{
     OBSTACULO,
     DESCONHECIDO,
     VAZIO();
+    
 }
+    

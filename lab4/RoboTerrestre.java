@@ -9,7 +9,7 @@ public class RoboTerrestre extends Robo {
      * Função construtora do robô terrestre
      */
     public RoboTerrestre(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner, ambiente.getLista_Robos());
+        super(ambiente, scanner, ambiente.getlistRobos());
     }
 
     @Override
