@@ -12,13 +12,5 @@ javac -encoding UTF-8 -d "$BIN_DIR" -sourcepath "$SRC_DIR" @sources.list >/dev/n
 COMPILE_STATUS=$?
 rm sources.list
 
-if [ $COMPILE_STATUS -ne 0 ]; then
-    find "$SRC_DIR" -name "*.java" > sources.list # Recria para mostrar erros
-    javac -encoding UTF-8 -d "$BIN_DIR" -sourcepath "$SRC_DIR" @sources.list
-    rm sources.list
-    echo "ERRO DE COMPILAÇÃO!" >&2
-    exit 1
-fi
-
 # Executa o programa esperando entrada interativa do terminal
 java -cp "$BIN_DIR" "$MAIN_CLASS"
