@@ -1,3 +1,6 @@
+package simulador.interfaces;
+import simulador.ambiente.ColisaoException;
+
 public interface InterfaceRobo extends Entidade{
     String getNome(); 
     void getPosicao(); 

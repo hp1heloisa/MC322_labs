@@ -1,6 +1,10 @@
-import java.util.Scanner;
+package simulador.robo;
 
-class RoboDestruidor extends RoboAereo {
+import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
+
+public class RoboDestruidor extends RoboAereo {
 
     /**Função construtora do robô destruidor */
     public RoboDestruidor(Ambiente ambiente, Scanner scanner) {

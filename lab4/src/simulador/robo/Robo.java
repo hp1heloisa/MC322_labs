@@ -1,6 +1,16 @@
+package simulador.robo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
+import simulador.ambiente.Coordenada;
+import simulador.ambiente.TipoEntidade;
+import simulador.interfaces.Entidade;
+import simulador.interfaces.InterfaceRobo;
+import simulador.sensores.SensorPlano;
+import simulador.sensores.SensorTemperatura;
+import simulador.sensores.SensorUmidade;
 
 public abstract class Robo implements Entidade, InterfaceRobo {
 
@@ -9,7 +19,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     protected Coordenada coordenada;
     protected Scanner scanner;
     protected Ambiente ambiente;
-    protected EstadoRobo estado;
+    // protected EstadoRobo estado;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
     protected SensorUmidade sensorHumidade;

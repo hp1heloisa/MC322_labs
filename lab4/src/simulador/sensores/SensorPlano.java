@@ -1,3 +1,6 @@
+package simulador.sensores;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 
 public class SensorPlano extends Sensor {
 

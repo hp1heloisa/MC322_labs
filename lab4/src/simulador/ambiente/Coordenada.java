@@ -1,4 +1,4 @@
-
+package simulador.ambiente;
 public class Coordenada {
 
     private int x, y, z;

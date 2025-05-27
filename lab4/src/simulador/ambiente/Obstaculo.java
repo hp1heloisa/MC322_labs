@@ -1,4 +1,5 @@
-
+package simulador.ambiente;
+import simulador.interfaces.Entidade;
 public class Obstaculo implements Entidade{
 
     int posicaoX, posicaoY1, posicaoZ1;

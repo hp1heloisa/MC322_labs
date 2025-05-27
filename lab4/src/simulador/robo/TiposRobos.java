@@ -1,14 +1,15 @@
+package simulador.robo;
 
+import simulador.ambiente.Ambiente;
 import java.util.Scanner;
-
 /**
  * Função construtora de TiposRobos
  */
 public class TiposRobos {
 
     Scanner scanner;
-    private static String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"};
-    private static String[] listTerrestre = {"Robô Limitado", "Robô Guindaste"};
+    private static final String[] listAereos = {"Robô Destruidor", "Robô Teletransportador"};
+    private static final String[] listTerrestre = {"Robô Limitado", "Robô Guindaste"};
     int robo_escolhido;
 
     public TiposRobos(Scanner scanner) {

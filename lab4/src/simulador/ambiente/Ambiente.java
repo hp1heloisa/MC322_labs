@@ -1,9 +1,12 @@
-
+package simulador.ambiente;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import simulador.interfaces.Entidade;
+import simulador.interfaces.InterfaceRobo;
+import simulador.robo.Robo;
 
-class Ambiente {
+public class Ambiente {
 
     private int comprimentoX, comprimentoY, altura;
     private TipoEntidade[][][] mapa;

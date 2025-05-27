@@ -1,20 +1,28 @@
-public class EspacoVazio implements Entidade{
-    protected  Coordenada coordenada;
-    public EspacoVazio(int x, int y, int z){
+package simulador.robo;
+
+import simulador.interfaces.Entidade;
+import simulador.ambiente.Coordenada;
+import simulador.ambiente.TipoEntidade;
+
+
+public class RoboInativo implements Entidade{
+    protected Coordenada coordenada;
+
+    public RoboInativo(int x, int y, int z) {
         this.coordenada = new Coordenada(x, y, z);
     }
-    @Override
+     @Override
     public TipoEntidade getTipo(){
-        return TipoEntidade.VAZIO;
+        return TipoEntidade.ROBO;
 
     }
     @Override
     public char getRepresentacao(){
-        return '*';
+        return 'r';
     }
     @Override
     public String getDescricao(){
-        return "Não há nenhum obstáculo nesta posição";
+        return "Há um robô inativo nesta posição";
     }
     @Override
     public int getX(){
@@ -41,3 +49,4 @@ public class EspacoVazio implements Entidade{
         coordenada.setz(z);
     }
 }
+    

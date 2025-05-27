@@ -1,3 +1,5 @@
+package simulador.interfaces;
+import simulador.ambiente.TipoEntidade;
 public interface Entidade{
     int getX();
     int getY();

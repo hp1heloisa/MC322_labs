@@ -1,6 +1,10 @@
-import java.util.Scanner;
+package simulador.robo;
 
-class RoboTeletransportador extends RoboAereo {
+import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
+
+public class RoboTeletransportador extends RoboAereo {
 
     public RoboTeletransportador(Ambiente ambiente, Scanner scanner) {
         super(ambiente, scanner);

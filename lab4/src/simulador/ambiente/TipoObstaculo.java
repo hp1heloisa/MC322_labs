@@ -1,3 +1,4 @@
+package simulador.ambiente;
 
 public enum TipoObstaculo {
     MURALHA("Longa muralha bloqueando a passagem", 'M', 5, 5, 40, 5),

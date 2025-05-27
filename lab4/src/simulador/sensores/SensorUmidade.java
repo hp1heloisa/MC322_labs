@@ -1,4 +1,7 @@
-
+package simulador.sensores;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
+import simulador.ambiente.TipoObstaculo;
 
 public class SensorUmidade extends Sensor {
     protected int altitude;

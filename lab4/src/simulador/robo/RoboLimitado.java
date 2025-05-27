@@ -1,4 +1,6 @@
+package simulador.robo;
 import java.util.Scanner;
+import simulador.ambiente.Ambiente;
 
 public class RoboLimitado extends RoboTerrestre {
 

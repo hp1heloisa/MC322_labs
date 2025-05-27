@@ -1,3 +1,3 @@
-rm *.class
-javac Main.java
-java Main #< input.txt
+rm **/*.class
+javac src/simulador/Main.java -cp bin/
+java Main 

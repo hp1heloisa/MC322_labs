@@ -1,6 +1,12 @@
-import java.util.Scanner;
+package simulador.robo;
 
-class RoboAereo extends Robo {
+import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
+import simulador.ambiente.Coordenada;
+import simulador.sensores.SensorAltitude;
+
+public class RoboAereo extends Robo {
 
     protected SensorAltitude sensorAltitude = new SensorAltitude(5, super.ambiente);
     protected int altitudeMaxima;

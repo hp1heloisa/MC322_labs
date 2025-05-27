@@ -1,3 +1,8 @@
+package simulador.sensores;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
+
+
 public class SensorAltitude extends Sensor{
     public SensorAltitude(int r, Ambiente ambiente){
         super(r, ambiente);

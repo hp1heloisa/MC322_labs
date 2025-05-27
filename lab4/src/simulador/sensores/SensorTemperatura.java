@@ -1,5 +1,7 @@
-
-
+package simulador.sensores;
+import simulador.ambiente.TipoObstaculo;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 public class SensorTemperatura extends Sensor {
     protected int altitude;
     public SensorTemperatura(int r, int h, Ambiente ambiente){

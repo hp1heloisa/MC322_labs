@@ -1,6 +1,9 @@
+package simulador.robo;
 import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 
-class RoboGuindaste extends RoboTerrestre {
+public class RoboGuindaste extends RoboTerrestre {
 
     /**Função construtora do robô guindaste */
     public RoboGuindaste(Ambiente ambiente, Scanner scanner) {

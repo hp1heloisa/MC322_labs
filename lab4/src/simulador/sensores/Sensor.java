@@ -1,3 +1,8 @@
+package simulador.sensores;
+import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
+import simulador.ambiente.TipoObstaculo;
+import simulador.interfaces.Entidade;
 public class Sensor {
     protected int raio;
     protected Ambiente ambiente;
