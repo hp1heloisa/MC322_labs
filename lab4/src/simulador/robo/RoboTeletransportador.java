@@ -6,8 +6,8 @@ import simulador.ambiente.ColisaoException;
 
 public class RoboTeletransportador extends RoboAereo {
 
-    public RoboTeletransportador(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner);
+    public RoboTeletransportador(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, estado);
     }
 
     @Override

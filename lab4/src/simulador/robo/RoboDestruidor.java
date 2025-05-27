@@ -7,8 +7,8 @@ import simulador.ambiente.ColisaoException;
 public class RoboDestruidor extends RoboAereo {
 
     /**Função construtora do robô destruidor */
-    public RoboDestruidor(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner);
+    public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, estado);
     }
 
     @Override

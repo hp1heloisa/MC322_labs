@@ -5,8 +5,8 @@ import simulador.ambiente.Ambiente;
 public class RoboLimitado extends RoboTerrestre {
 
     /**Função construtora do robô limitado */
-    public RoboLimitado(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner);
+    public RoboLimitado(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, estado);
         System.out.printf("A velocidade máxima do robô Limitado é de 5 km/h\n");
         velocidadeMax = 5;
     }

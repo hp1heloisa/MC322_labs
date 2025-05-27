@@ -6,8 +6,8 @@ import simulador.ambiente.Coordenada;
 public class RoboGuindaste extends RoboTerrestre {
 
     /**Função construtora do robô guindaste */
-    public RoboGuindaste(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner);
+    public RoboGuindaste(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, estado);
     }
     
     @Override

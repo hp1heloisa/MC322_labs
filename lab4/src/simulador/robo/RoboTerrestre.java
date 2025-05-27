@@ -1,7 +1,7 @@
 package simulador.robo;
 
-import simulador.ambiente.Ambiente;
 import java.util.Scanner;
+import simulador.ambiente.Ambiente;
 
 
 
@@ -13,8 +13,8 @@ public class RoboTerrestre extends Robo {
     /**
      * Função construtora do robô terrestre
      */
-    public RoboTerrestre(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner, ambiente.getlistRobos());
+    public RoboTerrestre(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, ambiente.getlistRobos(), estado);
     }
 
     @Override

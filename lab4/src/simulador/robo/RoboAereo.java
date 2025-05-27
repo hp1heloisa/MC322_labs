@@ -15,8 +15,8 @@ public class RoboAereo extends Robo {
      * Função construtura que herda do ambiente, definimos como padrão a
      * altitude como 0 e perguntamos qual será a altitude máxima
      */
-    public RoboAereo(Ambiente ambiente, Scanner scanner) {
-        super(ambiente, scanner, ambiente.getlistRobos());
+    public RoboAereo(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
+        super(ambiente, scanner, ambiente.getlistRobos(), estado);
         sensorTemperatura.setAltitude(5);
         sensorHumidade.setAltitude(5);
         System.out.println("Qual altidude máxima que o seu robô pode alcançar?");

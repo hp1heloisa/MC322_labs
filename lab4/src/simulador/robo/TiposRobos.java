@@ -1,7 +1,8 @@
 package simulador.robo;
 
-import simulador.ambiente.Ambiente;
 import java.util.Scanner;
+import simulador.ambiente.Ambiente;
+
 /**
  * Função construtora de TiposRobos
  */
@@ -45,17 +46,18 @@ public class TiposRobos {
         robo_escolhido = scanner.nextInt();
         scanner.nextLine();
         if (robo_escolhido == 1) {
-            RoboAereo robo = new RoboDestruidor(ambiente, scanner); 
+            RoboAereo robo = new RoboDestruidor(ambiente, scanner, EstadoRobo.ligado);
             return robo;
-        }else {
-            RoboAereo robo = new RoboTeletransportador(ambiente, scanner);
+        } else {
+            RoboAereo robo = new RoboTeletransportador(ambiente, scanner, EstadoRobo.ligado);
             return robo;
         }
 
     }
 
     /**
-     * Método responsável por selecionar qual é o tipo de robô terrestre selecionado
+     * Método responsável por selecionar qual é o tipo de robô terrestre
+     * selecionado
      */
     private RoboTerrestre terrestres(Ambiente ambiente) {
         System.out.println("Digite o número do robô escolhido:");
@@ -65,10 +67,10 @@ public class TiposRobos {
         robo_escolhido = scanner.nextInt();
         scanner.nextLine();
         if (robo_escolhido == 1) {
-            RoboTerrestre robo = new RoboLimitado(ambiente, scanner); 
+            RoboTerrestre robo = new RoboLimitado(ambiente, scanner, EstadoRobo.ligado);
             return robo;
-        }else {
-            RoboTerrestre robo = new RoboGuindaste(ambiente, scanner);
+        } else {
+            RoboTerrestre robo = new RoboGuindaste(ambiente, scanner, EstadoRobo.ligado);
             return robo;
         }
     }

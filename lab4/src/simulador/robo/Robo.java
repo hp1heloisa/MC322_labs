@@ -19,7 +19,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     protected Coordenada coordenada;
     protected Scanner scanner;
     protected Ambiente ambiente;
-    // protected EstadoRobo estado;
+    protected EstadoRobo estado;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
     protected SensorUmidade sensorHumidade;
@@ -28,7 +28,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
      * e pergunta ao qual a direção ele está
      */
-    public Robo(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos) {
+    public Robo(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado) {
         this.scanner = scanner;
         sensorPlano = new SensorPlano(5, ambiente);
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
@@ -38,6 +38,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
         nome = "robo" + listaRobos.size();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
+        this.estado = estado;
     }
 
     @Override
