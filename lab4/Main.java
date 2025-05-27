@@ -3,7 +3,7 @@
 
     public class Main {
 
-        public static void main(String[] args) throws IOException {
+        public static void main(String[] args) throws IOException, ColisaoException {
             // Ambiente ambiente = new Ambiente(30,40,100);
             // ambiente.salvar_o_ambiente("ambiente.txt");
             Ambiente ambiente = new Ambiente("ambiente.txt");

@@ -1,7 +1,10 @@
-public class SensorPlano extends Sensor{
-    public SensorPlano(int r, Ambiente ambiente){
+
+public class SensorPlano extends Sensor {
+
+    public SensorPlano(int r, Ambiente ambiente) {
         super(r, ambiente);
     }
+
     public void identificarArea(Coordenada coordenada) {
         System.out.printf("Obstáculos identificados em um raio de %dm: \n", super.raio);
         for (int y = super.raio; y > -super.raio; y--) {
@@ -14,8 +17,12 @@ public class SensorPlano extends Sensor{
                     continue;
                 }
                 if (ambiente.dentroDosLimites(nova_c)) {
-                    ambiente.print_coordenada(coordenada.getx()+x, coordenada.gety() + y, coordenada.getz());
-                } 
+                    if (x == 0 && y == 0) {
+                        System.out.printf("R"); 
+                    }else {
+                        ambiente.print_coordenada(coordenada.getx() + x, coordenada.gety() + y, coordenada.getz());
+                    }
+                }
             }
             System.out.println("");
         }

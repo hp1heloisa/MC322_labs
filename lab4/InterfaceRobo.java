@@ -2,6 +2,6 @@ public interface InterfaceRobo extends Entidade{
     String getNome(); 
     void getPosicao(); 
     void print_sensores(); 
-    char movimentacao();
+    char movimentacao() throws ColisaoException;
     void explicar_movimentacao();
 }

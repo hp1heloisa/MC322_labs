@@ -12,11 +12,11 @@ class RoboTeletransportador extends RoboAereo {
     }
 
     @Override
-    public void explicar_movimentacao() {
+    public void explicar_movimentacao(){
         super.explicar_movimentacao();
         System.out.printf("k - > para teletransportar de altitude\n");
     }
-    public void alterar_altitude(int deltah){
+    public void alterar_altitude(int deltah) throws ColisaoException{
         super.alterar_altitude(deltah);
     }
     // @Override
@@ -33,7 +33,7 @@ class RoboTeletransportador extends RoboAereo {
      * Método especial do robô teletransportador, em que le pode ir para
      * qualquer altitude que ele quiser
      */
-    private void teletransportar() {
+    private void teletransportar() throws ColisaoException {
         System.out.println("Indique a posição z para qual o robô irá se teletransportar?");
         int novaaltitude = scanner.nextInt();
         scanner.nextLine();
@@ -48,7 +48,7 @@ class RoboTeletransportador extends RoboAereo {
     }
 
     @Override
-    public char movimentacao() {
+    public char movimentacao() throws  ColisaoException{
         char movimento_robo = ' ';
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");

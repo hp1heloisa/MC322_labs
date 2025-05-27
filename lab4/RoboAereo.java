@@ -49,7 +49,7 @@ class RoboAereo extends Robo {
     /**
      * Método que altera a altitude de um robô aéreo, podendo subir ou descer.
      */
-    public void alterar_altitude(int deltah) {
+    public void alterar_altitude(int deltah) throws ColisaoException{
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
         Coordenada nova_c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()+ deltah);
         boolean dentroDosLimites = ambiente.dentroDosLimites(nova_c);
@@ -63,8 +63,9 @@ class RoboAereo extends Robo {
                     System.out.printf("Há um obstáculo do tipo %s na posição: %s\n",  sensorPlano.mostrar_obstaculo(nova_c), nova_c);
                 }
             } else {
-                System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-                return;
+                throw new ColisaoException("Essa posição encontra-se fora dos limites do ambiente!");
+        
+
             }
     
         System.out.printf("Altitude atual: %d\n", nova_c.getz());
@@ -75,7 +76,7 @@ class RoboAereo extends Robo {
      * Implementação da movimentação do robô aéreo
      */
     @Override
-    public char movimentacao() {
+    public char movimentacao() throws ColisaoException{
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {

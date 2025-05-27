@@ -1,0 +1,3 @@
+public interface Sensoriavel{
+    acionarSensores() throws RoboDesligadoException;
+}

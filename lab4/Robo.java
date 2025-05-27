@@ -9,6 +9,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     protected Coordenada coordenada;
     protected Scanner scanner;
     protected Ambiente ambiente;
+    protected EstadoRobo estado;
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
     protected SensorUmidade sensorHumidade;
@@ -79,7 +80,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     /**
      * Abstrata, pois os robôs têm movimentações distintas
      */
-    public abstract char movimentacao();
+    public abstract char movimentacao() throws ColisaoException;
 
     /**
      * Método que o robô se move no campo sempre para um lugar sem nenhum

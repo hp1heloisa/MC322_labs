@@ -17,8 +17,11 @@ public class Sensor {
     }
 /**Método que retorna se há algum obstáculo na nova posição do robô*/
     public boolean tem_obstaculo(Coordenada coordenada) {
-        char element = ambiente.getElemento(coordenada);
-        return (element == '*' || element=='F' || element=='L') ? false : true;
+        Entidade ent = ambiente.getEntidade(coordenada);
+        if(ent == null){
+            return false;
+        }
+        return true;
     }
     /**Método que retorna qual é o obstáculo na nova posição do robô, se há*/
     public String mostrar_obstaculo(Coordenada coordenada){
