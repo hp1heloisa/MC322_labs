@@ -2,6 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
 import simulador.ambiente.ForadosLimitesException;
 
 public class RoboTerrestre extends Robo {
@@ -60,7 +61,7 @@ public class RoboTerrestre extends Robo {
     }
 
     @Override
-    public char movimentacao() {
+    public char movimentacao() throws ColisaoException, ForadosLimitesException{
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
@@ -73,16 +74,16 @@ public class RoboTerrestre extends Robo {
             }
             switch (movimento_robo) {
                 case 'a':
-                    this.mover(-1, 0, this.velocidadeatual);
+                    ambiente.moverEntidade(this, this.getPosicaoX() - 1, this.getPosicaoY(), this.getposicaoZ(), this);
                     break;
                 case 'd':
-                    this.mover(1, 0, this.velocidadeatual);
+                    ambiente.moverEntidade(this, this.getPosicaoX() + 1, this.getPosicaoY(), this.getposicaoZ(), this);
                     break;
                 case 'w':
-                    this.mover(0, 1, this.velocidadeatual);
+                    ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() + 1, this.getposicaoZ(), this);
                     break;
                 case 's':
-                    this.mover(0, -1, this.velocidadeatual);
+                    ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() - 1, this.getposicaoZ(), this);
                     break;
                 case 'q':
                     setVelocidade(velocidadeatual + 1);

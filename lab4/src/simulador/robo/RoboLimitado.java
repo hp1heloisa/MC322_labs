@@ -1,6 +1,8 @@
 package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.ColisaoException;
+import simulador.ambiente.ForadosLimitesException;
 
 public class RoboLimitado extends RoboTerrestre {
 
@@ -27,7 +29,7 @@ public class RoboLimitado extends RoboTerrestre {
     }
 
     @Override
-    public char movimentacao() {
+    public char movimentacao() throws ColisaoException, ForadosLimitesException {
         return super.movimentacao();
     }
 }

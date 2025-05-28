@@ -7,7 +7,7 @@ import simulador.ambiente.Coordenada;
 import simulador.ambiente.ForadosLimitesException;
 import simulador.sensores.SensorAltitude;
 
-public class RoboAereo extends Robo {
+public abstract class RoboAereo extends Robo {
 
     protected SensorAltitude sensorAltitude = new SensorAltitude(5, super.ambiente);
     protected int altitudeMaxima;
@@ -81,8 +81,8 @@ public class RoboAereo extends Robo {
     /**
      * Implementação da movimentação do robô aéreo
      */
-    @Override
-    public char movimentacao() throws ColisaoException, ForadosLimitesException {
+
+    public char movimentacao(Ambiente ambiente) throws ColisaoException, ForadosLimitesException {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
@@ -96,7 +96,7 @@ public class RoboAereo extends Robo {
             try {
                 switch (movimento_robo) {
                     case 'a':
-                        this.mover(-1, 0);
+                        ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY(), this.getposicaoZ(), this);
                         break;
                     case 'd':
                         this.mover(1, 0);

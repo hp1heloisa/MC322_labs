@@ -1,4 +1,5 @@
 package simulador.ambiente;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +10,7 @@ import simulador.robo.Robo;
 public class Ambiente {
 
     private int comprimentoX, comprimentoY, altura;
-    private TipoEntidade[][][] mapa;
+    public TipoEntidade[][][] mapa;
     private ArrayList<Entidade> entidades; //TODO: no lugar de listaRobos
 
     /**
@@ -28,7 +29,7 @@ public class Ambiente {
     public void inicializarMapa() {
         int x = this.comprimentoX;
         int y = this.comprimentoY;
-        int z = this.altura; 
+        int z = this.altura;
         Random aleatorio = new Random();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
@@ -40,7 +41,7 @@ public class Ambiente {
                         Entidade obstaculo = new Obstaculo(i, j, k, tipoObstaculo); //adicionar um obstáculo aleatorio ao ambiente
                         entidades.add(obstaculo);
                         // atualizar mapa
-                        mapa[i][j][k] = TipoEntidade.OBSTACULO;                                         
+                        mapa[i][j][k] = TipoEntidade.OBSTACULO;
                     } else {
                         mapa[i][j][k] = TipoEntidade.VAZIO;
                     }
@@ -61,10 +62,11 @@ public class Ambiente {
     // }
 
     private char getRepresentacaoEntidade(TipoEntidade tipo, int x, int y, int z) {
-        if (tipo == TipoEntidade.OBSTACULO){
+        if (tipo == TipoEntidade.OBSTACULO) {
             for (Entidade e : entidades) {
-                if (e.getTipo() == TipoEntidade.OBSTACULO && e.getX()==x && e.getY()==y && e.getZ()==z)
+                if (e.getTipo() == TipoEntidade.OBSTACULO && e.getX() == x && e.getY() == y && e.getZ() == z) {
                     return e.getRepresentacao();
+                }
             }
             return '?';
         }
@@ -113,16 +115,15 @@ public class Ambiente {
                 String linha = arq.readLine();
                 for (int x = 0; x < comprimentoX; x++) {
                     char caractere = linha.charAt(x);
-                    if (caractere == '*'){
+                    if (caractere == '*') {
                         mapa[x][y][z] = TipoEntidade.VAZIO;
-                    }
-                    else{
+                    } else {
                         TipoObstaculo obst = TipoObstaculo.busca_inicial(caractere);
                         Entidade obstaculo = new Obstaculo(x, y, z, obst); //adicionar um obstáculo aleatorio ao ambiente
                         entidades.add(obstaculo);
                         // atualizar mapa
-                        mapa[x][y][z] = TipoEntidade.OBSTACULO;       
-                    
+                        mapa[x][y][z] = TipoEntidade.OBSTACULO;
+
                     }
                 }
             }
@@ -139,7 +140,7 @@ public class Ambiente {
      * Método que adiciona entidades ao mapa
      */
     public void adicionarEntidade(Entidade e) { //TODO: no lugar de adicionaRobo
-        if (!dentroDosLimites(new Coordenada(e.getX(), e.getY(), e.getZ()))){ //verifica se a entidade está fora dos limites 
+        if (!dentroDosLimites(new Coordenada(e.getX(), e.getY(), e.getZ()))) { //verifica se a entidade está fora dos limites 
             throw new IllegalArgumentException("Fora dos limites!");
         }
         entidades.add(e); //caso esteja nos limites adicionamos a lista e ao ambiente
@@ -155,7 +156,6 @@ public class Ambiente {
         entidades.remove(e);
         return removEnt;
     }
-    
 
     /**
      * Método que imprime os tipos de robôs que possuímos
@@ -163,26 +163,29 @@ public class Ambiente {
     public void getRobos() {
         System.out.println("Você tem os seguintes robôs: ");
         int quant = 1;
-        for (Entidade ent : entidades){
-            if (ent instanceof Robo)
+        for (Entidade ent : entidades) {
+            if (ent instanceof Robo) {
                 System.out.printf("%d. %s\n", quant++, ent);
+            }
 
         }
     }
-    public ArrayList<Robo> getlistRobos(){
+
+    public ArrayList<Robo> getlistRobos() {
         ArrayList<Robo> listRobos = new ArrayList<>();
-        for(Entidade ent : entidades){
-            if (ent instanceof Robo){
+        for (Entidade ent : entidades) {
+            if (ent instanceof Robo) {
                 listRobos.add((Robo) ent);
             }
         }
         return listRobos;
     }
-    public Robo get_tipo_Robo(int pos_robo){
+
+    public Robo get_tipo_Robo(int pos_robo) {
         int cont = 1;
-        for(Entidade ent : entidades){
-            if (ent instanceof Robo){
-                if(cont == pos_robo){
+        for (Entidade ent : entidades) {
+            if (ent instanceof Robo) {
+                if (cont == pos_robo) {
                     return (Robo) ent;
                 }
                 cont++;
@@ -213,13 +216,14 @@ public class Ambiente {
     public int getIndexOfRobo(String robo) {
         int index = -1;
         int quant = 0;
-        for (Entidade ent : entidades){
-            if (ent instanceof Robo)
+        for (Entidade ent : entidades) {
+            if (ent instanceof Robo) {
                 if (ent.toString().equals(robo)) {
                     index = quant;
                     break;
                 }
-                quant++;
+            }
+            quant++;
         }
         return index;
     }
@@ -236,36 +240,49 @@ public class Ambiente {
         }
     }
 
-     /**
-     * Método que retorna um booleano em relação se a coordenada está
-     * ocupada ou não.
+    /**
+     * Método que retorna um booleano em relação se a coordenada está ocupada ou
+     * não.
      */
     public boolean estaOcupado(Coordenada coordenada) {
         return mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()] != TipoEntidade.VAZIO;
     }
 
     /**
-     * Método que que verifica se a nova posicao de entidade está dentro dos limites,
-     * se estiver move para a nova posição
+     * Método que que verifica se a nova posicao de entidade está dentro dos
+     * limites, se estiver move para a nova posição
      */
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ) throws ColisaoException{
-        if (!dentroDosLimites(new Coordenada(novoX, novoY, novoZ))){
-            throw new ColisaoException("Coordenada fora dos limites!");
+    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ, Robo robo) throws ForadosLimitesException, ColisaoException {
+        Coordenada new_pos = new Coordenada(novoX, novoY, novoZ);
+        if (!dentroDosLimites(new_pos)) {
+            throw new ForadosLimitesException("Coordenada fora dos limites!");
         }
-        if (estaOcupado(new Coordenada(novoX, novoY, novoZ))){
-            throw new ColisaoException("Espaço já ocupado, você tem que procurar outro lugar!");
+        try {
+            if (estaOcupado(new_pos)) {
+                System.out.printf("Espaço já ocupado, você tem que procurar outro lugar! ");
+                if (getElemento(new_pos) == 'L') {
+                    robo.ligar(new_pos, this);
+                    System.out.printf("Mas o lago fresquinho acabou ligando o seu robô");
+                } else if (getElemento(new_pos) == 'F') {
+                    robo.desligar(new_pos, this);
+                    System.out.printf("Mas o fogo acabou danificando e desligando o seu robô.");
+                }
+                throw new ColisaoException("\n");
+            }
         }
-        mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
-        e.setX(novoX);
-        e.setY(novoY);
-        e.setZ(novoZ);
-        mapa[novoX][novoY][novoZ] = e.getTipo();
-    }
-
-
-    /**
-     * Método que retorna a entidade na coordenada
-     */
+        catch(ColisaoException exception){
+            System.out.println(" Mova novamente!");
+            return;
+        }
+            mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
+            e.setX(novoX);
+            e.setY(novoY);
+            e.setZ(novoZ);
+            mapa[novoX][novoY][novoZ] = e.getTipo();
+        }
+        /**
+         * Método que retorna a entidade na coordenada
+         */
     public char getElemento(Coordenada coordenada) {
         TipoEntidade tipo = mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()];
         return getRepresentacaoEntidade(tipo, coordenada.getx(), coordenada.gety(), coordenada.getz());

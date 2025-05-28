@@ -37,9 +37,9 @@ public class Main {
                     System.out.printf("Você agora está no mundo do robô %s!\n", robo.getNome());
                     robo.getPosicao();
                     robo.print_sensores();
-                    try{
+                    try {
                         estado = robo.movimentacao();
-                    }catch(ForadosLimitesException exception){
+                    } catch (ForadosLimitesException exception) {
                         System.out.println(exception.getMessage());
                     }
                     break;
@@ -59,9 +59,9 @@ public class Main {
                     ambiente.adicionarEntidade(robo);
                     System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
                     robo.explicar_movimentacao();
-                    try{
+                    try {
                         estado = robo.movimentacao();
-                    }catch(ForadosLimitesException exception){
+                    } catch (ForadosLimitesException exception) {
                         System.out.println(exception.getMessage());
                     }
                     break;

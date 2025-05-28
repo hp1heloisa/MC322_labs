@@ -35,7 +35,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
         sensorHumidade = new SensorUmidade(5, 0, ambiente);
         this.ambiente = ambiente;
-        System.out.printf("O nome o seu robô é robo_%d ",listaRobos.size());
+        System.out.printf("O nome o seu robô é robo_%d ", listaRobos.size());
         nome = "robo" + listaRobos.size();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
@@ -71,18 +71,21 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     public int getZ() {
         return coordenada.getz();
     }
-        @Override
-        public void setX(int x){
-            coordenada.setx(x);
-        }
-        @Override
-        public void setY(int y){
-            coordenada.sety(y);
-        }
-        @Override
-        public void setZ(int z){
-            coordenada.setz(z);
-        }
+
+    @Override
+    public void setX(int x) {
+        coordenada.setx(x);
+    }
+
+    @Override
+    public void setY(int y) {
+        coordenada.sety(y);
+    }
+
+    @Override
+    public void setZ(int z) {
+        coordenada.setz(z);
+    }
 
     /**
      * Abstrata, pois os robôs têm movimentações distintas
@@ -98,7 +101,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
      * Método que o robô se move no campo sempre para um lugar sem nenhum
      * obstáculo
      */
-    protected void mover(int deltaX, int deltaY) throws ForadosLimitesException{
+    protected void mover(int deltaX, int deltaY) throws ForadosLimitesException {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()); // Coordenada inicial do robô
         Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz()); // Nova coordenada do robô
 
@@ -149,7 +152,6 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     /**
      * Método que define o tipo do robô. EX: robô destruidor, robô limitado, etc
      */
-
     /**
      * Método que define o nome do robô
      */
@@ -175,6 +177,22 @@ public abstract class Robo implements Entidade, InterfaceRobo {
             coordenada.setz(c.getz());
         }
 
+    }
+
+    public void ligar(Coordenada coordenada, Ambiente ambiente) {
+        if (ambiente.mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()] == TipoEntidade.ROBO) {
+            Entidade ent = ambiente.getEntidade(coordenada);
+            Robo Robo_ligado = (Robo) ent;
+            Robo_ligado.estado = EstadoRobo.ligado;
+        }
+    }
+
+    public void desligar(Coordenada coordenada, Ambiente ambiente) {
+        if (ambiente.mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()] == TipoEntidade.ROBO) {
+            Entidade ent = ambiente.getEntidade(coordenada);
+            Robo Robo_ligado = (Robo) ent;
+            Robo_ligado.estado = EstadoRobo.desligado;
+        }
     }
 
     /**
