@@ -12,8 +12,9 @@ import simulador.interfaces.InterfaceRobo;
 import simulador.sensores.SensorPlano;
 import simulador.sensores.SensorTemperatura;
 import simulador.sensores.SensorUmidade;
+import simulador.interfaces.Sensoriavel;
 
-public abstract class Robo implements Entidade, InterfaceRobo {
+public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
 
     protected String nome;
     protected TipoEntidade tipo;
@@ -85,6 +86,12 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     @Override
     public void setZ(int z) {
         coordenada.setz(z);
+    }
+    @Override
+    public void acionarSensores() throws RoboDesligadoException{
+        if(this.estado == EstadoRobo.desligado){
+            throw new RoboDesligadoException(this.getNome() + "está desligado, só pode usar o sensor de plano!");
+        }   
     }
 
     /**
