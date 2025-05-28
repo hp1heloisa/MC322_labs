@@ -5,6 +5,7 @@ import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.ColisaoException;
 import simulador.ambiente.Coordenada;
+import simulador.ambiente.ForadosLimitesException;
 import simulador.ambiente.TipoEntidade;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
@@ -91,13 +92,13 @@ public abstract class Robo implements Entidade, InterfaceRobo {
     /**
      * Abstrata, pois os robôs têm movimentações distintas
      */
-    public abstract char movimentacao() throws ColisaoException;
+    public abstract char movimentacao() throws ColisaoException, ForadosLimitesException;
 
     /**
      * Método que o robô se move no campo sempre para um lugar sem nenhum
      * obstáculo
      */
-    protected void mover(int deltaX, int deltaY) {
+    protected void mover(int deltaX, int deltaY) throws ForadosLimitesException{
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()); // Coordenada inicial do robô
         Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz()); // Nova coordenada do robô
 
@@ -111,8 +112,7 @@ public abstract class Robo implements Entidade, InterfaceRobo {
                 return;
             }
         } else {
-            System.out.println("Essa posição encontra-se fora dos limites do ambiente!");
-            return;
+            throw new ForadosLimitesException("Essa posição encontra-se fora dos limites do ambiente");
         }
         atualizarAmbiente(c_0, nova_pos);
         System.out.printf("\n");

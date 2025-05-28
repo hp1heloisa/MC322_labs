@@ -2,8 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
-
-
+import simulador.ambiente.ForadosLimitesException;
 
 public class RoboTerrestre extends Robo {
 
@@ -18,7 +17,7 @@ public class RoboTerrestre extends Robo {
     }
 
     @Override
-    public String getDescricao(){
+    public String getDescricao() {
         return "Olá! Eu sou um Robô Terrestre e eu posso me mover nas coordenadas X e Y.";
     }
 
@@ -35,15 +34,22 @@ public class RoboTerrestre extends Robo {
     protected void mover(int deltaX, int deltaY, int velocidade) {
         if (velocidade <= velocidadeMax) {
             if (velocidadeatual == 0) {
-                System.out.println("Seu robô se encontra com velocidade 0, digite q para aumentar sua velocidade e começar a movê-lo"); 
-            }else {
-                super.mover(deltaX, deltaY);
+                System.out.println("Seu robô se encontra com velocidade 0, digite q para aumentar sua velocidade e começar a movê-lo");
+            } else {
+                try {
+                    super.mover(deltaX, deltaY);
+                } catch (ForadosLimitesException exception) {
+                    System.out.println(exception.getMessage());
+
+                }
             }
+
         }
-
     }
-
-    /**Função que atualiza a velocidade, não permitindo que a velocidade atual ultrapasse a velocidade máxima */
+        /**
+         * Função que atualiza a velocidade, não permitindo que a velocidade
+         * atual ultrapasse a velocidade máxima
+         */
     protected void setVelocidade(int vel) {
         if (vel <= velocidadeMax) {
             velocidadeatual = vel;
@@ -58,7 +64,9 @@ public class RoboTerrestre extends Robo {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-            if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
+            if (nome == null) {
+                System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
+            }
             movimento_robo = scanner.next().charAt(0);
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 explicar_movimentacao();
@@ -93,9 +101,10 @@ public class RoboTerrestre extends Robo {
                     System.out.println("Comando inválido! Use a, d, q ou x");
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                this.print_sensores();            
+                this.print_sensores();
             }
         }
         return movimento_robo;
     }
 }
+

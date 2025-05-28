@@ -3,6 +3,7 @@ package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.ColisaoException;
+import simulador.ambiente.ForadosLimitesException;
 
 public class RoboTeletransportador extends RoboAereo {
 
@@ -52,7 +53,7 @@ public class RoboTeletransportador extends RoboAereo {
     }
 
     @Override
-    public char movimentacao() throws  ColisaoException{
+    public char movimentacao() throws ColisaoException, ForadosLimitesException{
         char movimento_robo = ' ';
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");

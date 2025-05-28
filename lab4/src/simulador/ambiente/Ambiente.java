@@ -229,7 +229,7 @@ public class Ambiente {
      * está dentro dos limites possíveis.
      */
     public boolean dentroDosLimites(Coordenada coordenada) {
-        if (coordenada.getx() < 0 || coordenada.gety() < 0 || coordenada.getz() < 0 || coordenada.getx() > comprimentoX || coordenada.gety() > comprimentoY || coordenada.getz() > altura) {
+        if (coordenada.getx() < 0 || coordenada.gety() < 0 || coordenada.getz() < 0 || coordenada.getx() > comprimentoX - 1 || coordenada.gety() > comprimentoY - 1 || coordenada.getz() > altura - 1) {
             return false;
         } else {
             return true;

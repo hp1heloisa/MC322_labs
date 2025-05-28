@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.ColisaoException;
+import simulador.ambiente.ForadosLimitesException;
 import simulador.interfaces.InterfaceRobo;
 import simulador.robo.Robo;
 import simulador.robo.TiposRobos;
@@ -36,7 +37,11 @@ public class Main {
                     System.out.printf("Você agora está no mundo do robô %s!\n", robo.getNome());
                     robo.getPosicao();
                     robo.print_sensores();
-                    estado = robo.movimentacao();
+                    try{
+                        estado = robo.movimentacao();
+                    }catch(ForadosLimitesException exception){
+                        System.out.println(exception.getMessage());
+                    }
                     break;
                 case 'r':
                     ambiente.getRobos();
@@ -54,7 +59,11 @@ public class Main {
                     ambiente.adicionarEntidade(robo);
                     System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
                     robo.explicar_movimentacao();
-                    estado = robo.movimentacao();
+                    try{
+                        estado = robo.movimentacao();
+                    }catch(ForadosLimitesException exception){
+                        System.out.println(exception.getMessage());
+                    }
                     break;
             }
 
