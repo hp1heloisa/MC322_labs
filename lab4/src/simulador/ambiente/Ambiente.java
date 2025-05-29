@@ -22,7 +22,7 @@ public class Ambiente {
         this.comprimentoY = y;
         this.altura = z;
         this.mapa = new TipoEntidade[x][y][z];
-
+        this.entidades = new ArrayList<>();
         inicializarMapa();
     }
 
@@ -260,29 +260,30 @@ public class Ambiente {
         try {
             if (estaOcupado(new_pos)) {
                 System.out.printf("Espaço já ocupado, você tem que procurar outro lugar! ");
-                if (getElemento(new_pos) == 'L') {
-                    robo.ligar(new_pos, this);
-                    System.out.printf("Mas o lago fresquinho acabou ligando o seu robô");
-                } else if (getElemento(new_pos) == 'F') {
+                if (getElemento(new_pos) == 'L' || getElemento(new_pos) == 'F') {
                     robo.desligar(new_pos, this);
-                    System.out.printf("Mas o fogo acabou danificando e desligando o seu robô.");
+                    Entidade entidade = getEntidade(new_pos);
+                    System.out.printf("Mas o %s acabou danificando e desligando o seu robô", entidade.getDescricao());
+                } else if (getElemento(new_pos) == 'O') {
+                    robo.desligar(new_pos, this);
+                    System.out.printf("Mas a oficina acabou arrumando e ligando o seu robô.");
                 }
                 throw new ColisaoException("\n");
             }
-        }
-        catch(ColisaoException exception){
+        } catch (ColisaoException exception) {
             System.out.println(" Mova novamente!");
             return;
         }
-            mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
-            e.setX(novoX);
-            e.setY(novoY);
-            e.setZ(novoZ);
-            mapa[novoX][novoY][novoZ] = e.getTipo();
-        }
-        /**
-         * Método que retorna a entidade na coordenada
-         */
+        mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
+        e.setX(novoX);
+        e.setY(novoY);
+        e.setZ(novoZ);
+        mapa[novoX][novoY][novoZ] = e.getTipo();
+    }
+
+    /**
+     * Método que retorna a entidade na coordenada
+     */
     public char getElemento(Coordenada coordenada) {
         TipoEntidade tipo = mapa[coordenada.getx()][coordenada.gety()][coordenada.getz()];
         return getRepresentacaoEntidade(tipo, coordenada.getx(), coordenada.gety(), coordenada.getz());

@@ -5,7 +5,8 @@ public enum TipoObstaculo {
     LAGO("Área de água", 'L', 2, 3, -10, 500),
     FOGO("Área incendiada", 'F', 2, 2, 1000, -600),
     VEGETACAO("Vegetação densa", 'V', 1, 6, 0, 100),
-    ROBO("Robô", 'r', 1, 1, 0, 0);
+    ROBO("Robô", 'r', 1, 1, 0, 0),
+    OFICINA("Oficina", 'O', 1, 1, 0, 0);
 
     private final String descricao;
     private final char inicial;
