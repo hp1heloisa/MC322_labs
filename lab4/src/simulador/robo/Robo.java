@@ -9,15 +9,14 @@ import simulador.ambiente.ForadosLimitesException;
 import simulador.ambiente.TipoEntidade;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
+import simulador.interfaces.Sensoriavel;
 import simulador.sensores.SensorPlano;
 import simulador.sensores.SensorTemperatura;
 import simulador.sensores.SensorUmidade;
-import simulador.interfaces.Sensoriavel;
 
 public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
 
     protected String nome;
-    protected TipoEntidade tipo;
     protected Coordenada coordenada;
     protected Scanner scanner;
     protected Ambiente ambiente;
@@ -41,6 +40,7 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
         this.estado = estado;
+
     }
 
     @Override
@@ -87,11 +87,12 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
     public void setZ(int z) {
         coordenada.setz(z);
     }
+
     @Override
-    public void acionarSensores() throws RoboDesligadoException{
-        if(this.estado == EstadoRobo.desligado){
+    public void acionarSensores() throws RoboDesligadoException {
+        if (this.estado == EstadoRobo.desligado) {
             throw new RoboDesligadoException(this.getNome() + "está desligado, só pode usar o sensor de plano!");
-        }   
+        }
     }
 
     /**
@@ -152,8 +153,10 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
         return nome;
     }
 
+
+    @Override
     public String toString() {
-        return nome + " - " + tipo;
+        return nome + " - " + getClass().getSimpleName();
     }
 
     /**
