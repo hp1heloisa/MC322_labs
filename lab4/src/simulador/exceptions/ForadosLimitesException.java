@@ -1,4 +1,4 @@
-package simulador.ambiente;
+package simulador.exceptions;
 
 public class ForadosLimitesException extends Exception{
 

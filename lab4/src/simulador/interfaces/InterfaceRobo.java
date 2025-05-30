@@ -1,6 +1,6 @@
 package simulador.interfaces;
-import simulador.ambiente.ColisaoException;
-import simulador.ambiente.ForadosLimitesException;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 
 public interface InterfaceRobo extends Entidade{
     String getNome(); 

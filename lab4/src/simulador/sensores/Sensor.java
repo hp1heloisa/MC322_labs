@@ -3,8 +3,6 @@ import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.ambiente.TipoObstaculo;
 import simulador.interfaces.Entidade;
-import simulador.interfaces.Sensoriavel;
-import simulador.robo.RoboDesligadoException;
 public class Sensor {
     protected int raio;
     protected Ambiente ambiente;

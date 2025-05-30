@@ -1,7 +1,7 @@
 package simulador.interfaces;
 
 
-import simulador.robo.RoboDesligadoException;
+import simulador.exceptions.RoboDesligadoException;
 
 public interface Sensoriavel{
 

@@ -1,4 +1,4 @@
-package simulador.robo;
+package simulador.exceptions;
 public class RoboDesligadoException extends Exception{
     public RoboDesligadoException(String text){
         super(text);

@@ -2,9 +2,9 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
-import simulador.ambiente.ColisaoException;
+import simulador.exceptions.ColisaoException;
 import simulador.ambiente.Coordenada;
-import simulador.ambiente.ForadosLimitesException;
+import simulador.exceptions.ForadosLimitesException;
 import simulador.sensores.SensorAltitude;
 
 public abstract class RoboAereo extends Robo {

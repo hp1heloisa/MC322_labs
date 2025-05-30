@@ -1,8 +1,8 @@
 package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
-import simulador.ambiente.ColisaoException;
-import simulador.ambiente.ForadosLimitesException;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 
 public class RoboLimitado extends RoboTerrestre {
 

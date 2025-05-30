@@ -3,6 +3,8 @@ package simulador.ambiente;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
 import simulador.robo.Robo;
@@ -263,7 +265,8 @@ public class Ambiente {
                 if (getElemento(new_pos) == 'L' || getElemento(new_pos) == 'F') {
                     robo.desligar(new_pos, this);
                     Entidade entidade = getEntidade(new_pos);
-                    System.out.printf("Mas o %s acabou danificando e desligando o seu robô", entidade.getDescricao());
+                    TipoObstaculo tipoObstaculo = TipoObstaculo.busca_inicial(entidade.getRepresentacao());
+                    System.out.printf("Mas %s acabou danificando e desligando o seu robô", tipoObstaculo.getDescricao());
                 } else if (getElemento(new_pos) == 'O') {
                     robo.desligar(new_pos, this);
                     System.out.printf("Mas a oficina acabou arrumando e ligando o seu robô.");
