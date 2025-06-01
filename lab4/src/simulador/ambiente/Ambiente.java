@@ -266,7 +266,7 @@ public class Ambiente {
                     robo.desligar(new_pos, this);
                     Entidade entidade = getEntidade(new_pos);
                     TipoObstaculo tipoObstaculo = TipoObstaculo.busca_inicial(entidade.getRepresentacao());
-                    System.out.printf("Mas %s acabou danificando e desligando o seu robô", tipoObstaculo.getDescricao());
+                    System.out.printf("Mas %s acabou danificando e desligando o seu robô.", tipoObstaculo.getDescricao());
                 } else if (getElemento(new_pos) == 'O') {
                     robo.desligar(new_pos, this);
                     System.out.printf("Mas a oficina acabou arrumando e ligando o seu robô.");

@@ -3,6 +3,7 @@ package simulador.robo;
 import java.util.ArrayList;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.CentralComunicacao;
 import simulador.ambiente.Coordenada;
 import simulador.ambiente.TipoEntidade;
 import simulador.exceptions.ColisaoException;
@@ -10,12 +11,12 @@ import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
-import simulador.interfaces.Sensoriavel;
 import simulador.sensores.SensorPlano;
 import simulador.sensores.SensorTemperatura;
 import simulador.sensores.SensorUmidade;
+import simulador.interfaces.Comunicavel;
 
-public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
+public abstract class Robo implements InterfaceRobo {
 
     protected String nome;
     protected Coordenada coordenada;
@@ -25,6 +26,8 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
     protected SensorPlano sensorPlano;
     protected SensorTemperatura sensorTemperatura;
     protected SensorUmidade sensorHumidade;
+    private static int contadorId = 0;
+    protected final int id;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
@@ -41,6 +44,7 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
         this.estado = estado;
+        this.id = ++contadorId;
 
     }
 
@@ -97,6 +101,58 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
     }
 
     /**
+     * Método para que o robô possa mandar mensagens para outros robôs
+     */
+    @Override
+    public String enviarMensagem(Comunicavel destinatario, String mensagem) throws RoboDesligadoException {
+        CentralComunicacao.getComunicacao().registrarMensagemEnviada(nome, destinatario.getNome(), mensagem);
+        if (destinatario.getEstado() == EstadoRobo.desligado)
+            throw new RoboDesligadoException(destinatario.getNome() + " está desligado e não pode receber sua mensagem!");
+        else {
+            CentralComunicacao.getComunicacao().registrarMensagemRecebida(nome, destinatario.getNome(), mensagem);
+        }
+        String text = String.format("%s para %s: %s\n", nome, destinatario.getNome(), mensagem);
+        System.out.println(text);
+        return text;
+    }
+
+    /**
+     * Método para o robô escanear em raio de 5m e detectar algum sinal de outros robôs
+     */
+    @Override 
+    public void receberMensagem(String mensagem) throws RoboDesligadoException {
+        if (getEstado() == EstadoRobo.desligado)
+            throw new RoboDesligadoException(getNome() + " está desligado e não pode receber mensagens!");
+        
+        int raio = 5;
+        System.out.println("Procurando por sinal de vida...");
+
+        for (int dx = -raio; dx <= raio; dx++) {
+            for (int dy = -raio; dy <= raio; dy++) {
+                for (int dz = -raio; dz <= raio; dz++) {
+                    int nx = getX() + dx;
+                    int ny = getY() + dy;
+                    int nz = getZ() + dz;
+
+                    if (!ambiente.dentroDosLimites(new Coordenada(nx, ny, nz))) continue;
+
+                    Entidade e = ambiente.getEntidade(new Coordenada(nx, ny, nz));
+
+                    if (e != null && e instanceof Comunicavel && !e.equals(this)) {
+                        Comunicavel outroRobo = (Comunicavel) e;
+
+                        if (outroRobo.getEstado() == EstadoRobo.desligado) continue;
+
+                        CentralComunicacao.getComunicacao().registrarMensagemRecebida(outroRobo.getNome(), this.getNome(), mensagem);
+
+                        System.out.printf("Ouvindo uma mensagem de %s: \"%s\"\n", outroRobo.getNome(), mensagem);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Abstrata, pois os robôs têm movimentações distintas
      */
     public abstract void explicar_movimentacao();
@@ -116,7 +172,6 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
 
         if (ambiente.dentroDosLimites(nova_pos)) {
             if (sensorPlano.tem_obstaculo(nova_pos)) {
-
                 System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(nova_pos), nova_pos);
                 return;
             } else if (sensorPlano.tem_robo(nova_pos)) {
@@ -154,6 +209,21 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
         return nome;
     }
 
+    /**
+     * Método que retorna o estado do robô
+     */
+    public EstadoRobo getEstado() {
+        System.out.printf("O seu robo está %s.\n", estado);
+        return estado;
+    }
+
+    /**
+     * Método que retorna o id do robô
+     */
+    public int getId() {
+        System.out.printf("O id do seu robo é: %d\n", id);
+        return id;
+    }
 
     @Override
     public String toString() {
@@ -187,7 +257,6 @@ public abstract class Robo implements Entidade, InterfaceRobo, Sensoriavel {
             coordenada.sety(c.gety());
             coordenada.setz(c.getz());
         }
-
     }
 
     public void ligar(Coordenada coordenada, Ambiente ambiente) {
