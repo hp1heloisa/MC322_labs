@@ -4,12 +4,18 @@ import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
+import simulador.exceptions.RoboDesligadoException;
 
 public class RoboDestruidor extends RoboAereo {
 
     /**Função construtora do robô destruidor */
     public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
         super(ambiente, scanner, estado);
+        try {
+            super.setMensagemPadrao("Quem será minha próxima vítima? >:)");
+        } catch (RoboDesligadoException e) {
+           System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -64,40 +70,55 @@ public class RoboDestruidor extends RoboAereo {
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
                 explicar_movimentacao();
             }
-            switch (movimento_robo){
-                case 'a':
-                    this.mover(-1, 0);
-                    break;
-                case 'd':
-                    this.mover(1, 0);
-                    break;
-                case 'w':
-                    this.mover(0, 1);
-                    break;
-                case 's':
-                    this.mover(0, -1);
-                    break;
-                case 'u':
-                    alterar_altitude(1);
-                    break;
-                case 'j':
-                    alterar_altitude(-1);
-                    break;
-                case 'k':
-                    destruir();
-                    break;
-                case 'p':
-                    print_sensores();
-                    break;
-                case 'x':
-                    System.out.println("Encerrando movimentação...");
-                    break;
-                case 'n':
-                    break;
-                case 'c':
-                    break;
-                default:
-                    System.out.println("Comando inválido! Use w, s, a, d, u, j, k ou x");
+            try { 
+                switch (movimento_robo){
+                    case 'a':
+                        this.mover(-1, 0);
+                        break;
+                    case 'd':
+                        this.mover(1, 0);
+                        break;
+                    case 'w':
+                        this.mover(0, 1);
+                        break;
+                    case 's':
+                        this.mover(0, -1);
+                        break;
+                    case 'u':
+                        alterar_altitude(1);
+                        break;
+                    case 'j':
+                        alterar_altitude(-1);
+                        break;
+                    case 'k':
+                        destruir();
+                        break;
+                    case '?': 
+                        receberMensagensDoAmbiente();
+                        break;
+                    case '!': 
+                        System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("O que gostaria de dizer para ele?");
+                        String msg = scanner.nextLine();  
+                        enviarMensagem(ambiente.getRobo(index), msg);
+                        break;
+                    case 'p':
+                        print_sensores();
+                        break;
+                    case 'x':
+                        System.out.println("Encerrando movimentação...");
+                        break;
+                    case 'n':
+                        break;
+                    case 'c':
+                        break;
+                    default:
+                        System.out.println("Comando inválido! Use w, s, a, d, u, j, k, ?, ! ou x");
+                }
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
+                System.out.println(exception.getMessage());
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 print_sensores();

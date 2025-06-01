@@ -6,6 +6,7 @@ import simulador.exceptions.ColisaoException;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.sensores.SensorAltitude;
+import simulador.exceptions.RoboDesligadoException;
 
 public abstract class RoboAereo extends Robo {
 
@@ -20,14 +21,18 @@ public abstract class RoboAereo extends Robo {
         super(ambiente, scanner, ambiente.getlistRobos(), estado);
         sensorTemperatura.setAltitude(5);
         sensorHumidade.setAltitude(5);
-        System.out.println("Qual altidude máxima que o seu robô pode alcançar?");
-        altitudeMaxima = scanner.nextInt();
-        scanner.nextLine();
+        if (scanner == null) {
+            altitudeMaxima = 20;
+        } else {
+            System.out.println("Qual altitude máxima que o seu robô pode alcançar?");
+            altitudeMaxima = scanner.nextInt();
+            scanner.nextLine();
+        }
     }
 
     @Override
     public String getDescricao() {
-        return "Olá! Eu sou o R0bô Aéreo e eu posso me mover nas coordenadas X, Y e Z!";
+        return "Olá! Eu sou o Robô Aéreo e eu posso me mover nas coordenadas X, Y e Z!";
     }
 
     /**
@@ -40,6 +45,7 @@ public abstract class RoboAereo extends Robo {
         System.out.println("d -> ir para direita; a -> ir para a esqueda");
         System.out.println("u -> para subir; j -> para descer");
         System.out.println("p -> para scanear a área; n -> criar um novo robô");
+        System.out.println("? -> para ouvir o ambiente; ! -> para enviar mensagens");
         System.out.println("c -> remover ou trocar de robô; x -> para sair");
     }
 
@@ -116,6 +122,17 @@ public abstract class RoboAereo extends Robo {
                     case 'p':
                         print_sensores();
                         break;
+                    case '?': 
+                        receberMensagensDoAmbiente();
+                        break;
+                    case '!': 
+                        System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("O que gostaria de dizer para ele?");
+                        String msg = scanner.nextLine();  
+                        enviarMensagem(ambiente.getRobo(index), msg);
+                        break;
                     case 'x':
                         System.out.println("Encerrando movimentação...");
                         break;
@@ -124,9 +141,9 @@ public abstract class RoboAereo extends Robo {
                     case 'c':
                         break;
                     default:
-                        System.out.println("Comando inválido! Use w, s, a, d, u, j ou x");
+                        System.out.println("Comando inválido! Use w, s, a, d, u, j, ?, ! ou x");
                 }
-            } catch (ForadosLimitesException exception) {
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
                 System.out.println(exception.getMessage());
             }
         }

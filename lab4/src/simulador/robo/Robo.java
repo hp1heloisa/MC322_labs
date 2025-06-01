@@ -1,6 +1,9 @@
 package simulador.robo;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.CentralComunicacao;
@@ -28,6 +31,7 @@ public abstract class Robo implements InterfaceRobo {
     protected SensorUmidade sensorHumidade;
     private static int contadorId = 0;
     protected final int id;
+    protected String mensagemPadrao;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
@@ -39,7 +43,7 @@ public abstract class Robo implements InterfaceRobo {
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
         sensorHumidade = new SensorUmidade(5, 0, ambiente);
         this.ambiente = ambiente;
-        System.out.printf("O nome o seu robô é robo_%d ", listaRobos.size());
+        System.out.printf("O nome do seu robô é robo_%d ", listaRobos.size());
         nome = "robo" + listaRobos.size();
         System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
         this.coordenada = new Coordenada(0, 0, 0);
@@ -101,6 +105,26 @@ public abstract class Robo implements InterfaceRobo {
     }
 
     /**
+     * Método para quando um robô estiver pelas proximidades saber o que outros robôs estão pensando
+     */
+    @Override
+    public String getMensagemPadrao() throws RoboDesligadoException {
+        if (getEstado() == EstadoRobo.desligado)
+            throw new RoboDesligadoException(getNome() + " está desligado e você não pode saber o que ele tem a dizer!");
+        return mensagemPadrao;
+    }
+
+     /**
+     * Método para setar uma mensagem de um robô como padrão
+     */
+    @Override
+    public void setMensagemPadrao(String msg) throws RoboDesligadoException {
+        if (getEstado() == EstadoRobo.desligado)
+            throw new RoboDesligadoException(getNome() + " está desligado e não pode ter sua mensagem padrão atualizada!"); 
+        this.mensagemPadrao = msg;
+    }
+
+    /**
      * Método para que o robô possa mandar mensagens para outros robôs
      */
     @Override
@@ -117,38 +141,66 @@ public abstract class Robo implements InterfaceRobo {
     }
 
     /**
-     * Método para o robô escanear em raio de 5m e detectar algum sinal de outros robôs
+     * Método para que o robô possa receber mensagens de outros robôs
+     */
+    @Override
+    public void receberMensagem(Comunicavel remetente, String mensagem) throws RoboDesligadoException {
+        String remetente_nome = remetente.getNome();
+
+        CentralComunicacao.getComunicacao().registrarMensagemEnviada(remetente_nome, nome, mensagem);
+        if (getEstado() == EstadoRobo.desligado)
+            throw new RoboDesligadoException("Você está desligado e não pode receber sua mensagens!");
+        
+        CentralComunicacao.getComunicacao().registrarMensagemRecebida(remetente_nome, nome, mensagem);
+        String text = String.format("%s para %s: %s\n", remetente_nome, nome, mensagem);
+        System.out.println(text);
+    }
+
+    /**
+     * Método para o robô escanear em raio de 5m e detectar algum sinal de outros robôs ou do ambiente
      */
     @Override 
-    public void receberMensagem(String mensagem) throws RoboDesligadoException {
+    public void receberMensagensDoAmbiente() throws RoboDesligadoException {
         if (getEstado() == EstadoRobo.desligado)
             throw new RoboDesligadoException(getNome() + " está desligado e não pode receber mensagens!");
         
         int raio = 5;
         System.out.println("Procurando por sinal de vida...");
+        List<String> mensagens = new ArrayList<>(); // Lista criada para armezenar as mensagens captadas pelo robô
+        
+        PrintStream originalOut = System.out;
 
-        for (int dx = -raio; dx <= raio; dx++) {
-            for (int dy = -raio; dy <= raio; dy++) {
-                for (int dz = -raio; dz <= raio; dz++) {
-                    int nx = getX() + dx;
-                    int ny = getY() + dy;
-                    int nz = getZ() + dz;
+        try{
+            System.setOut(new PrintStream(OutputStream.nullOutputStream())); //Silenciando os prints ao pegar informações dos robôs
+            for (int dx = -raio; dx <= raio; dx++) {
+                for (int dy = -raio; dy <= raio; dy++) {
+                    for (int dz = -raio; dz <= raio; dz++) {
+                        int nx = getX() + dx;
+                        int ny = getY() + dy;
+                        int nz = getZ() + dz;
 
-                    if (!ambiente.dentroDosLimites(new Coordenada(nx, ny, nz))) continue;
+                        if (!ambiente.dentroDosLimites(new Coordenada(nx, ny, nz))) continue;
 
-                    Entidade e = ambiente.getEntidade(new Coordenada(nx, ny, nz));
+                        Entidade e = ambiente.getEntidade(new Coordenada(nx, ny, nz));
 
-                    if (e != null && e instanceof Comunicavel && !e.equals(this)) {
-                        Comunicavel outroRobo = (Comunicavel) e;
+                        if (e != null && e instanceof Comunicavel && e != this) {
+                            Comunicavel outroRobo = (Comunicavel) e;
 
-                        if (outroRobo.getEstado() == EstadoRobo.desligado) continue;
+                            if (outroRobo.getEstado() == EstadoRobo.desligado) continue;
 
-                        CentralComunicacao.getComunicacao().registrarMensagemRecebida(outroRobo.getNome(), this.getNome(), mensagem);
+                            CentralComunicacao.getComunicacao().registrarMensagemRecebida(outroRobo.getNome(), this.getNome(), outroRobo.getMensagemPadrao());
 
-                        System.out.printf("Ouvindo uma mensagem de %s: \"%s\"\n", outroRobo.getNome(), mensagem);
+                            mensagens.add(String.format("Ouvindo mensagem do %s: \"%s\"", outroRobo.getNome(), outroRobo.getMensagemPadrao()));
+                        }
                     }
                 }
             }
+        } finally {
+            System.setOut(originalOut);
+        }
+       
+        for (String msg : mensagens){
+            System.out.println(msg);
         }
     }
 

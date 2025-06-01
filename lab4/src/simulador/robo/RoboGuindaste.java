@@ -2,6 +2,7 @@ package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
+import simulador.exceptions.RoboDesligadoException;
 
 public class RoboGuindaste extends RoboTerrestre {
 
@@ -67,7 +68,8 @@ public class RoboGuindaste extends RoboTerrestre {
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
                 explicar_movimentacao();
             }
-            switch (movimento_robo) {
+            try {
+                switch (movimento_robo) {
                 case 'a':
                     super.mover(-1, 0, velocidadeatual);
                     break;
@@ -89,6 +91,17 @@ public class RoboGuindaste extends RoboTerrestre {
                 case 'q':
                     setVelocidade(velocidadeatual + 1);
                     break;
+                case '?': 
+                    receberMensagensDoAmbiente();
+                    break;
+                case '!': 
+                    System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
+                    int index = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("O que gostaria de dizer para ele?");
+                    String msg = scanner.nextLine();  
+                    enviarMensagem(ambiente.getRobo(index), msg);
+                    break;
                 case 'x':
                     System.out.println("Encerrando movimentação...");
                     break;
@@ -97,11 +110,14 @@ public class RoboGuindaste extends RoboTerrestre {
                 case 'c':
                     break;
                 default:
-                    System.out.println("Comando inválido! Use w, s, a, d, k ou x");
+                    System.out.println("Comando inválido! Use w, s, a, d, k, ?, ! ou x");
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-                this.print_sensores();
-            }
+        } catch ( RoboDesligadoException exception) {
+                System.out.println(exception.getMessage());
+        } 
+        if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            this.print_sensores();
+        }
         }
         return movimento_robo;
     }

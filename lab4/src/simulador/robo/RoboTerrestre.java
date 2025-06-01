@@ -4,6 +4,7 @@ import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
+import simulador.exceptions.RoboDesligadoException;
 
 public class RoboTerrestre extends Robo {
 
@@ -28,6 +29,7 @@ public class RoboTerrestre extends Robo {
         System.out.println("w -> ir para frente; s -> ir para trás");
         System.out.println("d -> ir para direita; a -> ir para a esqueda");
         System.out.println("p -> para scanear a área; q -> para aumentar velocidade");
+        System.out.println("? -> para ouvir o ambiente; ! -> para enviar mensagens");
         System.out.println("n -> criar um novo robô; x -> para sair");
         System.out.println("c -> remover ou trocar de robô");
     }
@@ -60,6 +62,7 @@ public class RoboTerrestre extends Robo {
         }
     }
 
+    //TODO: implementar o !
     @Override
     public char movimentacao() throws ColisaoException, ForadosLimitesException{
         char movimento_robo = ' ';
@@ -72,34 +75,49 @@ public class RoboTerrestre extends Robo {
             if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 explicar_movimentacao();
             }
-            switch (movimento_robo) {
-                case 'a':
-                    ambiente.moverEntidade(this, this.getPosicaoX() - 1, this.getPosicaoY(), this.getposicaoZ(), this);
-                    break;
-                case 'd':
-                    ambiente.moverEntidade(this, this.getPosicaoX() + 1, this.getPosicaoY(), this.getposicaoZ(), this);
-                    break;
-                case 'w':
-                    ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() + 1, this.getposicaoZ(), this);
-                    break;
-                case 's':
-                    ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() - 1, this.getposicaoZ(), this);
-                    break;
-                case 'q':
-                    setVelocidade(velocidadeatual + 1);
-                    break;
-                case 'p':
-                    print_sensores();
-                    break;
-                case 'x':
-                    System.out.println("Encerrando movimentação...");
-                    break;
-                case 'n':
-                    break;
-                case 'c':
-                    break;
-                default:
-                    System.out.println("Comando inválido! Use a, d, q ou x");
+            try {
+                switch (movimento_robo) {
+                    case 'a':
+                        ambiente.moverEntidade(this, this.getPosicaoX() - 1, this.getPosicaoY(), this.getposicaoZ(), this);
+                        break;
+                    case 'd':
+                        ambiente.moverEntidade(this, this.getPosicaoX() + 1, this.getPosicaoY(), this.getposicaoZ(), this);
+                        break;
+                    case 'w':
+                        ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() + 1, this.getposicaoZ(), this);
+                        break;
+                    case 's':
+                        ambiente.moverEntidade(this, this.getPosicaoX(), this.getPosicaoY() - 1, this.getposicaoZ(), this);
+                        break;
+                    case 'q':
+                        setVelocidade(velocidadeatual + 1);
+                        break;
+                    case 'p':
+                        print_sensores();
+                        break;
+                    case '?': 
+                        receberMensagensDoAmbiente();
+                        break;
+                    case '!': 
+                        System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("O que gostaria de dizer para ele?");
+                        String msg = scanner.nextLine();  
+                        enviarMensagem(ambiente.getRobo(index), msg);
+                        break;
+                    case 'x':
+                        System.out.println("Encerrando movimentação...");
+                        break;
+                    case 'n':
+                        break;
+                    case 'c':
+                        break;
+                    default:
+                        System.out.println("Comando inválido! Use a, d, q, ?, ! ou x");
+                }
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
+                System.out.println(exception.getMessage());
             }
             if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
                 this.print_sensores();

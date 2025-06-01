@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.Random;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
+import simulador.exceptions.TipoDeRoboInexistente;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
 import simulador.robo.Robo;
+import simulador.robo.TipoRobo;
 
 public class Ambiente {
 
     private int comprimentoX, comprimentoY, altura;
     public TipoEntidade[][][] mapa;
-    private ArrayList<Entidade> entidades; //TODO: no lugar de listaRobos
+    private ArrayList<Entidade> entidades;
 
     /**
      * Função construtura que define os comprimentos iniciais do ambiente,
@@ -33,6 +35,8 @@ public class Ambiente {
         int y = this.comprimentoY;
         int z = this.altura;
         Random aleatorio = new Random();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(OutputStream.nullOutputStream()));  // Silenciar prints para não poluir durante a criação do ambiente
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 for (int k = 0; k < z; k++) {
@@ -41,15 +45,31 @@ public class Ambiente {
                     } else if (aleatorio.nextDouble() < 0.1) { //Se a chance for menor do que 10 %, vamos colocar um obstáculo
                         TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)]; // Vamos selecionar um tipo de obstáculo
                         Entidade obstaculo = new Obstaculo(i, j, k, tipoObstaculo); //adicionar um obstáculo aleatorio ao ambiente
-                        entidades.add(obstaculo);
                         // atualizar mapa
-                        mapa[i][j][k] = TipoEntidade.OBSTACULO;
+                        if ( obstaculo.getRepresentacao() == 'r') {
+                            TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
+
+                            try {
+                                Entidade robo = tipoRobo.criar(this, null);
+                                robo.setX(i);
+                                robo.setY(j);
+                                robo.setZ(k);
+                                entidades.add(robo);
+                                mapa[i][j][k] = TipoEntidade.ROBO;
+                            } catch (TipoDeRoboInexistente e){
+                                mapa[i][j][k] = TipoEntidade.VAZIO;
+                            }
+                        } else {
+                            entidades.add(obstaculo);
+                            mapa[i][j][k] = TipoEntidade.OBSTACULO;
+                        }
                     } else {
                         mapa[i][j][k] = TipoEntidade.VAZIO;
                     }
                 }
             }
         }
+        System.setOut(originalOut);
     }
 
     /**
@@ -141,7 +161,7 @@ public class Ambiente {
     /**
      * Método que adiciona entidades ao mapa
      */
-    public void adicionarEntidade(Entidade e) { //TODO: no lugar de adicionaRobo
+    public void adicionarEntidade(Entidade e) { 
         if (!dentroDosLimites(new Coordenada(e.getX(), e.getY(), e.getZ()))) { //verifica se a entidade está fora dos limites 
             throw new IllegalArgumentException("Fora dos limites!");
         }
@@ -152,7 +172,7 @@ public class Ambiente {
     /**
      * Método que remove uma entidade
      */
-    public String removerEntidade(Entidade e) { //TODO: no lugar de removerRobo       
+    public String removerEntidade(Entidade e) {    
         mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
         String removEnt = e.getDescricao();
         entidades.remove(e);
