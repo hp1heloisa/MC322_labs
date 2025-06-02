@@ -2,7 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
-import simulador.exceptions.TipoDeRoboInexistente;
+import simulador.exceptions.TipoDeRoboInexistenteException;
 
 public enum TipoRobo {
 
@@ -30,7 +30,7 @@ public enum TipoRobo {
         return aereo;
     }
 
-    public Robo criar(Ambiente ambiente, Scanner scanner) throws TipoDeRoboInexistente {
+    public Robo criar(Ambiente ambiente, Scanner scanner) throws TipoDeRoboInexistenteException {
         switch (this) {
             case LIMITADO: 
                 return new RoboLimitado(ambiente, scanner, EstadoRobo.ligado);
@@ -41,7 +41,7 @@ public enum TipoRobo {
             case TELETRANSPORTADOR:
                 return new RoboTeletransportador(ambiente, scanner, EstadoRobo.ligado);
             default:
-                throw new TipoDeRoboInexistente("Não foi possível criar o robô, pois " + this + " não existe!");
+                throw new TipoDeRoboInexistenteException("Não foi possível criar o robô, pois " + this + " não existe!");
         }
     }
 
