@@ -1,7 +1,7 @@
-# Laboratório 3 - Relacionamentos
+# Laboratório 4 - Interfaces
 
 ## Introdução
-Seja bem-vindo a explicação do código do Lab 3!
+Seja bem-vindo a explicação do código do Lab 4!
 
 Após alguns anos de paz, algumas coisas fugiram de controle: Os robôs descobriram que podem morrer agora. Por isso, eles estão desesperados. A fim de contornar tal situação, os engenheiros desonvolveram uma nova ferramenta -- o Piloto Automático. Com essa nova funcionalidade, os robôs minimizam sua chance de morte, porém como ainda está em períodos de testes, ainda ocorrem alguns deslizes. Então, vamos testar essa nova funcionalidade!
 
@@ -15,11 +15,13 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 #### Robô Limitado
 - Movimentação restrita aos quatro pontos cardeais (frente, trás, direita, esquerda)
 - Funcionalidades básicas de movimento
+- Apresenta mensagens melancólicas durante a execução
 
 #### Robô Guindaste
 - Equipado com guindaste para manipulação de obstáculos
 - Pode trocar de posição com obstáculos no caminho
 - Mantém o ambiente organizado reposicionando os obstáculos
+- Pode emitir frases motivacionais durante o uso
 
 ### Robôs Aéreos
 - Capacidade de voo com altitude controlável
@@ -28,12 +30,18 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 #### Robô Destruidor
 - Tecnologia avançada para destruição de obstáculos
 - Pode eliminar obstáculos em todas as direções
-
+- Gera frases ameaçadoras e provocativas automaticamente
 
 #### Robô Teletransportador
 - Capacidade de teletransporte vertical
 - Mantém coordenadas X e Y durante o teletransporte
 - Ideal para evasão rápida de ameaças aéreas
+- Apresenta frases curiosas e existenciais sobre o teletransporte
+
+### Robô Recarregável
+- Possui energia limitada e precisa se recarregar em oficinas
+- Pode verificar seu nível de bateria
+- Alerta de nível de enrgia baixo
 
 ## Tipos de obstáculos
 
@@ -57,6 +65,11 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 - Possui o maior comprimento de todos os obstáculos
 - Fornece um pouco de umidade.
 
+### Oficina
+- Inicial: O
+- Recarrega robôs com capacidade de energia
+- Pode religar robôs desligados
+
 ## Sensores 
 ### Sensor Plano
 - Mostra os objetos próximos no mesmo plano em um raio r, definido pelo sensor
@@ -67,8 +80,53 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 ### Sensor Temperatura
 - Mostra a temperatura da coordenada, utilizando a distância eucliadiana entre vários obstáculos e realizando uma média entre todos.
 
-### Sensor Altitude
-- Mesma lógica do sensor temperatura.
+### Sensor Umidade
+- Mesma lógica do sensor temperatura, mas com umidade.
+
+## Interfaces
+
+### Entidade
+- Interface geral para qualquer elemento posicionado no ambiente. Define coordenadas e representação.
+
+### InterfaceRobo
+- Interface principal dos robôs. Estende **Entidade**, **Sensoriavel**, **Comunicavel** e **Recarregavel**.
+
+### Comunicavel
+- Define robôs que podem enviar e receber mensagens, dependendo do seu estado (**Ligado**, **Desligado**).
+
+### Recarregavel 
+- Define robôs que possuem bateria, podem recarregar e consomem energia.
+
+### Sensoriavel
+- Define entidades que possuem sensores e podem acionar sua leitura.
+
+### Emissor
+- Interface para envio de mensagens (herdada por **Comunicavel**).
+
+### Receptor
+- Interface para recebimento de mensagens (herdada por **Comunicavel**).
+
+## Exceções Personalizadas
+
+### ColisaoException
+- Lançada quando o robô tenta se mover para uma posição ocupada por outro obstáculo.
+
+### EnergiaInsuficienteException
+-  Lançada quando um robô não possui energia suficiente para realizar uma ação.
+
+### ForadosLimitesException
+- Lançada quando o robô tenta sair dos limites do ambiente.
+
+### RoboDesligadoException
+- Lançada quando uma ação depende do estado “ligado” do robô, mas ele está desligado.
+
+### OperacaoNaoSuportadaException
+- Lançada quando um robô tenta realizar uma ação que não é compatível com sua natureza.
+
+### TipoDeRoboInexistenteException
+- Lançada quando o tipo de robô informado não está entre os reconhecidos.
+
+
 ## Guia de Uso
 
 ### Como Executar
@@ -91,7 +149,9 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 | p     | Scanear área        | Todos                   |
 | n     | Novo robô           | Todos                   |
 | x     | Sair                | Todos                   |
-| c     | Remover/trocar robô | Todos
+| c     | Remover/trocar robô | Todos                   |
+| ?     | Ouvir ambiente      | Todos                   |
+| !     | Enviar mensagem     | Todos                   |  
 
 ### Os nossos testes
  O piloto automático é a nossa entrada padrão, o arquivo "input.txt". Se quiserem rodar o `./script.sh`, sem alterações, ele irá funcionar direitinho. Sugiro que se teste copiando algumas partes, pois o teste irá vir diversas linhas de uma vez.

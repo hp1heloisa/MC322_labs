@@ -2,7 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
-import simulador.exceptions.TipoDeRoboInexistente;
+import simulador.exceptions.TipoDeRoboInexistenteException;
 
 /**
  * Função construtora de TiposRobos
@@ -39,7 +39,7 @@ public class TiposRobos {
         try {
             Robo robo = tipo.criar(ambiente, scanner);
             return robo;
-        } catch (TipoDeRoboInexistente e) {
+        } catch (TipoDeRoboInexistenteException e) {
             System.out.println("Erro ao criar robô: " + e.getMessage());
             return null;
         }

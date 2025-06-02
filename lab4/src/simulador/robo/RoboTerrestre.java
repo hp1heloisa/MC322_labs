@@ -3,13 +3,14 @@ package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
+import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 
 public class RoboTerrestre extends Robo {
 
     protected int velocidadeMax = 100;
-    protected int velocidadeatual = 0;
+    protected int velocidadeatual = 1;
 
     /**
      * Função construtora do robô terrestre
@@ -41,7 +42,7 @@ public class RoboTerrestre extends Robo {
             } else {
                 try {
                     super.mover(deltaX, deltaY);
-                } catch (ForadosLimitesException exception) {
+                } catch (ForadosLimitesException | EnergiaInsuficienteException exception) {
                     System.out.println(exception.getMessage());
 
                 }
@@ -62,7 +63,6 @@ public class RoboTerrestre extends Robo {
         }
     }
 
-    //TODO: implementar o !
     @Override
     public char movimentacao() throws ColisaoException, ForadosLimitesException{
         char movimento_robo = ' ';
@@ -72,7 +72,7 @@ public class RoboTerrestre extends Robo {
                 System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             }
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
                 explicar_movimentacao();
             }
             try {
@@ -119,7 +119,7 @@ public class RoboTerrestre extends Robo {
             } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
                 System.out.println(exception.getMessage());
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'  && movimento_robo != '?' && movimento_robo != '!') {
                 this.print_sensores();
             }
         }

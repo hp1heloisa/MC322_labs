@@ -3,6 +3,7 @@ package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
+import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.sensores.SensorAltitude;
@@ -74,6 +75,8 @@ public abstract class RoboAereo extends Robo {
                 }
             } else {
                 System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(nova_c), nova_c);
+                if (sensorPlano.mostrar_obstaculo(nova_c) == "Oficina")
+                    recarregar();
             }
         } else {
             throw new ColisaoException("Essa posição encontra-se fora dos limites do ambiente!");
@@ -96,7 +99,7 @@ public abstract class RoboAereo extends Robo {
                 System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             }
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
                 explicar_movimentacao();
             }
             try {
@@ -143,7 +146,7 @@ public abstract class RoboAereo extends Robo {
                     default:
                         System.out.println("Comando inválido! Use w, s, a, d, u, j, ?, ! ou x");
                 }
-            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException | EnergiaInsuficienteException exception) {
                 System.out.println(exception.getMessage());
             }
         }

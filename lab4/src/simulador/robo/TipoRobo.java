@@ -6,13 +6,13 @@ import simulador.exceptions.TipoDeRoboInexistente;
 
 public enum TipoRobo {
 
-    // Robôs Terrestres
-    LIMITADO("Robô Limitado", false),
-    GUINDASTE("Robô Guindaste", false),
-
     // Robôs Aéreos
     DESTRUIDOR("Robô Destruidor", true),
-    TELETRANSPORTADOR("Robô Teletransportador", true);
+    TELETRANSPORTADOR("Robô Teletransportador", true),
+
+    // Robôs Terrestres
+    LIMITADO("Robô Limitado", false),
+    GUINDASTE("Robô Guindaste", false);
 
     private final String nome;
     private final boolean aereo;

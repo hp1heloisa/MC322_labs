@@ -13,7 +13,7 @@ public class RoboLimitado extends RoboTerrestre {
         System.out.printf("A velocidade máxima do robô Limitado é de 5 km/h\n");
         velocidadeMax = 5;
         try {
-            super.setMensagemPadrao("Gostaria de ter mais poderes como meus irmãos...");
+            super.setMensagemPadrao(FrasesRobos.getFraseLimitado());
         } catch (RoboDesligadoException e) {
            System.out.println(e.getMessage());
         }

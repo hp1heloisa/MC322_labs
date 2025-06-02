@@ -3,6 +3,7 @@ package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
+import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 
@@ -12,7 +13,7 @@ public class RoboDestruidor extends RoboAereo {
     public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
         super(ambiente, scanner, estado);
         try {
-            super.setMensagemPadrao("Quem será minha próxima vítima? >:)");
+            super.setMensagemPadrao(FrasesRobos.getFraseDestruidor());
         } catch (RoboDesligadoException e) {
            System.out.println(e.getMessage());
         }
@@ -67,7 +68,7 @@ public class RoboDestruidor extends RoboAereo {
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
                 explicar_movimentacao();
             }
             try { 
@@ -117,10 +118,10 @@ public class RoboDestruidor extends RoboAereo {
                     default:
                         System.out.println("Comando inválido! Use w, s, a, d, u, j, k, ?, ! ou x");
                 }
-            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException | EnergiaInsuficienteException exception) {
                 System.out.println(exception.getMessage());
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'  && movimento_robo != '?' && movimento_robo != '!') {
                 print_sensores();
             }
         }

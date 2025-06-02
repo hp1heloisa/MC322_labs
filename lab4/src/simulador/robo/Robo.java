@@ -17,6 +17,7 @@ import simulador.interfaces.InterfaceRobo;
 import simulador.sensores.SensorPlano;
 import simulador.sensores.SensorTemperatura;
 import simulador.sensores.SensorUmidade;
+import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.interfaces.Comunicavel;
 
 public abstract class Robo implements InterfaceRobo {
@@ -32,6 +33,7 @@ public abstract class Robo implements InterfaceRobo {
     private static int contadorId = 0;
     protected final int id;
     protected String mensagemPadrao;
+    private int nivelBateria = 100;
 
     /**
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
@@ -102,6 +104,28 @@ public abstract class Robo implements InterfaceRobo {
         if (this.estado == EstadoRobo.desligado) {
             throw new RoboDesligadoException(this.getNome() + "está desligado, só pode usar o sensor de plano!");
         }
+    }
+
+    @Override
+    public void recarregar() {
+        this.nivelBateria = 100;
+        System.out.println("Bateria recarregada!");
+    }
+
+    @Override
+    public void consumirEnergia(int quantidade) throws EnergiaInsuficienteException {
+        if (nivelBateria < quantidade) {
+            throw new EnergiaInsuficienteException("Energia insuficiente! Nível atual: " + nivelBateria);
+        }
+        nivelBateria -= quantidade;
+        System.out.printf("\n%d%% de bateria\n", nivelBateria);
+        if (nivelBateria < 30)
+            System.out.println("Sua bateria está baixa! Procure uma oficina para recarregar!");
+    }
+
+    @Override
+    public int getNivelBateria() {
+        return nivelBateria;
     }
 
     /**
@@ -218,13 +242,17 @@ public abstract class Robo implements InterfaceRobo {
      * Método que o robô se move no campo sempre para um lugar sem nenhum
      * obstáculo
      */
-    protected void mover(int deltaX, int deltaY) throws ForadosLimitesException {
+    protected void mover(int deltaX, int deltaY) throws ForadosLimitesException, EnergiaInsuficienteException {
         Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()); // Coordenada inicial do robô
         Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz()); // Nova coordenada do robô
+
+        consumirEnergia(2);
 
         if (ambiente.dentroDosLimites(nova_pos)) {
             if (sensorPlano.tem_obstaculo(nova_pos)) {
                 System.out.printf("Há um obstáculo do tipo %s na posição: %s\n", sensorPlano.mostrar_obstaculo(nova_pos), nova_pos);
+                if (sensorPlano.mostrar_obstaculo(nova_pos) == "Oficina")
+                    recarregar();
                 return;
             } else if (sensorPlano.tem_robo(nova_pos)) {
                 System.out.printf("Há um robô na posição: (%s)\n", nova_pos);

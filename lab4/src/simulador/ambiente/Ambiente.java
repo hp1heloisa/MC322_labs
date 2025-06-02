@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
-import simulador.exceptions.TipoDeRoboInexistente;
+import simulador.exceptions.TipoDeRoboInexistenteException;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
 import simulador.robo.Robo;
@@ -47,7 +47,7 @@ public class Ambiente {
                         Entidade obstaculo = new Obstaculo(i, j, k, tipoObstaculo); //adicionar um obstáculo aleatorio ao ambiente
                         // atualizar mapa
                         if ( obstaculo.getRepresentacao() == 'r') {
-                            TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
+                            TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(k>0 ? 2 : TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
 
                             try {
                                 Entidade robo = tipoRobo.criar(this, null);
@@ -56,7 +56,7 @@ public class Ambiente {
                                 robo.setZ(k);
                                 entidades.add(robo);
                                 mapa[i][j][k] = TipoEntidade.ROBO;
-                            } catch (TipoDeRoboInexistente e){
+                            } catch (TipoDeRoboInexistenteException e){
                                 mapa[i][j][k] = TipoEntidade.VAZIO;
                             }
                         } else {
@@ -288,6 +288,7 @@ public class Ambiente {
                     TipoObstaculo tipoObstaculo = TipoObstaculo.busca_inicial(entidade.getRepresentacao());
                     System.out.printf("Mas %s acabou danificando e desligando o seu robô.", tipoObstaculo.getDescricao());
                 } else if (getElemento(new_pos) == 'O') {
+                    robo.recarregar();
                     robo.desligar(new_pos, this);
                     System.out.printf("Mas a oficina acabou arrumando e ligando o seu robô.");
                 }

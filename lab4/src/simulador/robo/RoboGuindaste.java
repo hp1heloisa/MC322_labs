@@ -9,6 +9,11 @@ public class RoboGuindaste extends RoboTerrestre {
     /**Função construtora do robô guindaste */
     public RoboGuindaste(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
         super(ambiente, scanner, estado);
+        try {
+            super.setMensagemPadrao(FrasesRobos.getFraseGuindaste());
+        } catch (RoboDesligadoException e) {
+           System.out.println(e.getMessage());
+        }
     }
     
     @Override
@@ -65,7 +70,7 @@ public class RoboGuindaste extends RoboTerrestre {
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
                 explicar_movimentacao();
             }
             try {
@@ -115,7 +120,7 @@ public class RoboGuindaste extends RoboTerrestre {
         } catch ( RoboDesligadoException exception) {
                 System.out.println(exception.getMessage());
         } 
-        if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
+        if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'  && movimento_robo != '?' && movimento_robo != '!') {
             this.print_sensores();
         }
         }
