@@ -1,11 +1,32 @@
 package simulador.sensores;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
+import simulador.ambiente.TipoObstaculo;
 
 public class SensorPlano extends Sensor {
 
     public SensorPlano(int r, Ambiente ambiente) {
         super(r, ambiente);
+    }
+
+    public Coordenada busca_coord_obstaculo(TipoObstaculo tipo, Coordenada coordenada){
+        for(int y = super.raio; y > -super.raio; y--){
+            if(coordenada.gety() + y < 0){
+                continue;
+            }
+        for(int x = -super.raio; x < super.raio; x++){
+            Coordenada nova_c = new Coordenada(coordenada.getx() + x, coordenada.gety(), coordenada.getz());
+            if(nova_c.getx() < 0){
+                continue;
+            }
+            if(ambiente.dentroDosLimites(nova_c)){
+                if(ambiente.getElemento(nova_c) == tipo.get_inicial())
+                    return nova_c;
+            }
+        }
+        }
+        return null;
+
     }
 
     public void identificarArea(Coordenada coordenada) {

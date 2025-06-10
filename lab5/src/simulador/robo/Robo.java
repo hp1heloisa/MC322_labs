@@ -10,15 +10,15 @@ import simulador.ambiente.CentralComunicacao;
 import simulador.ambiente.Coordenada;
 import simulador.ambiente.TipoEntidade;
 import simulador.exceptions.ColisaoException;
+import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
+import simulador.interfaces.Comunicavel;
 import simulador.interfaces.Entidade;
 import simulador.interfaces.InterfaceRobo;
 import simulador.sensores.SensorPlano;
 import simulador.sensores.SensorTemperatura;
 import simulador.sensores.SensorUmidade;
-import simulador.exceptions.EnergiaInsuficienteException;
-import simulador.interfaces.Comunicavel;
 
 public abstract class Robo implements InterfaceRobo {
 
@@ -27,9 +27,9 @@ public abstract class Robo implements InterfaceRobo {
     protected Scanner scanner;
     protected Ambiente ambiente;
     protected EstadoRobo estado;
-    protected SensorPlano sensorPlano;
-    protected SensorTemperatura sensorTemperatura;
-    protected SensorUmidade sensorHumidade;
+    public SensorPlano sensorPlano;
+    public SensorTemperatura sensorTemperatura;
+    public SensorUmidade sensorHumidade;
     private static int contadorId = 0;
     protected final int id;
     protected String mensagemPadrao;
@@ -354,7 +354,9 @@ public abstract class Robo implements InterfaceRobo {
             Robo_ligado.estado = EstadoRobo.desligado;
         }
     }
-
+    public Coordenada get_Coordenada(){
+        return coordenada;
+    }
     /**
      * Método que retorna a posiçãoX do robô
      */
