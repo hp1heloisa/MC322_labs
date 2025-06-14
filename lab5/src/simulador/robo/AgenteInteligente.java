@@ -1,13 +1,32 @@
 package simulador.robo;
-import java.util.Scanner;
+
 import simulador.ambiente.Ambiente;
 import simulador.interfaces.Missao;
 
+/**
+ * Robô que executa missões de forma autônoma.
+ */
+public abstract class AgenteInteligente extends Robo {
 
-public abstract class AgenteInteligente extends Robo{
     protected Missao missao;
 
-    public AgenteInteligente(Ambiente ambiente, Scanner scanner, EstadoRobo estado){
-        super(ambiente, scanner, ambiente.getlistRobos(), estado);
+    public AgenteInteligente(Ambiente ambiente) {
+        super(ambiente, null, ambiente.getlistRobos(), EstadoRobo.ligado);
+    }
+
+    /** Método para atribuir missões ao robô. */
+    public void definirMissao(Missao missao) { 
+        this.missao = missao; 
+    }
+
+    /** Método para indicar se o robô tem uma missão. */
+    public boolean temMissao() {
+        return missao != null; 
+    }
+
+    /** Método para executar missão */
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) missao.executar(this, a);
+        else System.out.println(getNome() + " não tem nenhuma missão.");
     }
 }

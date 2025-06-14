@@ -18,12 +18,12 @@ public class CentralComunicacao {
 
     public void registrarMensagemEnviada(String remetente, String destinatario, String msg) {
         mensagensEnviadasPorRobo.putIfAbsent(remetente, new ArrayList<>());
-        mensagensEnviadasPorRobo.get(remetente).add(String.format("Para %s: %s \n", destinatario, msg));
+        mensagensEnviadasPorRobo.get(remetente).add(String.format("Para %s: %s%n", destinatario, msg));
     }
 
     public void registrarMensagemRecebida(String remetente, String destinatario, String msg) {
-        mensagensEnviadasPorRobo.putIfAbsent(destinatario, new ArrayList<>());
-        mensagensEnviadasPorRobo.get(destinatario).add(String.format("De %s: %s \n", remetente, msg));
+        mensagensRecebidasPorRobo.putIfAbsent(destinatario, new ArrayList<>());
+        mensagensRecebidasPorRobo.get(destinatario).add(String.format("De %s: %s%n", remetente, msg));
     }
 
     public void exibirMensagensEnviadasPorRobo(String nome) {

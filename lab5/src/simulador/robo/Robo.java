@@ -285,7 +285,6 @@ public abstract class Robo implements InterfaceRobo {
      * Método que retorna o nome do robô
      */
     public String getNome() {
-        System.out.printf("O nome do seu robo é: %s\n", nome);
         return nome;
     }
 
@@ -293,7 +292,6 @@ public abstract class Robo implements InterfaceRobo {
      * Método que retorna o estado do robô
      */
     public EstadoRobo getEstado() {
-        System.out.printf("O seu robo está %s.\n", estado);
         return estado;
     }
 
@@ -301,7 +299,6 @@ public abstract class Robo implements InterfaceRobo {
      * Método que retorna o id do robô
      */
     public int getId() {
-        System.out.printf("O id do seu robo é: %d\n", id);
         return id;
     }
 
