@@ -5,7 +5,8 @@ import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
 import simulador.interfaces.Missao;
-import simulador.missao.MissaoFactory;
+import simulador.missao.CriarMissao;
+import simulador.robo.AgenteInteligente; // Importa a classe AgenteInteligente
 import simulador.robo.Robo;
 import simulador.robo.TiposRobos;
 
@@ -28,7 +29,8 @@ public class Main {
 
             switch (comando) {
                 case "ROBO":
-                    Robo novoRobo = TiposRobos.criarRobo(ambiente, infos); // Use a fábrica de robôs estática
+                    // A chamada agora está correta, usando o método estático da fábrica.
+                    Robo novoRobo = TiposRobos.criarRobo(ambiente, infos);
                     if (novoRobo != null) {
                         ambiente.adicionarEntidade(novoRobo);
                         System.out.println("INFO: Robô '" + novoRobo.getNome() + "' criado.");
@@ -43,9 +45,14 @@ public class Main {
                     String nomeRoboAlvo = infos[1];
                     Robo roboAlvo = ambiente.getRoboPorNome(nomeRoboAlvo);
 
-                    if (roboAlvo != null) {
-                        Missao novaMissao = MissaoFactory.criarMissao(infos);
-                        roboAlvo.adicionarMissao(novaMissao);
+                    if (roboAlvo instanceof AgenteInteligente) { // Verifica se o robô pode ter missões
+                        AgenteInteligente agenteAlvo = (AgenteInteligente) roboAlvo; // Faz o cast
+                        Missao novaMissao = CriarMissao.criarMissao(infos);
+                        if(novaMissao != null) {
+                           agenteAlvo.adicionarMissao(novaMissao); // Chama o método do AgenteInteligente
+                        }
+                    } else if (roboAlvo != null) {
+                        System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não pode receber missões.");
                     } else {
                         System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não encontrado.");
                     }
@@ -58,8 +65,11 @@ public class Main {
                     }
                     String nomeRoboExec = infos[1];
                     Robo roboParaExecutar = ambiente.getRoboPorNome(nomeRoboExec);
-                    if (roboParaExecutar != null) {
-                        roboParaExecutar.executarMissao(ambiente);
+                     if (roboParaExecutar instanceof AgenteInteligente) { // Verifica se o robô pode executar missões
+                        AgenteInteligente agenteParaExecutar = (AgenteInteligente) roboParaExecutar; // Faz o cast
+                        agenteParaExecutar.executarMissao(ambiente); // Chama o método do AgenteInteligente
+                    } else if (roboParaExecutar != null) {
+                        System.err.println("ERRO: Robô '" + nomeRoboExec + "' não pode executar missões.");
                     } else {
                         System.err.println("ERRO: Robô '" + nomeRoboExec + "' não encontrado.");
                     }
