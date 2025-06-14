@@ -45,7 +45,12 @@ public class MissaoBuscarPonto implements Missao {
     }
 
     @Override
+<<<<<<< HEAD
     public String getDescricao() {
         return "Buscar o ponto " + this.destino;
+=======
+    public String getDescricao(){
+        return "Ainda não implementado";
+>>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
     }
 }

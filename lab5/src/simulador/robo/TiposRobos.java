@@ -1,41 +1,48 @@
 package simulador.robo;
 
+import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.TipoDeRoboInexistenteException;
 
 /**
- * Classe utilitária (fábrica) para criar instâncias de robôs.
+ * Função construtora de TiposRobos
  */
 public class TiposRobos {
 
+    Scanner scanner;
+
+    public  TiposRobos(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     /**
-     * Cria e retorna uma instância de Robô com base nos argumentos de um comando.
-     *
-     * @param ambiente O ambiente onde o robô existirá.
-     * @param infos    O array de strings do comando (ex: "ROBO", "TIPO", "NOME", "X", "Y", "Z").
-     * @return Uma instância de Robô ou null se a criação falhar.
+     * Método responsável retornar as classes possíveis do robô e criá-lo
+     * com base na escolha do usuário.
      */
-    public static Robo criarRobo(Ambiente ambiente, String[] infos) {
-        if (infos.length < 6) {
-            System.err.println("ERRO: Comando ROBO incompleto. Use: ROBO TIPO NOME X Y Z");
-            return null;
-        }
+    public Robo definir_robo(Ambiente ambiente, String[] infos) {
+        System.out.println("Qual tipo de robô você quer criar?");
+        TipoRobo[] tipos = TipoRobo.values();
+        String tipo_robo = infos[1];
+
+        // for (int i = 0; i < tipos.length; i++) {
+        //     System.out.printf("%d. %s (%s)\n", i+1, tipos[i].getNome(), tipos[i].isAereo() ? "Aéreo" : "Terrestre");
+        // }
+
+        // int robo_escolhido = scanner.nextInt();
+        // scanner.nextLine();
+
+        // if (robo_escolhido < 1 || robo_escolhido > tipos.length) {
+        //     System.out.println("Opção inválida!");
+        //     return null;
+        // }
         
-        String tipo_robo_str = infos[1];
-        
+        // TipoRobo tipo = tipos[robo_escolhido - 1];
+        TipoRobo tipo = TipoRobo.valueOf(tipo_robo.toUpperCase());
         try {
-            // Converte a string do tipo de robô para o enum correspondente
-            TipoRobo tipo = TipoRobo.valueOf(tipo_robo_str.toUpperCase());
-            
-            // O Scanner é passado como nulo, pois a criação é via comando, não interativa.
-            return tipo.criar(ambiente, null, infos);
-        } catch (IllegalArgumentException e) {
-            // Ocorre se valueOf() não encontrar o enum
-            System.err.println("ERRO: Tipo de robô '" + tipo_robo_str + "' desconhecido.");
-            return null;
+            Robo robo = tipo.criar(ambiente, scanner, infos);
+            return robo;
         } catch (TipoDeRoboInexistenteException e) {
-            // Exceção personalizada da lógica de criação
-            System.err.println("Erro ao criar robô: " + e.getMessage());
+            System.out.println("Erro ao criar robô: " + e.getMessage());
             return null;
         }
     }

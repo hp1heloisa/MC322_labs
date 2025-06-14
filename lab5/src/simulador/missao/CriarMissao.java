@@ -15,7 +15,7 @@ public class CriarMissao {
                     int passos = infos.length > 3 ? Integer.parseInt(infos[3]) : 50;
                     return new MissaoExplorar(passos);
                 
-                case "BUSCAR": // ou BUSCAR
+                case "BUSCARPONTO": // ou BUSCAR
                     // Ex: MISSAO R2 BUSCARPONTO 7 7 0
                     int x = Integer.parseInt(infos[3]);
                     int y = Integer.parseInt(infos[4]);

@@ -17,6 +17,7 @@ public class MissaoExplorar implements Missao {
     // CORREÇÃO: Implementa o método único da interface.
     @Override
     public void executar(Robo robo, Ambiente ambiente, LogadorMissao log) {
+<<<<<<< HEAD
         if (!(robo instanceof RoboExplorador)) {
             log.log("ERRO: O robô " + robo.getNome() + " não é um RoboExplorador e não pode executar a MissaoExplorar.");
             return;
@@ -43,6 +44,32 @@ public class MissaoExplorar implements Missao {
         log.log("Exploração concluída.");
     }
 
+=======
+        for (int passo = 1; passo <= passosMax && robo.getEstado() == EstadoRobo.ligado; passo++) {
+
+            int dx = rnd.nextInt(3) - 1;   // -1,0,1
+            int dy = rnd.nextInt(3) - 1;
+
+            Coordenada antes = robo.get_Coordenada();
+            try {
+                if (robo instanceof RoboExplorador explorador) 
+                    explorador.tentarMover(ambiente);
+                log.log(robo.getNome() + " -> " + robo.get_Coordenada());
+            } catch (Exception e) {
+                log.log("Falha de movimento (" + e.getMessage() + ")");
+            }
+        }
+        log.log("Missão concluída.");
+    }
+
+    /* Interface antiga sem logger */
+    @Override
+    public void executar(Robo robo, Ambiente ambiente) {
+        try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
+            executar(robo, ambiente, log);
+        } catch (Exception ignored) {}
+    }
+>>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
     @Override
     public String getDescricao() {
         return "Explorar por " + passosMax + " passos.";
