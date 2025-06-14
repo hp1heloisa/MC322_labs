@@ -1,17 +1,17 @@
 package simulador.robo;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
-import simulador.exceptions.ColisaoException;
-import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.MoverParaOutroPonto;
 
 // RoboExplorador agora é um AgenteInteligente que "assina o contrato" de que é CapazDeMoverAleatoriamente.
 public class RoboExplorador extends AgenteInteligente implements MoverParaOutroPonto {
 
-    public RoboExplorador(Ambiente ambiente, String nome, Coordenada pos_inicial) {
-        super(ambiente, nome, pos_inicial);
+    public RoboExplorador(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado, String nome, Coordenada pos_inicial) {
+        super(ambiente,scanner, listaRobos, estado, nome, pos_inicial);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class RoboExplorador extends AgenteInteligente implements MoverParaOutroP
     }
 
     @Override 
-    public char movimentacao() throws ColisaoException, ForadosLimitesException { 
+    public char movimentacao(){ 
         return 'x'; 
     }
 

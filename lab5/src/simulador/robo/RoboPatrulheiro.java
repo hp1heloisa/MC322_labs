@@ -1,10 +1,10 @@
 package simulador.robo;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
-import simulador.exceptions.ColisaoException;
-import simulador.exceptions.ForadosLimitesException;
 
 /**
  * Representa um robô do tipo Explorador.
@@ -16,8 +16,8 @@ public class RoboPatrulheiro extends AgenteInteligente {
     
     // 2. O construtor é simplificado. Ele apenas cria o robô base.
     // O construtor que criava uma pipeline fixa foi REMOVIDO.
-    public RoboPatrulheiro(Ambiente ambiente, String nome, Coordenada pos_inicial) {
-        super(ambiente, nome, pos_inicial);
+    public RoboPatrulheiro(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado, String nome, Coordenada pos_inicial) {
+        super(ambiente, scanner, listaRobos, estado, nome, pos_inicial);
     }
 
     @Override

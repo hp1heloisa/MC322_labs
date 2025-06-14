@@ -1,5 +1,7 @@
 package simulador.robo;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 
@@ -14,8 +16,8 @@ public class RoboHibrido extends AgenteInteligente {
 
     // 1. O construtor agora é muito simples.
     // Ele apenas passa as informações básicas para a superclasse.
-    public RoboHibrido(Ambiente ambiente, String nome, Coordenada pos_inicial) {
-        super(ambiente, nome, pos_inicial);
+    public RoboHibrido(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado, String nome, Coordenada pos_inicial) {
+        super(ambiente, scanner, listaRobos, estado, nome, pos_inicial);
     }
 
     // 2. A descrição continua útil para identificar o tipo do robô.

@@ -12,13 +12,19 @@ public class LogadorMissao implements Closeable {
     private final BufferedWriter bw;
 
     public LogadorMissao(String nomeArquivo) throws IOException {
+        // CORREÇÃO: O segundo argumento "true" abre o arquivo em modo de apêndice.
         bw = new BufferedWriter(new FileWriter(nomeArquivo, true));
     }
 
     public void log(String msg) {
-        try { bw.write(LocalDateTime.now() + " - " + msg + System.lineSeparator()); }
-        catch (IOException ignored) {}
+        try {
+            bw.write(LocalDateTime.now() + " - " + msg + System.lineSeparator());
+        } catch (IOException ignored) {
+        }
     }
 
-    @Override public void close() throws IOException { bw.close(); }
+    @Override
+    public void close() throws IOException {
+        bw.close();
+    }
 }

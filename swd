@@ -1,0 +1,641 @@
+[33mcommit 14cbc99dfe2f9b3e394d4efd7a3d656309ad7ad9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sat Jun 14 14:26:14 2025 -0300
+
+    Falta debug com o arquivo
+
+[33mcommit 23012e51a715be55bbffb5e7adce93151ab8841b[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sat Jun 14 14:07:29 2025 -0300
+
+    Atualizações
+
+[33mcommit dac1b4b6a97b64563f2787cc8b8bc707476d173a[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sat Jun 14 12:10:29 2025 -0300
+
+    Modificada a main para receber a entrada dos robôs e criado o hibrido que patrulha e explora ao mesmo tempo
+
+[33mcommit cad937474fc03fafc0275a67a7ace92a8c04d3d3[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Jun 14 02:39:35 2025 -0300
+
+    feat: lab5 done
+
+[33mcommit 62be4728a216e62d2a69444b7d6a6db1274d19f7[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Jun 10 15:40:25 2025 -0300
+
+    Criada a MissãoExplorar
+
+[33mcommit ea47849f54011da29e034598ec3e97968ce4021b[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Jun 10 15:05:48 2025 -0300
+
+    Criadas as classes básicas do lab5
+
+[33mcommit c1b072e6e0cfca013ed1f04f7f650973ac7f459b[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Jun 10 14:45:14 2025 -0300
+
+    feat: new pasta
+
+[33mcommit c517247448b81776ceb41c073a78bccbc4809ae5[m[33m ([m[1;33mtag: [m[1;33mlab04-236510-281391[m[33m)[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Jun 1 23:46:03 2025 -0300
+
+    fim
+
+[33mcommit dfa5401a6b938ac97635f3b5bbe06c59d04d67e6[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Jun 1 23:45:56 2025 -0300
+
+    fim do lab
+
+[33mcommit 67703f5c0aacd1375634224b202ac075908c1a4e[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Jun 1 17:30:09 2025 -0300
+
+    feat: comunicacao entre robos + tipoRobo
+
+[33mcommit 1af74ab08e3674a2de0717b655c3e6d9f9790aed[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat May 31 23:57:32 2025 -0300
+
+    feat: centralComunicacao + comunicavel
+
+[33mcommit 749a91823408f510ca1c46e8ea2654d81a972113[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Fri May 30 13:38:50 2025 -0300
+
+    Arrumados alguns bugs e criada a pasta de exceptions
+
+[33mcommit daff490698df048561415241f12015f4fb1e99f3[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu May 29 10:52:30 2025 -0300
+
+    Arrumado o bug de não mostrar o tipo dos robôs ao usar a função de mudar os robos
+
+[33mcommit 981315af06a072bce3bf471ce25fc67818a14f1b[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu May 29 10:40:41 2025 -0300
+
+    Adicionada a oficina para concertar o robô
+
+[33mcommit f167f07a212866a998e9fa19303b60ff205ac09c[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed May 28 14:34:22 2025 -0300
+
+    Criada a interface sensoriavel. Apenas colocar dentro das outras classes
+
+[33mcommit 573989ce1aaf125b7728e3c4a67530a4be0bbb05[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed May 28 10:22:42 2025 -0300
+
+    Implementada a lógica de ligar e desligar o robô.
+
+[33mcommit 73a0cf21b9cfef0f285894f57ad92bc62049e910[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed May 28 08:51:56 2025 -0300
+
+    Implementadas algumas exceções
+
+[33mcommit 4096552db3266ca58e28f10fa0ed4a403999f6ac[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue May 27 15:54:06 2025 -0300
+
+    Otimizada script
+
+[33mcommit 172834adcfcb857e95214a3f09ce4d1b3b635832[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue May 27 15:53:12 2025 -0300
+
+    Programa voltou a funcionar!
+
+[33mcommit d5a629fb24905751428f191aed48f0dce3fc58d8[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue May 27 15:43:30 2025 -0300
+
+    Falta arrumar o arquivo de script.sh
+
+[33mcommit 8061914f352c4c5f807e16f710dbc0a4ea50f377[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue May 27 14:36:59 2025 -0300
+
+    Consegui separar os arquivos em pastas
+
+[33mcommit fda274f93f3c0f2bcde576f43a0c063a1aa9ccdc[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue May 27 11:08:15 2025 -0300
+
+    Arrumado alguns bugs e criada a interface sensoreácel e mudanças no robô
+
+[33mcommit 560cd5a3eaa404a6937e8a734cc9abea6daff104[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon May 26 17:17:28 2025 -0300
+
+    Programa voltou a funcionar. Falta fazer o robô controlado ter o R maiúsculo e ao trocar o robô ele está falando que é NULL
+
+[33mcommit 32302868bf74438e7d7815433569d24fe05e8eb6[m
+Merge: 1edbbce 45cb662
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Mon May 26 14:52:12 2025 -0300
+
+    Merge branch 'main' of github.com:hp1heloisa/MC322_labs
+
+[33mcommit 1edbbce329088f390f708720e3088cff99866f0f[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Mon May 26 14:47:12 2025 -0300
+
+    ref: alterações no ambiente e métodos
+
+[33mcommit 45cb66227f5d09da3c9ed8d864d2cf23727bea0a[m
+Merge: 8734820 fa52b90
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun May 25 21:31:17 2025 -0300
+
+    Merge branch 'main' of https://github.com/hp1heloisa/MC322_labs
+
+[33mcommit 873482049cbca49a30f0f325f86dd92f9071e2a2[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun May 25 21:30:32 2025 -0300
+
+    Falta arrumar o método de trocar o robô, pois ele não está identificando o tipo do robô
+
+[33mcommit fa52b90d15441fa3de5247d748d526fdf9261def[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun May 25 20:33:24 2025 -0300
+
+    feat: more TipoEntidade + description for robos
+
+[33mcommit 85733be9694293f1d576a69ab16b166d803ca620[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun May 25 08:30:36 2025 -0300
+
+    O programa voltou a funcionar
+
+[33mcommit 3a43b4343cc2898257863f542de93aa03bcbbb91[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun May 25 07:53:11 2025 -0300
+
+    Adicionado ao lab 4 os arquivos
+
+[33mcommit 0a6ebc872d241ffc31bb09f75311057b6acaf806[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sat May 24 21:51:05 2025 -0300
+
+    Create README.md
+
+[33mcommit 7d84ff2429e362b65b3519870eb6347e3288b6e1[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sat May 24 21:50:15 2025 -0300
+
+    Delete lab4
+
+[33mcommit 0474f41df24c8ae03133b77fd8d7884d7c1c1e63[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sat May 24 21:49:41 2025 -0300
+
+    Create lab4
+
+[33mcommit f01df040b7cdb931bc86cbe9ac0301600ec714c3[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sat May 24 21:42:29 2025 -0300
+
+    Está sem erro de compilação, mas a função de movimentação dos robôs está toda bugada
+
+[33mcommit 2d4afc1d7d08798425d5526d7c0f1f286c4990d4[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed May 21 15:52:43 2025 -0300
+
+    Deu ruim!!! É preciso refatorar todo o projeto e há muita coisa para se fazer ainda
+
+[33mcommit a274ac0c0ea5d06127a7e56bdf2858fd35cbd15c[m[33m ([m[1;33mtag: [m[1;33mlab03-236510-281391[m[33m)[m
+Author: Heloisa Pimentel <124917455+hp1heloisa@users.noreply.github.com>
+Date:   Mon Apr 28 22:38:33 2025 -0300
+
+    Update README.md
+
+[33mcommit 9e7b91321f5e92cc0aa970bd8c0aab52a6a7a076[m
+Author: Heloisa Pimentel <124917455+hp1heloisa@users.noreply.github.com>
+Date:   Mon Apr 28 22:28:41 2025 -0300
+
+    Update README.md
+
+[33mcommit f4161eb225e8ef22d06bb753034b9e36679f7fdf[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 28 21:29:38 2025 -0300
+
+    Atualização final( se a Heloísa deixar):<
+
+[33mcommit 9c4984faeb81b735b1fa645819abbe8e3d004bba[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 28 21:23:38 2025 -0300
+
+    Atualização do README
+
+[33mcommit acd973f83dfdbccec9c2dbfb8d944ed61aae21f3[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 28 21:18:34 2025 -0300
+
+    Adicionado o diagrama e o README
+
+[33mcommit d11130bf893cfb38b4a7e76d11f3aa7efceaf26e[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 28 09:06:41 2025 -0300
+
+    Documentado quase todo o código. Ainda falta documentar os métodos de definir a temperatura e umidade de um determinado lugar e fazer o README
+
+[33mcommit 843b2da3cd67baed709cc14d1c5628c25f64740c[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 28 08:14:40 2025 -0300
+
+    Arrumados os erros do robô guindaste
+
+[33mcommit 8519e279dab6db6b55ec7dbc1b46243cabc9c14d[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Mon Apr 28 01:09:37 2025 -0300
+
+    fix: Robo guindaste bloqueia mover robo
+
+[33mcommit 68f74ee59412ed91175c155f6a881cc4b4abb68d[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Mon Apr 28 00:02:29 2025 -0300
+
+    feat: input.txt + fix bug
+
+[33mcommit a66e3a59db92d3531a435b0226b0f87ca3f603e0[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Apr 27 17:32:17 2025 -0300
+
+    fix: humidade e temperatura + mudar altura + tentativa de input
+
+[33mcommit ff415b11fa83eaa9dba04b9bf119b4ae947c5fd6[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Apr 27 07:58:10 2025 -0300
+
+    Melhora na escrita de vários métodos e print dos sensores na tela.
+
+[33mcommit 95f01c9f0e5973b5cd1e4f6436502bdf97a32736[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Apr 26 23:30:43 2025 -0300
+
+    feat: sensorHumidade + handle humidade e temperatura
+
+[33mcommit b6d18070730ec522018cb08c4c86e5f33278e8c5[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Apr 26 22:15:38 2025 -0300
+
+    feat: elimina robo ambiente + sensor temperatura
+
+[33mcommit 6d12d2e30a6147853c43ec571525d48f2d1b7c43[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Apr 26 17:49:43 2025 -0300
+
+    feat: sensor altitude + plano
+
+[33mcommit 2578919718945cc56817bc1e3d91ecd8f0440c24[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Apr 26 16:06:05 2025 -0300
+
+    feat: remover robo + trocar robo
+
+[33mcommit 1ecf680edb35b404e6addfaa24d6913170be7150[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed Apr 23 10:35:20 2025 -0300
+
+    Arrumado bug do robô aéreo de moviemntação
+
+[33mcommit 431bb3a3d0402bcb6ec5b663ac315891f7192a98[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Apr 22 13:58:27 2025 -0300
+
+    Código mais limpo
+
+[33mcommit 97c99ba08e05bcedfe36f059016efe7ee7b13323[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Apr 22 10:12:50 2025 -0300
+
+    Robo guindaste atualizado e redução de algumas coisas desnecessárias
+
+[33mcommit 7e4ee99291a87d5c93c9d2f1fb47aba89832c54b[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Apr 22 08:51:34 2025 -0300
+
+    Funções de movimentação e print na tela estão atualizadas
+
+[33mcommit 82599d4e15a5dbf933b40b74374ef08ec6c34e2b[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 21 22:57:37 2025 -0300
+
+    Implementado o ambiente com as inicias dos obstáculos. Criado o enum tipos_obstaculos e criada a classe de obstáculos e está conversando com a classe do ambiente.
+
+[33mcommit 16a4bb66f85d9eb59521ecc773c90aa86c4831fb[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Mon Apr 21 10:57:24 2025 -0300
+
+    Criado o arquivo de texto que define o nosso ambiente como padrão e também a leitura desse ambiente
+
+[33mcommit 465e5f32497266404a1e3d6229c7c771c59b9f02[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Apr 15 17:34:03 2025 -0300
+
+    wip: initial transition lab 3
+
+[33mcommit b9f6605fff4e18a877beeb2c2f4fafbe2680a592[m[33m ([m[1;33mtag: [m[1;33mlab02-236510-281391[m[33m)[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Mar 30 21:01:09 2025 -0300
+
+    pequenos ajustes no markdown
+
+[33mcommit 32743c3e6cbba57e6126107fb30caab859cc7583[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sun Mar 30 18:52:37 2025 -0300
+
+    Update README.md
+
+[33mcommit 8abb212f08f3cb0cbbe6c61dbda760b33a9e9d27[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sun Mar 30 18:52:27 2025 -0300
+
+    Update README.md
+
+[33mcommit 420cd9e81a4aa73c3f9543ff860fa9ef2b949df5[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sun Mar 30 18:51:53 2025 -0300
+
+    Update README.md
+
+[33mcommit 1cda51b7ccd43aa49e608e2a9b0c81e9a70f22ed[m
+Author: Vinicius007700 <vinismaciel@yahoo.com.br>
+Date:   Sun Mar 30 18:32:15 2025 -0300
+
+    Update README.md
+
+[33mcommit 60818cf283d7d25ca197302cbde9f6dccd937e43[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 18:29:34 2025 -0300
+
+    Testando layout do README
+
+[33mcommit 6e60c1b02f48b48a8cc4094fb3c1e491aeb3681a[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 18:26:08 2025 -0300
+
+    Teste no README
+
+[33mcommit 9a6addb95aefa9659f3a7f08238dba80d36f70ce[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 18:23:53 2025 -0300
+
+    Quebra de linha do README
+
+[33mcommit 2773de2a981ba2b8b3499052a1f5aba53bc4e833[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 18:18:04 2025 -0300
+
+    README
+
+[33mcommit 7e8926c23d76c4f19f73fe5bd08f91041a9b386c[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 17:15:29 2025 -0300
+
+    Documentado o código
+
+[33mcommit ae8885a87fa997fa963be927495e9349d2e34e1c[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Mar 30 13:39:32 2025 -0300
+
+    feat: comentários + robo guindaste + velocidade set
+    
+    Co-authored-by: Vinicius007700 <Vinicius007700@users.noreply.github.com>
+
+[33mcommit 74c98f3eaed35a7ea1ce72d19e93198b575e3d2a[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sun Mar 30 12:09:13 2025 -0300
+
+    feat: alterou nomes e prints
+    
+    Co-authored-by: Vinicius007700 <Vinicius007700@users.noreply.github.com>
+
+[33mcommit f428b57dd1091bd7940ffe0b53d2546284606d8e[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 08:12:51 2025 -0300
+
+    Consertadas as funções de subir. O robô identifica o máximo. Falta arrumar os poderes dos robos desenrolado e os transportadores trabalham
+
+[33mcommit 0c9f61794135aef9cd69058e43231d065ea094c7[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sun Mar 30 00:58:43 2025 -0300
+
+    Falta arrumar a função de subir, pois ela não está identificando o máximo
+
+[33mcommit 3987a6fc4b28b676f01d35543206824314e31964[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Sat Mar 29 23:32:51 2025 -0300
+
+    Retirei a direção do robô e coloquei para printar os comandos de movimentação sempre acima em cada movimento
+
+[33mcommit a251f2fbdaa61d9f31d93fcd35b63a9ab9284ec5[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Sat Mar 29 21:01:01 2025 -0300
+
+    falta 1 robo aereo
+
+[33mcommit 5e51c99c27d55ceb48185369130afec89d74e7f3[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu Mar 27 21:14:10 2025 -0300
+
+    Resolvido o erro
+
+[33mcommit 87a22cddb92670a36df23af89a029835d37e6492[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu Mar 27 20:34:50 2025 -0300
+
+    Erro na no método movimentação
+
+[33mcommit 56ef38e0c38c72971483f1ae1261879483aafdb9[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu Mar 27 00:59:17 2025 -0300
+
+    Limpeza na main. Bem melhorgit add .!
+
+[33mcommit 8eb306399a1cfb0455d22090543d1e3d3f4cbca3[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed Mar 26 23:33:27 2025 -0300
+
+    Umas pequenas modificações para ir para a branch
+
+[33mcommit 2fdff8eb6335451072b7417592ab6b2cbfbab7e1[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed Mar 26 23:26:04 2025 -0300
+
+    Adicionado obstáculo
+
+[33mcommit 7e3b667388425be6cb9a1b519186c5dbb78da1a1[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed Mar 26 08:20:36 2025 -0300
+
+    Correção de um print
+
+[33mcommit e433ee321a95e553eef92f41e1938dcafa064094[m[33m ([m[1;31morigin/feat/robo-aereo[m[33m)[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 21:59:34 2025 -0300
+
+    feat: interação com o robo
+
+[33mcommit 2b3b2d1783dcd088e01287a521b8c02f904bdb3e[m
+Merge: abcf971 6514066
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 21:11:29 2025 -0300
+
+    Merge branch 'main' into feat/robo-aereo
+
+[33mcommit 65140666ba6d3d018bf7e726c8adaf6841eecf48[m
+Merge: 71fc50a 3d0fef2
+Author: Heloisa Pimentel <124917455+hp1heloisa@users.noreply.github.com>
+Date:   Tue Mar 25 21:09:10 2025 -0300
+
+    Merge pull request #3 from hp1heloisa/feat/roboTerrestre
+    
+    Falta resolver um bug do roboDesenrolado
+
+[33mcommit abcf97123931e3cb383a09e5c0d00b4526c9f111[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 21:07:15 2025 -0300
+
+    feat: robo aereo e topeira
+
+[33mcommit 3d0fef2374d59e8ba7471154a77f0d5833745b67[m[33m ([m[1;31morigin/feat/roboTerrestre[m[33m, [m[1;32mfeat/roboTerrestre[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Mar 25 16:01:45 2025 -0300
+
+    Falta resolver um bug do roboDesenrolado
+
+[33mcommit 71fc50a4dc9f0fa5233a99b65475c6bb9b09239f[m
+Merge: fedfc32 2d4894e
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 15:29:48 2025 -0300
+
+    Merge branch 'feat/robo-aereo'
+
+[33mcommit 2d4894e52a5f008a5a560e4fecad88ce61fb81cc[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 15:28:06 2025 -0300
+
+    alteracoes robos
+
+[33mcommit fedfc3283c71263c67f93bc629ee14bd7b813263[m[33m ([m[1;31morigin/feat/robo-vini[m[33m, [m[1;32mfeat/robo-vini[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Mar 25 15:26:02 2025 -0300
+
+    Alterações nas funções construtoras
+
+[33mcommit 4b3915d48183beee99b099e9fa379f0aaad01162[m
+Merge: 9b16da8 79437bc
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 14:49:09 2025 -0300
+
+    Merge branch 'main' of github.com:hp1heloisa/MC322_labs
+
+[33mcommit 9b16da898ba870c944534722319590ddd44c6124[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 25 14:43:00 2025 -0300
+
+    feat: free user choice
+    
+    Co-authored-by: Vinicius007700 <Vinicius007700@users.noreply.github.com>
+
+[33mcommit 79437bcf1b265fcf7cf1bf4c690379f5ce7902b6[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Wed Mar 19 08:07:14 2025 -0300
+
+    Terminada a função do robô transportador
+
+[33mcommit 89db5211f34de48b02699482c0bcce1ac8eb3626[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 18 15:59:20 2025 -0300
+
+    feat: roboTer + robAer
+    
+    Co-authored-by: Vinicius007700 <Vinicius007700@users.noreply.github.com>
+
+[33mcommit b2f75123baf529b4a90a183545d293edea2e4f85[m
+Author: hp1heloisa <heloisapimentel2202@gmail.com>
+Date:   Tue Mar 18 14:47:37 2025 -0300
+
+    robo terrestre
+    
+    Co-authored-by: Vinicius007700 <Vinicius007700@users.noreply.github.com>
+
+[33mcommit 8292e6b764cd3075d44ee32a113b43b0200e573c[m[33m ([m[1;32mvini[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Mar 18 12:34:48 2025 -0300
+
+    Devolvendo os arquivos ao lab1
+
+[33mcommit 4cae28a91d79bf5bdd76fb402fd3a4604be3f742[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Mar 18 12:33:42 2025 -0300
+
+    Criada pasta lab2
+
+[33mcommit 4d517329fb4469b861b8375b36167859da438f88[m[33m ([m[1;33mtag: [m[1;33mlab01-236510-281391[m[33m)[m
+Author: heloisapimentel <heloisapimentel@ibm.com>
+Date:   Thu Mar 13 22:49:18 2025 -0300
+
+    separacao em pasta
+
+[33mcommit 04fc8f19b6c433bb14dcea67c1ab65475965fb61[m[33m ([m[1;31morigin/feat/class-main[m[33m, [m[1;32mfeat/class-main[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Thu Mar 13 22:25:28 2025 -0300
+
+    Finalizado
+
+[33mcommit 68f1fc31fe5dd7cbcfa678490e9730eee6659c6f[m
+Author: heloisapimentel <heloisapimentel@ibm.com>
+Date:   Tue Mar 11 16:04:10 2025 -0300
+
+    feat: main
+
+[33mcommit 0a790888232100cdf54b98c6236a3af31a6dbfc9[m
+Merge: 94322b9 a68d545
+Author: Heloisa Pimentel <124917455+hp1heloisa@users.noreply.github.com>
+Date:   Tue Mar 11 15:30:58 2025 -0300
+
+    Merge pull request #2 from hp1heloisa/feat/class-ambiente
+    
+    Primeira implentação
+
+[33mcommit 94322b97ee3d2c86aa58cefbfd267b414e8b1515[m
+Merge: 9b5de70 340c8e9
+Author: Heloisa Pimentel <124917455+hp1heloisa@users.noreply.github.com>
+Date:   Tue Mar 11 15:29:33 2025 -0300
+
+    Merge pull request #1 from hp1heloisa/feat/class-robo
+    
+    feat: robo + main
+
+[33mcommit a68d54597e001fc319315f62c0d12348dea0ec22[m[33m ([m[1;31morigin/feat/class-ambiente[m[33m, [m[1;32mfeat/class-ambiente[m[33m)[m
+Author: Vinícius Maciel <v281391@dac.unicamp.br>
+Date:   Tue Mar 11 15:28:59 2025 -0300
+
+    Primeira implentação
+
+[33mcommit 340c8e944d9d91173c4ee9910f96f282803bf29c[m[33m ([m[1;31morigin/feat/class-robo[m[33m)[m
+Author: heloisapimentel <heloisapimentel@ibm.com>
+Date:   Tue Mar 11 15:27:30 2025 -0300
+
+    feat: robo + main
+
+[33mcommit 9b5de707a78c615e27d6eaefdc7ea1d00fd9b8e0[m
+Author: heloisapimentel <heloisapimentel@ibm.com>
+Date:   Tue Mar 11 15:07:19 2025 -0300
+
+    docs : initial file
+
+[33mcommit 2fb2aae3580d89926db935b96980f94dae776930[m
+Author: heloisapimentel <heloisapimentel@ibm.com>
+Date:   Tue Mar 11 14:56:36 2025 -0300
+
+    first commit

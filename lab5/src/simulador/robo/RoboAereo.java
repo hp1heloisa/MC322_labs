@@ -9,7 +9,7 @@ import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 import simulador.sensores.SensorAltitude;
 
-public abstract class RoboAereo extends Robo {
+public abstract class RoboAereo extends AgenteInteligente {
 
     protected SensorAltitude sensorAltitude = new SensorAltitude(5, super.ambiente);
     protected int altitudeMaxima;
@@ -22,13 +22,7 @@ public abstract class RoboAereo extends Robo {
         super(ambiente, scanner, ambiente.getlistRobos(), estado, nome, coordenada);
         sensorTemperatura.setAltitude(5);
         sensorHumidade.setAltitude(5);
-        if (scanner == null) {
-            altitudeMaxima = 20;
-        } else {
-            System.out.println("Qual altitude máxima que o seu robô pode alcançar?");
-            altitudeMaxima = scanner.nextInt();
-            scanner.nextLine();
-        }
+        altitudeMaxima = 99;
     }
 
     @Override
