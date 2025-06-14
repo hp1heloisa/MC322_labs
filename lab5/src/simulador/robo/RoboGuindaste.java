@@ -7,8 +7,8 @@ import simulador.exceptions.RoboDesligadoException;
 public class RoboGuindaste extends RoboTerrestre {
 
     /**Função construtora do robô guindaste */
-    public RoboGuindaste(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
-        super(ambiente, scanner, estado);
+    public RoboGuindaste(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
+        super(ambiente, scanner, estado, nome, coordenada);
         try {
             super.setMensagemPadrao(FrasesRobos.getFraseGuindaste());
         } catch (RoboDesligadoException e) {

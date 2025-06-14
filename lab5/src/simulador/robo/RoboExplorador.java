@@ -3,7 +3,6 @@ package simulador.robo;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
@@ -16,13 +15,13 @@ import simulador.missao.MissaoExplorar;
 public class RoboExplorador extends AgenteInteligente {
     private List<Missao> pipeline;
 
-    public RoboExplorador(Ambiente ambiente) {
-        super(ambiente);
-        setNome("Explorador_" + getId());
+    public RoboExplorador(Ambiente ambiente, String nome, Coordenada pos_inicial) {
+        super(ambiente, nome, pos_inicial);
+        setNome(nome);
     }
 
-    public RoboExplorador(Ambiente ambiente, int passosExplorar, Coordenada destino) {
-        this(ambiente);  // chama o construtor
+    public RoboExplorador(Ambiente ambiente, int passosExplorar, Coordenada destino, String nome, Coordenada pos_inicial) {
+        this(ambiente, nome, pos_inicial);  // chama o construtor
         pipeline = Arrays.asList(
                 new MissaoExplorar(passosExplorar),
                 new MissaoBuscarPonto(destino, 30));

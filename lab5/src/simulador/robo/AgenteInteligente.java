@@ -1,6 +1,7 @@
 package simulador.robo;
 
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
 
 /**
@@ -10,8 +11,8 @@ public abstract class AgenteInteligente extends Robo {
 
     protected Missao missao;
 
-    public AgenteInteligente(Ambiente ambiente) {
-        super(ambiente, null, ambiente.getlistRobos(), EstadoRobo.ligado);
+    public AgenteInteligente(Ambiente ambiente, String nome, Coordenada pos_inicial) {
+        super(ambiente, null, ambiente.getlistRobos(), EstadoRobo.ligado, nome, pos_inicial);
     }
 
     /** Método para atribuir missões ao robô. */

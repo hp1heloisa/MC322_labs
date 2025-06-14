@@ -3,6 +3,7 @@ package simulador.ambiente;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.TipoDeRoboInexistenteException;
@@ -21,16 +22,16 @@ public class Ambiente {
      * Função construtura que define os comprimentos iniciais do ambiente,
      * definindo onde temos obstáculos e não, de forma aleatória
      */
-    public Ambiente(int x, int y, int z) {
+    public Ambiente(int x, int y, int z, Scanner scanner) {
         this.comprimentoX = x;
         this.comprimentoY = y;
         this.altura = z;
         this.mapa = new TipoEntidade[x][y][z];
         this.entidades = new ArrayList<>();
-        inicializarMapa();
+        inicializarMapa(scanner);
     }
 
-    public void inicializarMapa() {
+    public void inicializarMapa(Scanner scanner) {
         int x = this.comprimentoX;
         int y = this.comprimentoY;
         int z = this.altura;
@@ -50,7 +51,8 @@ public class Ambiente {
                             TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(k>0 ? 2 : TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
 
                             try {
-                                Entidade robo = tipoRobo.criar(this, null);
+                                String[] infos = {"ROBO", "Inativo", "null", String.valueOf(i), String.valueOf(j), String.valueOf(k)};
+                                Entidade robo = tipoRobo.criar(this, scanner, infos);
                                 robo.setX(i);
                                 robo.setY(j);
                                 robo.setZ(k);

@@ -1,6 +1,7 @@
 package simulador.robo;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
@@ -8,8 +9,8 @@ import simulador.exceptions.RoboDesligadoException;
 public class RoboLimitado extends RoboTerrestre {
 
     /**Função construtora do robô limitado */
-    public RoboLimitado(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
-        super(ambiente, scanner, estado);
+    public RoboLimitado(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
+        super(ambiente, scanner, estado, nome, coordenada);
         System.out.printf("A velocidade máxima do robô Limitado é de 5 km/h\n");
         velocidadeMax = 5;
         try {

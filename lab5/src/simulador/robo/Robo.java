@@ -39,16 +39,14 @@ public abstract class Robo implements InterfaceRobo {
      * Função construtora que define inicialmente o robô já na posição X = Y = 0
      * e pergunta ao qual a direção ele está
      */
-    public Robo(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado) {
+    public Robo(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado, String nome, Coordenada pos_inicial) {
         this.scanner = scanner;
         sensorPlano = new SensorPlano(5, ambiente);
         sensorTemperatura = new SensorTemperatura(5, 0, ambiente);
         sensorHumidade = new SensorUmidade(5, 0, ambiente);
         this.ambiente = ambiente;
-        System.out.printf("O nome do seu robô é robo_%d ", listaRobos.size());
-        nome = "robo" + listaRobos.size();
-        System.out.printf("Aviso: Nós começaremos com o seu robô na origem do eixo de coordenadas(X = Y = Z = 0)\n");
-        this.coordenada = new Coordenada(0, 0, 0);
+        this.nome = nome;
+        this.coordenada = pos_inicial;
         this.estado = estado;
         this.id = ++contadorId;
 

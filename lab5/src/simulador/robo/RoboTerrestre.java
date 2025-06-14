@@ -2,6 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
@@ -15,8 +16,8 @@ public class RoboTerrestre extends Robo {
     /**
      * Função construtora do robô terrestre
      */
-    public RoboTerrestre(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
-        super(ambiente, scanner, ambiente.getlistRobos(), estado);
+    public RoboTerrestre(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
+        super(ambiente, scanner, ambiente.getlistRobos(), estado, nome, coordenada);
     }
 
     @Override

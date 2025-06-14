@@ -2,6 +2,7 @@ package simulador.robo;
 
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
+import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
@@ -10,8 +11,8 @@ import simulador.exceptions.RoboDesligadoException;
 public class RoboDestruidor extends RoboAereo {
 
     /**Função construtora do robô destruidor */
-    public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado) {
-        super(ambiente, scanner, estado);
+    public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
+        super(ambiente, scanner, estado, nome, coordenada);
         try {
             super.setMensagemPadrao(FrasesRobos.getFraseDestruidor());
         } catch (RoboDesligadoException e) {
