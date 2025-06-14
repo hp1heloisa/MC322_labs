@@ -73,4 +73,8 @@ public class MissaoPatrulhar implements Missao {
         }
         return robo.getEstado() == EstadoRobo.ligado;
     }
+    @Override
+    public String getDescricao() {
+        return "Explorar por " + maxTentativas + " passos.";
+    }
 }

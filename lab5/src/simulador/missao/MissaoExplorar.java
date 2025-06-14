@@ -29,7 +29,7 @@ public class MissaoExplorar implements Missao {
             Coordenada antes = robo.get_Coordenada();
             try {
                 if (robo instanceof RoboExplorador explorador) 
-                    explorador.tentarMoverAleatorio(ambiente);
+                    explorador.tentarMover(ambiente);
                 log.log(robo.getNome() + " -> " + robo.get_Coordenada());
             } catch (Exception e) {
                 log.log("Falha de movimento (" + e.getMessage() + ")");
@@ -44,5 +44,9 @@ public class MissaoExplorar implements Missao {
         try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
             executar(robo, ambiente, log);
         } catch (Exception ignored) {}
+    }
+    @Override
+    public String getDescricao() {
+        return "Explorar por " + passosMax + " passos.";
     }
 }

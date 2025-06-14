@@ -51,5 +51,10 @@ public class MissaoMonitorar implements Missao {
             
         }
     }
+
+    public String getDescricao() {
+        return "Explorar por " + ciclos + " passos.";
+    }
+
 }
 
