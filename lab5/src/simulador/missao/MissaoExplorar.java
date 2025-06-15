@@ -37,6 +37,15 @@ public class MissaoExplorar implements Missao {
     }
 
     /* Interface antiga sem logger */
+<<<<<<< HEAD
+=======
+    @Override
+    public void executar(Robo robo, Ambiente ambiente) {
+        try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
+            executar(robo, ambiente, log);
+        } catch (Exception ignored) {}
+    }
+>>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
     @Override
     public void executar(Robo robo, Ambiente ambiente) {
         try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
