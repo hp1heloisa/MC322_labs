@@ -45,6 +45,6 @@ public class MissaoBuscarPonto implements Missao {
     }
     @Override
     public String getDescricao(){
-        return "Deu certo! Robo no ponto" + this.destino;
+        return "Ainda não implementado";
     }
 }
