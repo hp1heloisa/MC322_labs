@@ -3,6 +3,7 @@ package simulador.missao;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
+import simulador.missao.LogadorMissao;
 import simulador.robo.EstadoRobo;
 import simulador.robo.Robo;
 
@@ -43,9 +44,8 @@ public class MissaoBuscarPonto implements Missao {
             log.log("Não foi possível alcançar o alvo. Parou em " + robo.get_Coordenada());
         }
     }
-
     @Override
-    public String getDescricao() {
-        return "Buscar o ponto " + this.destino;
+    public String getDescricao(){
+        return "Ainda não implementado";
     }
 }

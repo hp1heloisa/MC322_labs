@@ -56,7 +56,7 @@ public class MissaoExplorar implements Missao {
             Coordenada antes = robo.get_Coordenada();
             try {
                 if (robo instanceof RoboExplorador explorador) 
-                    explorador.tentarMover(ambiente);
+                    explorador.tentarMoverAleatorio(ambiente);
                 log.log(robo.getNome() + " -> " + robo.get_Coordenada());
             } catch (Exception e) {
                 log.log("Falha de movimento (" + e.getMessage() + ")");
@@ -72,10 +72,6 @@ public class MissaoExplorar implements Missao {
             executar(robo, ambiente, log);
         } catch (Exception ignored) {}
     }
-<<<<<<< HEAD
->>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
-=======
->>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
     @Override
     public String getDescricao() {
         return "Explorar por " + passosMax + " passos.";

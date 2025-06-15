@@ -49,11 +49,8 @@ public class MissaoMonitorar implements Missao {
         log.log("Monitoramento encerrado.");
     }
 
-    /**
-     * CORREÇÃO: A descrição da missão foi ajustada para ser mais precisa.
-     */
-    @Override
     public String getDescricao() {
-        return "Monitorar a área em " + centro + " por " + ciclos + " ciclos.";
+        return "Explorar por " + ciclos + " passos.";
     }
+
 }

@@ -1,25 +1,26 @@
 package simulador.robo;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.MoverParaOutroPonto;
 
-// RoboExplorador agora é um AgenteInteligente que "assina o contrato" de que é CapazDeMoverAleatoriamente.
-public class RoboExplorador extends AgenteInteligente implements MoverParaOutroPonto {
+/** Robô terrestre autônomo capaz de explorar e buscar um ponto. */
+public class RoboExplorador extends AgenteInteligente {
+    private List<Missao> pipeline;
 
-    public RoboExplorador(Ambiente ambiente, Scanner scanner, ArrayList<Robo> listaRobos, EstadoRobo estado, String nome, Coordenada pos_inicial) {
-        super(ambiente,scanner, listaRobos, estado, nome, pos_inicial);
+    public RoboExplorador(Ambiente ambiente, String nome, Coordenada pos_inicial) {
+        super(ambiente, nome, pos_inicial);
     }
 
     @Override
     public String getDescricao() {
-        return "Robô Explorador";
+        return "Robô Explorador autônomo (explorar + opcional buscar ponto)";
     }
-    
-    
+
     @Override 
     public void explicar_movimentacao() {
 
@@ -31,16 +32,34 @@ public class RoboExplorador extends AgenteInteligente implements MoverParaOutroP
     }
 
     /** Executa pipeline, se existir; caso contrário usa definirMissao individualmente. */
-
     @Override
-    public boolean tentarMover(Ambiente ambiente) {
+    public void executarMissao(Ambiente ambiente) {
+        if (pipeline != null && !pipeline.isEmpty()) {
+            for (Missao m : pipeline) {
+                definirMissao(m);
+                super.executarMissao(ambiente);
+            }
+        } else {
+            super.executarMissao(ambiente);
+        }
+    }
+
+    public boolean tentarMoverAleatorio(Ambiente ambiente) {
         Random rnd = new Random();
-        for (int i = 0; i < 5; i++) { // Tenta até 5 vezes
+        for (int i = 0; i < 5; i++) {
             int dx = rnd.nextInt(3) - 1;
             int dy = rnd.nextInt(3) - 1;
             if (dx == 0 && dy == 0) continue;
+
+            int nx = getPosicaoX() + dx;
+            int ny = getPosicaoY() + dy;
+            int nz = getposicaoZ();
+            Coordenada nova = new Coordenada(nx, ny, nz);
+
+            if (ambiente.estaOcupado(nova)) continue;
+
             try {
-                super.mover(dx, dy); // Usa o método de mover da classe Robo
+                ambiente.moverEntidade(this, nx, ny, nz, this);
                 return true;
             } catch (Exception ignored) {}
         }

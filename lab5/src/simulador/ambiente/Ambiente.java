@@ -31,15 +31,6 @@ public class Ambiente {
         inicializarMapa(scanner);
     }
 
-    public Robo getRoboPorNome(String nome) {
-        for (Robo robo : this.getlistRobos()) { // Supondo que getlistRobos() retorna a lista de robôs
-            if (robo.getNome().equalsIgnoreCase(nome)) {
-                return robo;
-            }
-        }
-        return null; // Retorna null se não encontrar
-    }
-
     public void inicializarMapa(Scanner scanner) {
         int x = this.comprimentoX;
         int y = this.comprimentoY;
@@ -56,8 +47,8 @@ public class Ambiente {
                         TipoObstaculo tipoObstaculo = TipoObstaculo.values()[aleatorio.nextInt(TipoObstaculo.values().length)]; // Vamos selecionar um tipo de obstáculo
                         Entidade obstaculo = new Obstaculo(i, j, k, tipoObstaculo); //adicionar um obstáculo aleatorio ao ambiente
                         // atualizar mapa
-                        if (obstaculo.getRepresentacao() == 'r') {
-                            TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(k > 0 ? 2 : TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
+                        if ( obstaculo.getRepresentacao() == 'r') {
+                            TipoRobo tipoRobo = TipoRobo.values()[aleatorio.nextInt(k>0 ? 2 : TipoRobo.values().length)]; // Já que o obstáculo é um robô, vamos selecionar um tipo de Robô
 
                             try {
                                 String[] infos = {"ROBO", "Inativo", "null", String.valueOf(i), String.valueOf(j), String.valueOf(k)};
@@ -67,7 +58,7 @@ public class Ambiente {
                                 robo.setZ(k);
                                 entidades.add(robo);
                                 mapa[i][j][k] = TipoEntidade.ROBO;
-                            } catch (TipoDeRoboInexistenteException e) {
+                            } catch (TipoDeRoboInexistenteException e){
                                 mapa[i][j][k] = TipoEntidade.VAZIO;
                             }
                         } else {
@@ -172,7 +163,7 @@ public class Ambiente {
     /**
      * Método que adiciona entidades ao mapa
      */
-    public void adicionarEntidade(Entidade e) {
+    public void adicionarEntidade(Entidade e) { 
         if (!dentroDosLimites(new Coordenada(e.getX(), e.getY(), e.getZ()))) { //verifica se a entidade está fora dos limites 
             throw new IllegalArgumentException("Fora dos limites!");
         }
@@ -183,7 +174,7 @@ public class Ambiente {
     /**
      * Método que remove uma entidade
      */
-    public String removerEntidade(Entidade e) {
+    public String removerEntidade(Entidade e) {    
         mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
         String removEnt = e.getDescricao();
         entidades.remove(e);
