@@ -29,7 +29,7 @@ public class RoboPatrulheiro extends AgenteInteligente {
     }
 
     @Override
-    public void poder() {
+    public void poder(Coordenada cord_desejada, Coordenada cord_atual) {
         System.out.println("Robô Explorador não consegue utilizar poderes");
     }
 

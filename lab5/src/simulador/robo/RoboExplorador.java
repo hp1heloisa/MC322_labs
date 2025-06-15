@@ -30,7 +30,7 @@ public class RoboExplorador extends AgenteInteligente implements MoverParaOutroP
     }
 
     @Override
-    public void poder() {
+    public void poder(Coordenada desejada, Coordenada atual) {
         System.out.println("Robô Explorador não consegue utilizar poderes");
     }
 

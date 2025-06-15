@@ -52,7 +52,7 @@ public abstract class Robo implements InterfaceRobo {
         this.id = ++contadorId;
 
     }
-    public abstract void poder() throws ColisaoException;
+    public abstract void poder(Coordenada cord_desejada, Coordenada cord_atual) throws ColisaoException;
 
     @Override
     public TipoEntidade getTipo() {

@@ -10,59 +10,68 @@ import simulador.exceptions.RoboDesligadoException;
 
 public class RoboDestruidor extends RoboAereo {
 
-    /**Função construtora do robô destruidor */
+    /**
+     * Função construtora do robô destruidor
+     */
     public RoboDestruidor(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
         super(ambiente, nome, coordenada);
         try {
             super.setMensagemPadrao(FrasesRobos.getFraseDestruidor());
         } catch (RoboDesligadoException e) {
-           System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
-    }
-    @Override
-    public void poder(){
-        destruir();
     }
 
     @Override
-    public String getDescricao(){
+    public void poder(Coordenada alvo, Coordenada pos_atual) {
+        destruir(alvo, pos_atual);
+    }
+
+    @Override
+    public String getDescricao() {
         return "Olá! Eu sou um Robô Destruidor e eu sou uma subclasse do Robô Aéreo. Além de fazer tudo que ele faz, eu também posso destruir obstáculos que estiverem na minha frente, com exceção de outros robôs!";
     }
 
     @Override
     public void explicar_movimentacao() {
         super.explicar_movimentacao();
-        System.out.println("k -> para destruir o obstáculo"); //adiciona os detalhes da movimentação especial do robô destruidor
+        System.out.println("k -> para destruir o obstáculo"); // adiciona os detalhes da movimentação especial do robô
+        // destruidor
     }
 
     /**
      * Método especial do robô destruidor, o de destruir obstáculos
      */
-    public void destruir() {
-        System.out.println("Indique a direção do obstáculo: a, d, w, s, u ou j?");
-        char direcao = scanner.next().charAt(0);
-        switch (direcao) {
-            case 'a':
+    public void destruir(Coordenada alvo, Coordenada pos_atual) {
+        Coordenada diferenca = new Coordenada(alvo.getx() - pos_atual.getx(), alvo.gety() - pos_atual.gety(), alvo.getz() - alvo.getz());
+        if (diferenca.getx() != 0) {
+            if (diferenca.getx() < 0) {
                 ambiente.eliminaObstaculo(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
-                break;
-            case 'd':
+                return;
+            } else {
                 ambiente.eliminaObstaculo(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
-                break;
-            case 'w':
-                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
-                break;
-            case 's':
+                return;
+            }
+        }
+        if (diferenca.gety() != 0) {
+            if (diferenca.gety() < 0) {
                 ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
-                break;
-            case 'u':
+                return;
+            } else {
+                System.out.println("Erro");
+                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
+                return;
+
+            }
+        }
+        if (diferenca.getz() != 0) {
+            if (diferenca.getz() > 0) {
                 ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + 1);
-                break;
-            case 'j':
+                return;
+            } else {
                 ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() - 1);
-                break;
-            default:
-                System.out.println("Direção inválida! Use w, s, a, d, u ou j");
-                break;
+                return;
+            }
         }
 
     }
@@ -71,13 +80,17 @@ public class RoboDestruidor extends RoboAereo {
     public char movimentacao() throws ColisaoException, ForadosLimitesException {
         char movimento_robo = ' ';
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
-            if (nome == null) System.out.println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
+            if (nome == null) {
+                System.out
+                        .println("Seu robô morreu! Digite c ou n, para ir para outro robô ou para criar um novo robô:");
+            }
             movimento_robo = scanner.next().charAt(0);
-            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
+            if (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'k' && movimento_robo != 'c'
+                    && movimento_robo != '?' && movimento_robo != '!') {
                 explicar_movimentacao();
             }
-            try { 
-                switch (movimento_robo){
+            try {
+                switch (movimento_robo) {
                     case 'a':
                         this.mover(-1, 0);
                         break;
@@ -97,17 +110,17 @@ public class RoboDestruidor extends RoboAereo {
                         alterar_altitude(-1);
                         break;
                     case 'k':
-                        destruir();
+                        destruir(null, null);
                         break;
-                    case '?': 
+                    case '?':
                         receberMensagensDoAmbiente();
                         break;
-                    case '!': 
+                    case '!':
                         System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
                         int index = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("O que gostaria de dizer para ele?");
-                        String msg = scanner.nextLine();  
+                        String msg = scanner.nextLine();
                         enviarMensagem(ambiente.getRobo(index), msg);
                         break;
                     case 'p':
@@ -123,10 +136,12 @@ public class RoboDestruidor extends RoboAereo {
                     default:
                         System.out.println("Comando inválido! Use w, s, a, d, u, j, k, ?, ! ou x");
                 }
-            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException | EnergiaInsuficienteException exception) {
+            } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException
+                    | EnergiaInsuficienteException exception) {
                 System.out.println(exception.getMessage());
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'  && movimento_robo != '?' && movimento_robo != '!') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'
+                    && movimento_robo != '?' && movimento_robo != '!') {
                 print_sensores();
             }
         }

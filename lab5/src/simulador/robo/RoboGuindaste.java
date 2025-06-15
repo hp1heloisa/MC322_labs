@@ -63,8 +63,8 @@ public class RoboGuindaste extends RoboTerrestre {
         }
 
     }
-     @Override
-    public void poder(){
+    @Override
+    public void poder(Coordenada desejada, Coordenada atual){
         guindastiando();
     }
 
