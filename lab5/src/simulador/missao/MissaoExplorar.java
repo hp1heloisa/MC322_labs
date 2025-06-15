@@ -18,6 +18,7 @@ public class MissaoExplorar implements Missao {
     @Override
     public void executar(Robo robo, Ambiente ambiente, LogadorMissao log) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!(robo instanceof RoboExplorador)) {
             log.log("ERRO: O robô " + robo.getNome() + " não é um RoboExplorador e não pode executar a MissaoExplorar.");
             return;
@@ -45,6 +46,8 @@ public class MissaoExplorar implements Missao {
     }
 
 =======
+=======
+>>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
         for (int passo = 1; passo <= passosMax && robo.getEstado() == EstadoRobo.ligado; passo++) {
 
             int dx = rnd.nextInt(3) - 1;   // -1,0,1
@@ -69,6 +72,9 @@ public class MissaoExplorar implements Missao {
             executar(robo, ambiente, log);
         } catch (Exception ignored) {}
     }
+<<<<<<< HEAD
+>>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
+=======
 >>>>>>> parent of 14cbc99 (Falta debug com o arquivo)
     @Override
     public String getDescricao() {
