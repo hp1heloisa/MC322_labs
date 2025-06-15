@@ -48,9 +48,4 @@ public class MissaoMonitorar implements Missao {
 
         log.log("Monitoramento encerrado.");
     }
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> parent of 23012e5 (Atualizações)
