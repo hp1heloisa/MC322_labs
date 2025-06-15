@@ -1,11 +1,9 @@
 package simulador.missao;
 
 import java.util.Random;
-
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
-import simulador.missao.LogadorMissao;
 import simulador.robo.EstadoRobo;
 import simulador.robo.Robo;
 import simulador.robo.RoboExplorador;
@@ -29,7 +27,7 @@ public class MissaoExplorar implements Missao {
             Coordenada antes = robo.get_Coordenada();
             try {
                 if (robo instanceof RoboExplorador explorador) 
-                    explorador.tentarMover(ambiente);
+                    explorador.tentarMoverAleatorio(ambiente);
                 log.log(robo.getNome() + " -> " + robo.get_Coordenada());
             } catch (Exception e) {
                 log.log("Falha de movimento (" + e.getMessage() + ")");
@@ -44,9 +42,5 @@ public class MissaoExplorar implements Missao {
         try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
             executar(robo, ambiente, log);
         } catch (Exception ignored) {}
-    }
-    @Override
-    public String getDescricao() {
-        return "Explorar por " + passosMax + " passos.";
     }
 }
