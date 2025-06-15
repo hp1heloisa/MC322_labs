@@ -49,10 +49,8 @@ public enum TipoRobo {
                 return new RoboTeletransportador(ambiente, scanner, EstadoRobo.ligado, nome, pos_inicial);
             case EXPLORADOR:
                 return new RoboExplorador(ambiente, nome, pos_inicial);
-            case HIBRIDO:
-                return new RoboHibrido(ambiente, nome, pos_inicial);
-            // case PATRULEIRO:
-            //     return new RoboPatrulheiro(ambiente, nome, pos_inicial);
+            case PATRULEIRO:
+              return new RoboPatrulheiro(ambiente, nome, pos_inicial);
             default:
                 throw new TipoDeRoboInexistenteException("Não foi possível criar o robô, pois " + this + " não existe!");
         }

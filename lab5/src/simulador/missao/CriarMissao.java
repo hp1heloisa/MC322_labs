@@ -23,7 +23,11 @@ public class CriarMissao {
                     Coordenada destino = new Coordenada(x, y, z);
                     return new MissaoBuscarPonto(destino, 30);
                 
-                // Adicione outros cases para PATRULHAR, etc.
+                case "PATRULHAR":
+                    System.out.println("Missão Patrulhar ainda não implementada");
+
+                case "MONITORAR":
+                    System.out.println("Missão Monitorar ainda não implementada");
 
                 default:
                     System.err.println("ERRO: Tipo de missão '" + tipoMissao + "' desconhecido.");
