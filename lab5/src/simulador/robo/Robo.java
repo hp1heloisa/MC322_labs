@@ -1,6 +1,7 @@
 
 package simulador.robo;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public abstract class Robo implements InterfaceRobo {
         this.id = ++contadorId;
 
     }
-    public abstract void poder(Coordenada cord_desejada, Coordenada cord_atual) throws ColisaoException, ForadosLimitesException;
+    public abstract void poder(Coordenada cord_desejada, Coordenada cord_atual) throws ColisaoException, ForadosLimitesException, IOException;
 
     @Override
     public TipoEntidade getTipo() {
@@ -236,7 +237,7 @@ public abstract class Robo implements InterfaceRobo {
     /**
      * Abstrata, pois os robôs têm movimentações distintas
      */
-    public abstract char movimentacao() throws ColisaoException, ForadosLimitesException;
+    public abstract char movimentacao() throws ColisaoException, ForadosLimitesException, IOException;
 
     /**
      * Método que o robô se move no campo sempre para um lugar sem nenhum

@@ -1,4 +1,5 @@
 package simulador.interfaces;
+import java.io.IOException;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
 
@@ -7,6 +8,6 @@ public interface InterfaceRobo extends Entidade, Sensoriavel, Comunicavel, Recar
     String getNome(); 
     void getPosicao(); 
     void print_sensores(); 
-    char movimentacao() throws ColisaoException, ForadosLimitesException;
+    char movimentacao() throws ColisaoException, ForadosLimitesException, IOException;
     void explicar_movimentacao();
 }

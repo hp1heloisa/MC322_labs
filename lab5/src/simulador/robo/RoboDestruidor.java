@@ -1,5 +1,6 @@
 package simulador.robo;
 
+import java.io.IOException;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
@@ -7,6 +8,8 @@ import simulador.exceptions.ColisaoException;
 import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
+import simulador.interfaces.Entidade;
+import simulador.missao.LogadorMissao;
 
 public class RoboDestruidor extends RoboAereo {
 
@@ -23,7 +26,7 @@ public class RoboDestruidor extends RoboAereo {
     }
 
     @Override
-    public void poder(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException {
+    public void poder(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException, IOException {
         destruir(alvo, pos_atual);
     }
 
@@ -42,8 +45,12 @@ public class RoboDestruidor extends RoboAereo {
     /**
      * Método especial do robô destruidor, o de destruir obstáculos
      */
-    public void destruir(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException {
+    public void destruir(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException, IOException {
         Coordenada diferenca = new Coordenada(alvo.getx() - pos_atual.getx(), alvo.gety() - pos_atual.gety(), alvo.getz() - pos_atual.getz());
+        try (LogadorMissao log = new LogadorMissao("missao_" + this.getNome() + ".txt")) {
+            Entidade ent = ambiente.getEntidade(alvo);
+            log.log("Há um obstáculo do tipo " + ent.getRepresentacao() + " na posição " + alvo.toString());
+        }
         if (diferenca.getx() != 0) {
             if (diferenca.getx() < 0) {
                 ambiente.eliminaObstaculo(pos_atual.getx() - 1, pos_atual.gety(), pos_atual.getz());
@@ -61,7 +68,7 @@ public class RoboDestruidor extends RoboAereo {
                 this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety() - 1, pos_atual.getz(), this);
                 return;
             } else {
-    
+
                 ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety() + 1, pos_atual.getz());
                 this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety() + 1, pos_atual.getz(), this);
                 return;
@@ -71,7 +78,7 @@ public class RoboDestruidor extends RoboAereo {
         if (diferenca.getz() != 0) {
             if (diferenca.getz() > 0) {
                 ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety(), pos_atual.getz() + 1);
-                this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety(), pos_atual.getz()+ 1, this);
+                this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety(), pos_atual.getz() + 1, this);
                 return;
             } else {
                 ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety(), pos_atual.getz() - 1);
@@ -83,7 +90,7 @@ public class RoboDestruidor extends RoboAereo {
     }
 
     @Override
-    public char movimentacao() throws ColisaoException, ForadosLimitesException {
+    public char movimentacao() throws ColisaoException, ForadosLimitesException, IOException {
         char movimento_robo = ' ';
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
             if (nome == null) {

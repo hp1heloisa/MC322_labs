@@ -1,5 +1,6 @@
 package simulador.robo;
 
+import java.io.IOException;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
@@ -94,7 +95,7 @@ public abstract class RoboAereo extends AgenteInteligente {
      * Implementação da movimentação do robô aéreo
      */
 
-    public char movimentacao(Ambiente ambiente) throws ColisaoException, ForadosLimitesException {
+    public char movimentacao(Ambiente ambiente) throws ColisaoException, ForadosLimitesException, IOException {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {

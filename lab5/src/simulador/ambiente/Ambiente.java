@@ -285,7 +285,7 @@ public class Ambiente {
      * Método que que verifica se a nova posicao de entidade está dentro dos
      * limites, se estiver move para a nova posição
      */
-    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ, Robo robo) throws ForadosLimitesException, ColisaoException {
+    public void moverEntidade(Entidade e, int novoX, int novoY, int novoZ, Robo robo) throws ForadosLimitesException, ColisaoException, IOException {
         Coordenada new_pos = new Coordenada(novoX, novoY, novoZ);
         if (!dentroDosLimites(new_pos)) {
             throw new ForadosLimitesException("Coordenada fora dos limites!");
@@ -363,6 +363,7 @@ public class Ambiente {
                 System.out.println("É proibido matar outros robôs");
             } else {
                 mapa[x][y][z] = TipoEntidade.VAZIO;
+                
             }
         } else {
             System.out.println("Essa posiçao encontra-se fora dos limites!");

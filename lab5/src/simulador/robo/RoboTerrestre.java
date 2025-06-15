@@ -1,5 +1,6 @@
 package simulador.robo;
 
+import java.io.IOException;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
@@ -71,7 +72,7 @@ public class RoboTerrestre extends AgenteInteligente {
     }
 
     @Override
-    public char movimentacao() throws ColisaoException, ForadosLimitesException {
+    public char movimentacao() throws ColisaoException, ForadosLimitesException, IOException {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {

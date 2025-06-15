@@ -93,7 +93,6 @@ public class MissaoBuscarPonto implements Missao {
                         Coordenada coordOndeColidiu = new Coordenada(proximoX, proximoY, proximoZ);
                         log.log(String.format("Passo %d: Colisão em %s. Acionando poder.", passo, coordOndeColidiu));
                         try {
-                            System.out.println("Simbora");
                             robo.poder(coordOndeColidiu, posAtual);
                         } catch (Exception poderException) {
                             log.log("AVISO: Falha ao usar o poder. " + poderException.getMessage());

@@ -1,5 +1,10 @@
-2025-06-15T11:20:51.378965073 - Iniciando missão 'Buscar o ponto (0, 1, 2)'.
-2025-06-15T11:20:51.385392574 - Passo 1: Moveu para (0, 0, 1)
-2025-06-15T11:20:51.385490240 - Passo 2: Moveu para (0, 1, 1)
-2025-06-15T11:20:51.385927437 - Passo 3: Moveu para (0, 1, 2)
-2025-06-15T11:20:51.389351524 - SUCESSO: Alvo alcançado em 3 passos na posição (0, 1, 2)
+2025-06-15T11:43:41.791842123 - Há um obstáculo do tipo V na posição (0, 1, 6)
+2025-06-15T11:43:41.774020958 - Iniciando missão 'Buscar o ponto (0, 1, 6)'.
+2025-06-15T11:43:41.781533542 - Passo 1: Moveu para (0, 0, 1)
+2025-06-15T11:43:41.781689862 - Passo 2: Moveu para (0, 0, 2)
+2025-06-15T11:43:41.781774019 - Passo 3: Moveu para (0, 0, 3)
+2025-06-15T11:43:41.781862184 - Passo 4: Moveu para (0, 0, 4)
+2025-06-15T11:43:41.781936251 - Passo 5: Moveu para (0, 0, 5)
+2025-06-15T11:43:41.782021679 - Passo 6: Moveu para (0, 1, 5)
+2025-06-15T11:43:41.792541710 - Passo 7: Moveu para (0, 1, 6)
+2025-06-15T11:43:41.793148669 - SUCESSO: Alvo alcançado em 7 passos na posição (0, 1, 6)
