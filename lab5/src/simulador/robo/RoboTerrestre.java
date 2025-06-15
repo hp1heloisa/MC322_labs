@@ -1,3 +1,4 @@
+
 package simulador.robo;
 
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 
-public class RoboTerrestre extends Robo {
+public class RoboTerrestre extends AgenteInteligente{
 
     protected int velocidadeMax = 100;
     protected int velocidadeatual = 1;
@@ -17,7 +18,7 @@ public class RoboTerrestre extends Robo {
      * Função construtora do robô terrestre
      */
     public RoboTerrestre(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
-        super(ambiente, scanner, ambiente.getlistRobos(), estado, nome, coordenada);
+        super(ambiente, scanner, estado, nome, coordenada);
     }
 
     @Override
@@ -127,4 +128,3 @@ public class RoboTerrestre extends Robo {
         return movimento_robo;
     }
 }
-

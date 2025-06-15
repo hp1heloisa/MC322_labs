@@ -11,7 +11,7 @@ import simulador.exceptions.RoboDesligadoException;
 public class RoboTeletransportador extends RoboAereo {
 
     public RoboTeletransportador(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
-        super(ambiente, scanner, estado, nome, coordenada);
+        super(ambiente, nome, coordenada);
         try {
             super.setMensagemPadrao(FrasesRobos.getFraseTeletransportador());
         } catch (RoboDesligadoException e) {

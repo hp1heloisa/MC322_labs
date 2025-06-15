@@ -20,32 +20,39 @@ public class MissaoMonitorar implements Missao {
         this.ciclos = ciclos;   // quantas varreduras fazer
     }
 
-    /**
-     * CORREÇÃO: A assinatura do método foi alterada para corresponder à interface Missao,
-     * recebendo o LogadorMissao como parâmetro.
-     */
-    @Override
-    public void executar(Robo robo, Ambiente ambiente, LogadorMissao log) {
-        // CORREÇÃO: Lógica ajustada para mover o robô para o ponto central UMA VEZ.
-        log.log("Iniciando movimentação para o ponto de monitoramento " + centro);
-        try {
-            ambiente.moverEntidade(robo, centro.getx(), centro.gety(), centro.getz(), robo);
-            log.log("Robô posicionado em " + robo.get_Coordenada() + ". Iniciando varredura.");
-
-            // Loop de varredura na posição fixa
-            for (int i = 1; i <= ciclos && robo.getEstado() == EstadoRobo.ligado; i++) {
-                try {
-                    robo.acionarSensores(); // já escreve no console
-                    log.log("Ciclo " + i + ": Sensores acionados com sucesso em " + robo.get_Coordenada());
-                } catch (Exception e) {
-                    log.log("Falha ao acionar sensores no ciclo " + i + ": " + e.getMessage());
-                    break; // Interrompe a missão se os sensores falharem
-                }
-            }
-        } catch (Exception e) {
-            log.log("Falha crítica ao tentar se mover para o ponto de monitoramento: " + e.getMessage());
+    @Override public void executar(Robo robo, Ambiente ambiente) {
+        try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
+            // Teletransporta ou move de uma vez o robô para o ponto de monitoramento
+            
+            for (int x=0; x<5; x++) 
+                for (int y=0; y<5; y++) 
+                    for (int z=0; z<5; z++) {
+                        try {
+                            ambiente.moverEntidade(robo, centro.getx()+x, centro.gety()+y, centro.getz()+z, robo);
+                        } catch (Exception e) { 
+                            log.log("Falha ao chegar no ponto: " + e.getMessage()); 
+                        }
+                        // Loop de varredura
+                        for (int i = 1; i <= ciclos && robo.getEstado() == EstadoRobo.ligado; i++) {
+                            try {
+                                robo.acionarSensores();  // já escreve no console
+                                log.log("Ciclo " + i + " sensores OK em " + robo.get_Coordenada());
+                            } catch (Exception e) { 
+                                log.log(e.getMessage()); 
+                                break; 
+                            }
+                        }
+                    }
+            
+            
+            log.log("Monitoramento encerrado.");
+        } catch (Exception ignored) {
+            
         }
-
-        log.log("Monitoramento encerrado.");
     }
+
+    public String getDescricao() {
+        return "Explorar por " + ciclos + " passos.";
+    }
+
 }

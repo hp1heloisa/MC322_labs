@@ -1,46 +1,66 @@
 package simulador.robo;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Random;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
-import simulador.exceptions.ColisaoException;
-import simulador.exceptions.ForadosLimitesException;
-import simulador.interfaces.Missao;
-import simulador.missao.MissaoMonitorar;
-import simulador.missao.MissaoPatrulhar;
 
+/**
+ * Representa um robô do tipo Explorador.
+ * Herda toda a lógica de pipeline e execução de AgenteInteligente.
+ */
 public class RoboPatrulheiro extends AgenteInteligente {
 
-    private final List<Missao> pipeline;
-
-    public RoboPatrulheiro(Ambiente ambiente, List<Coordenada> waypoints, int ciclosMonitoramento, String nome, Coordenada pos_inicial) {
+    // 1. O campo 'pipeline' foi REMOVIDO. Ele agora é herdado de AgenteInteligente.
+    
+    // 2. O construtor é simplificado. Ele apenas cria o robô base.
+    // O construtor que criava uma pipeline fixa foi REMOVIDO.
+    public RoboPatrulheiro(Ambiente ambiente, String nome, Coordenada pos_inicial) {
         super(ambiente, nome, pos_inicial);
-        setNome(nome);
-        this.pipeline = Arrays.asList(
-            new MissaoPatrulhar(waypoints),
-            new MissaoMonitorar(waypoints.get(0), ciclosMonitoramento));
     }
 
-    @Override 
-    public String getDescricao() { 
-        return "Robô Patrulheiro (patrulhar + monitorar)"; 
+    @Override
+    public String getDescricao() {
+        return "Robô Explorador";
     }
-    @Override 
+
+    @Override
     public void explicar_movimentacao() {
-    }
-    @Override 
-    public char movimentacao() throws ColisaoException, ForadosLimitesException { 
-        return 'x'; 
+        System.out.println("Este robô executa missões de exploração e outras que lhe forem atribuídas.");
     }
 
-    @Override 
-    public void executarMissao(Ambiente ambiente) {
-        for (Missao m : pipeline) {
-            if (getEstado() == EstadoRobo.desligado) 
-                break;
-            definirMissao(m);
-            super.executarMissao(ambiente);
-        }
+    @Override
+    public char movimentacao() {
+        System.out.println("Use o comando EXECUTAR para iniciar a pipeline de missões.");
+        return ' ';
     }
+
+    // 3. O método 'executarMissao' foi REMOVIDO.
+    // O robô agora usará o método 'executarMissao' da sua classe pai, AgenteInteligente,
+    // que já contém a lógica correta de percorrer a pipeline.
+
+    /**
+     * Método específico deste tipo de robô.
+     */
+    public boolean tentarMoverAleatorio(Ambiente ambiente) {
+        Random rnd = new Random();
+        for (int i = 0; i < 5; i++) { // Tenta até 5 vezes encontrar uma posição livre
+            int dx = rnd.nextInt(3) - 1; // Gera -1, 0, ou 1
+            int dy = rnd.nextInt(3) - 1;
+            if (dx == 0 && dy == 0) continue;
+
+            int nx = getPosicaoX() + dx;
+            int ny = getPosicaoY() + dy;
+            int nz = getposicaoZ();
+            Coordenada nova = new Coordenada(nx, ny, nz);
+
+            if (ambiente.estaOcupado(nova)) continue;
+
+            try {
+                ambiente.moverEntidade(this, nx, ny, nz, this);
+                return true; // Movimento bem-sucedido
+            } catch (Exception ignored) {}
+        }
+        return false; // Não conseguiu se mover
+    }
+
 }

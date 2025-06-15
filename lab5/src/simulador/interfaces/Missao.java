@@ -9,4 +9,5 @@ public interface Missao {
     default void executar(Robo robo, Ambiente ambiente, LogadorMissao log) {
         executar(robo, ambiente);
     }
+    String getDescricao();
 }

@@ -1,6 +1,5 @@
 package simulador.robo;
 
-import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
@@ -18,11 +17,17 @@ public abstract class RoboAereo extends AgenteInteligente {
      * Função construtura que herda do ambiente, definimos como padrão a
      * altitude como 0 e perguntamos qual será a altitude máxima
      */
-    public RoboAereo(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada coordenada) {
-        super(ambiente, scanner, ambiente.getlistRobos(), estado, nome, coordenada);
+    public RoboAereo(Ambiente ambiente, String nome, Coordenada coordenada) {
+        super(ambiente, nome, coordenada);
         sensorTemperatura.setAltitude(5);
         sensorHumidade.setAltitude(5);
-        altitudeMaxima = 99;
+        if (scanner == null) {
+            altitudeMaxima = 20;
+        } else {
+            System.out.println("Qual altitude máxima que o seu robô pode alcançar?");
+            altitudeMaxima = scanner.nextInt();
+            scanner.nextLine();
+        }
     }
 
     @Override
