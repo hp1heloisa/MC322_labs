@@ -11,21 +11,33 @@ import simulador.robo.Robo;
 import simulador.robo.TiposRobos;
 
 public class Main {
+
     public static void main(String[] args) throws IOException, ColisaoException {
         Ambiente ambiente = new Ambiente("ambiente.txt");
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new java.io.File("input.txt"));
+            System.out.println("INFO: Lendo comandos do arquivo 'input.txt'.");
+        } catch (java.io.FileNotFoundException e) {
+            System.err.println("ERRO: 'input.txt' não encontrado.");
+            return; 
+        }
 
         System.out.println("Simulador de Robôs Iniciado. Comandos: ROBO, MISSAO, EXECUTAR, SAIR.");
 
         while (true) {
             System.out.print("> ");
             String linha = scanner.nextLine();
-            if (linha.isEmpty()) continue;
+            if (linha.isEmpty()) {
+                continue;
+            }
 
             String[] infos = linha.split(" ");
             String comando = infos[0].toUpperCase();
 
-            if ("SAIR".equalsIgnoreCase(comando)) break;
+            if ("SAIR".equalsIgnoreCase(comando)) {
+                break;
+            }
 
             switch (comando) {
                 case "ROBO":
@@ -48,8 +60,8 @@ public class Main {
                     if (roboAlvo instanceof AgenteInteligente) { // Verifica se o robô pode ter missões
                         AgenteInteligente agenteAlvo = (AgenteInteligente) roboAlvo; // Faz o cast
                         Missao novaMissao = CriarMissao.criarMissao(infos);
-                        if(novaMissao != null) {
-                           agenteAlvo.adicionarMissao(novaMissao); // Chama o método do AgenteInteligente
+                        if (novaMissao != null) {
+                            agenteAlvo.adicionarMissao(novaMissao); // Chama o método do AgenteInteligente
                         }
                     } else if (roboAlvo != null) {
                         System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não pode receber missões.");
@@ -57,15 +69,15 @@ public class Main {
                         System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não encontrado.");
                     }
                     break;
-                
+
                 case "EXECUTAR":
-                     if (infos.length < 2) {
+                    if (infos.length < 2) {
                         System.err.println("ERRO: Comando EXECUTAR incompleto. Use: EXECUTAR NOME_ROBO");
                         continue;
                     }
                     String nomeRoboExec = infos[1];
                     Robo roboParaExecutar = ambiente.getRoboPorNome(nomeRoboExec);
-                     if (roboParaExecutar instanceof AgenteInteligente) { // Verifica se o robô pode executar missões
+                    if (roboParaExecutar instanceof AgenteInteligente) { // Verifica se o robô pode executar missões
                         AgenteInteligente agenteParaExecutar = (AgenteInteligente) roboParaExecutar; // Faz o cast
                         agenteParaExecutar.executarMissao(ambiente); // Chama o método do AgenteInteligente
                     } else if (roboParaExecutar != null) {
@@ -74,7 +86,7 @@ public class Main {
                         System.err.println("ERRO: Robô '" + nomeRoboExec + "' não encontrado.");
                     }
                     break;
-                
+
                 default:
                     System.err.println("ERRO: Comando '" + comando + "' desconhecido.");
                     break;
