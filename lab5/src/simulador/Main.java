@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.Missao;
 import simulador.missao.CriarMissao;
 import simulador.robo.AgenteInteligente; // Importa a classe AgenteInteligente
@@ -12,7 +13,7 @@ import simulador.robo.TiposRobos;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, ColisaoException {
+    public static void main(String[] args) throws IOException, ColisaoException, ForadosLimitesException {
         Ambiente ambiente = new Ambiente("ambiente.txt");
         Scanner scanner;
         try {
@@ -61,7 +62,7 @@ public class Main {
                         AgenteInteligente agenteAlvo = (AgenteInteligente) roboAlvo; // Faz o cast
                         Missao novaMissao = CriarMissao.criarMissao(infos);
                         if (novaMissao != null) {
-                            agenteAlvo.adicionarMissao(novaMissao); // Chama o método do AgenteInteligente
+                            agenteAlvo.adicionarMissao(novaMissao); 
                         }
                     } else if (roboAlvo != null) {
                         System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não pode receber missões.");

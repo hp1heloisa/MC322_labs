@@ -18,31 +18,40 @@ public class RoboExplorador extends AgenteInteligente implements MoverParaOutroP
     public String getDescricao() {
         return "Robô Explorador";
     }
-    
-    
-    @Override 
+
+    @Override
     public void explicar_movimentacao() {
 
     }
 
-    @Override 
-    public char movimentacao() throws ColisaoException, ForadosLimitesException { 
-        return 'x'; 
+    @Override
+    public char movimentacao() throws ColisaoException, ForadosLimitesException {
+        return 'x';
     }
 
-    /** Executa pipeline, se existir; caso contrário usa definirMissao individualmente. */
+    @Override
+    public void poder() {
+        System.out.println("Robô Explorador não consegue utilizar poderes");
+    }
 
+    /**
+     * Executa pipeline, se existir; caso contrário usa definirMissao
+     * individualmente.
+     */
     @Override
     public boolean tentarMover(Ambiente ambiente) {
         Random rnd = new Random();
         for (int i = 0; i < 5; i++) { // Tenta até 5 vezes
             int dx = rnd.nextInt(3) - 1;
             int dy = rnd.nextInt(3) - 1;
-            if (dx == 0 && dy == 0) continue;
+            if (dx == 0 && dy == 0) {
+                continue;
+            }
             try {
                 super.mover(dx, dy); // Usa o método de mover da classe Robo
                 return true;
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         return false;
     }

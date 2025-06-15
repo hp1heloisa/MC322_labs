@@ -52,6 +52,7 @@ public abstract class Robo implements InterfaceRobo {
         this.id = ++contadorId;
 
     }
+    public abstract void poder() throws ColisaoException;
 
     @Override
     public TipoEntidade getTipo() {

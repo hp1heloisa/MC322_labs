@@ -23,6 +23,10 @@ public class RoboTeletransportador extends RoboAereo {
     public String getDescricao(){
         return "Olá! Eu sou um Robô Teletransportador e eu sou uma subclasse do Robô Aéreo. Além de fazer tudo o que ele faz, eu posso me teletransportar para diferentes alturas, muito maiores ou menores do que a que eu estou!";
     }
+     @Override
+    public void poder() throws ColisaoException{
+        teletransportar();
+    }
 
     @Override
     public void explicar_movimentacao(){

@@ -29,6 +29,10 @@ public abstract class RoboAereo extends AgenteInteligente {
             scanner.nextLine();
         }
     }
+    // @Override
+    // public void poder(){
+    //     System.out.println("Depende do tipo de robô");
+    // }
 
     @Override
     public String getDescricao() {

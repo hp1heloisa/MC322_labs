@@ -63,6 +63,10 @@ public class RoboGuindaste extends RoboTerrestre {
         }
 
     }
+     @Override
+    public void poder(){
+        guindastiando();
+    }
 
     @Override
     public char movimentacao() {

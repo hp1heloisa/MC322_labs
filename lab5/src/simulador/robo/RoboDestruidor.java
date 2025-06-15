@@ -19,6 +19,10 @@ public class RoboDestruidor extends RoboAereo {
            System.out.println(e.getMessage());
         }
     }
+    @Override
+    public void poder(){
+        destruir();
+    }
 
     @Override
     public String getDescricao(){

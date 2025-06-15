@@ -17,7 +17,7 @@ public class MissaoExplorar implements Missao {
     @Override
 public void executar(Robo robo, Ambiente ambiente) {
     try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
-        executar(robo, ambiente, log);
+        executar(robo, ambiente);
     } catch (Exception e) {
         // 👇 CORREÇÃO: Imprima o erro para saber o que está acontecendo
         System.err.println("FALHA CRÍTICA AO CRIAR LOG: Não foi possível criar o arquivo de log para o robô " + robo.getNome());

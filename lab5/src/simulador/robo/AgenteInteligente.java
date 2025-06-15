@@ -1,10 +1,13 @@
 package simulador.robo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.Missao;
 
 /**
@@ -13,7 +16,7 @@ import simulador.interfaces.Missao;
  */
 public abstract class AgenteInteligente extends Robo {
 
-    // A pipeline de missões, agora uma lista flexível.
+    
     protected List<Missao> pipeline;
 
     public AgenteInteligente(Ambiente ambiente, Scanner scanner, EstadoRobo estado, String nome, Coordenada pos_inicial) {
@@ -43,7 +46,7 @@ public abstract class AgenteInteligente extends Robo {
      * Executa todas as missões na pipeline, em ordem. Esta lógica agora vive
      * aqui e não precisa ser reescrita nos filhos.
      */
-    public void executarMissao(Ambiente ambiente) {
+    public void executarMissao(Ambiente ambiente) throws ColisaoException, IOException, ForadosLimitesException {
         if (pipeline.isEmpty()) {
             System.out.println("AVISO: " + getNome() + " não tem nenhuma missão na sua pipeline.");
             return;
@@ -62,4 +65,5 @@ public abstract class AgenteInteligente extends Robo {
         System.out.println("--- Pipeline de " + getNome() + " concluído ---");
         pipeline.clear(); // Limpa a pipeline para receber novas missões.
     }
+    
 }

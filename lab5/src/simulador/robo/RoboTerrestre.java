@@ -1,4 +1,3 @@
-
 package simulador.robo;
 
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import simulador.exceptions.EnergiaInsuficienteException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.exceptions.RoboDesligadoException;
 
-public class RoboTerrestre extends AgenteInteligente{
+public class RoboTerrestre extends AgenteInteligente {
 
     protected int velocidadeMax = 100;
     protected int velocidadeatual = 1;
@@ -52,10 +51,11 @@ public class RoboTerrestre extends AgenteInteligente{
 
         }
     }
-        /**
-         * Função que atualiza a velocidade, não permitindo que a velocidade
-         * atual ultrapasse a velocidade máxima
-         */
+
+    /**
+     * Função que atualiza a velocidade, não permitindo que a velocidade atual
+     * ultrapasse a velocidade máxima
+     */
     protected void setVelocidade(int vel) {
         if (vel <= velocidadeMax) {
             velocidadeatual = vel;
@@ -66,7 +66,12 @@ public class RoboTerrestre extends AgenteInteligente{
     }
 
     @Override
-    public char movimentacao() throws ColisaoException, ForadosLimitesException{
+    public void poder() {
+        System.out.println("Robô limitado não consegue utilizar poderes");
+    }
+
+    @Override
+    public char movimentacao() throws ColisaoException, ForadosLimitesException {
         char movimento_robo = ' ';
         System.out.printf("Aperte uma tecla de movimentação para começar\n");
         while (movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c') {
@@ -97,15 +102,15 @@ public class RoboTerrestre extends AgenteInteligente{
                     case 'p':
                         print_sensores();
                         break;
-                    case '?': 
+                    case '?':
                         receberMensagensDoAmbiente();
                         break;
-                    case '!': 
+                    case '!':
                         System.out.println("Para qual robô você gostaria de enviar uma mensagem? Digite o index dele:");
                         int index = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("O que gostaria de dizer para ele?");
-                        String msg = scanner.nextLine();  
+                        String msg = scanner.nextLine();
                         enviarMensagem(ambiente.getRobo(index), msg);
                         break;
                     case 'x':
@@ -121,7 +126,7 @@ public class RoboTerrestre extends AgenteInteligente{
             } catch (ColisaoException | ForadosLimitesException | RoboDesligadoException exception) {
                 System.out.println(exception.getMessage());
             }
-            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c'  && movimento_robo != '?' && movimento_robo != '!') {
+            if (movimento_robo != 'p' && movimento_robo != 'x' && movimento_robo != 'n' && movimento_robo != 'c' && movimento_robo != '?' && movimento_robo != '!') {
                 this.print_sensores();
             }
         }
