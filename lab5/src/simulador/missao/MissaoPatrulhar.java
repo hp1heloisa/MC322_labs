@@ -79,8 +79,4 @@ public class MissaoPatrulhar implements Missao {
         // Retorna true se o alvo foi alcançado ou se o robô ainda está ligado após as tentativas
         return robo.getEstado() == EstadoRobo.ligado;
     }
-    @Override
-    public String getDescricao() {
-        return "Explorar por " + maxTentativas + " passos.";
-    }
 }

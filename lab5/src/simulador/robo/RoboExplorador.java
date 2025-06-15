@@ -1,12 +1,16 @@
 package simulador.robo;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
-import simulador.interfaces.MoverParaOutroPonto;
+import simulador.interfaces.Missao;
+import simulador.missao.MissaoBuscarPonto;
+import simulador.missao.MissaoExplorar;
 
 /** Robô terrestre autônomo capaz de explorar e buscar um ponto. */
 public class RoboExplorador extends AgenteInteligente {
@@ -14,6 +18,14 @@ public class RoboExplorador extends AgenteInteligente {
 
     public RoboExplorador(Ambiente ambiente, String nome, Coordenada pos_inicial) {
         super(ambiente, nome, pos_inicial);
+        setNome(nome);
+    }
+
+    public RoboExplorador(Ambiente ambiente, int passosExplorar, Coordenada destino, String nome, Coordenada pos_inicial) {
+        this(ambiente, nome, pos_inicial);  // chama o construtor
+        pipeline = Arrays.asList(
+                new MissaoExplorar(passosExplorar),
+                new MissaoBuscarPonto(destino, 30));
     }
 
     @Override

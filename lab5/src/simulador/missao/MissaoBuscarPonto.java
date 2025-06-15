@@ -3,7 +3,6 @@ package simulador.missao;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
-import simulador.missao.LogadorMissao;
 import simulador.robo.EstadoRobo;
 import simulador.robo.Robo;
 

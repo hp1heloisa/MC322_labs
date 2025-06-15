@@ -15,8 +15,7 @@ public enum TipoRobo {
     LIMITADO("Robô Limitado", false),
     GUINDASTE("Robô Guindaste", false),
     EXPLORADOR("Robô Explorador", false),
-    PATRULEIRO("Robô Patruleiro", false),
-    HIBRIDO("Robô Híbrido", false);
+    PATRULEIRO("Robô Patruleiro", false);
 
     private final String nome;
     private final boolean aereo;
@@ -49,8 +48,6 @@ public enum TipoRobo {
                 return new RoboTeletransportador(ambiente, scanner, EstadoRobo.ligado, nome, pos_inicial);
             case EXPLORADOR:
                 return new RoboExplorador(ambiente, nome, pos_inicial);
-            case HIBRIDO:
-                return new RoboHibrido(ambiente, nome, pos_inicial);
             // case PATRULEIRO:
             //     return new RoboPatrulheiro(ambiente, nome, pos_inicial);
             default:

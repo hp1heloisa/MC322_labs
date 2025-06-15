@@ -1,19 +1,25 @@
 package simulador.robo;
 
-import java.util.Random;
+import java.util.Arrays;
+import java.util.List;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
+import simulador.interfaces.Missao;
+import simulador.missao.MissaoMonitorar;
+import simulador.missao.MissaoPatrulhar;
 
 public class RoboPatrulheiro extends AgenteInteligente {
 
-    // 1. O campo 'pipeline' foi REMOVIDO. Ele agora é herdado de AgenteInteligente.
-    
-    // 2. O construtor é simplificado. Ele apenas cria o robô base.
-    // O construtor que criava uma pipeline fixa foi REMOVIDO.
-    public RoboPatrulheiro(Ambiente ambiente, String nome, Coordenada pos_inicial) {
+    private final List<Missao> pipeline;
+
+    public RoboPatrulheiro(Ambiente ambiente, List<Coordenada> waypoints, int ciclosMonitoramento, String nome, Coordenada pos_inicial) {
         super(ambiente, nome, pos_inicial);
+        setNome(nome);
+        this.pipeline = Arrays.asList(
+            new MissaoPatrulhar(waypoints),
+            new MissaoMonitorar(waypoints.get(0), ciclosMonitoramento));
     }
 
     @Override 

@@ -1,5 +1,6 @@
 package simulador.robo;
-
+import java.util.Arrays;
+import java.util.List;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
@@ -13,13 +14,27 @@ import simulador.missao.MissaoMonitorar;
  */
 public class RoboHibrido extends AgenteInteligente {
 
-    // 1. O construtor agora é muito simples.
-    // Ele apenas passa as informações básicas para a superclasse.
-    public RoboHibrido(Ambiente ambiente, String nome, Coordenada pos_inicial) {
+    private final List<Missao> pipeline;
+
+    // O construtor recebe todos os parâmetros necessários para todas as missões
+    public RoboHibrido(
+            Ambiente ambiente,
+            String nome,
+            Coordenada pos_inicial,
+            int passosExplorar, // Parâmetro da MissaoExplorar
+            List<Coordenada> waypoints, // Parâmetro da MissaoPatrulhar
+            int ciclosMonitoramento // Parâmetro da MissaoMonitorar
+    ) {
         super(ambiente, nome, pos_inicial);
+
+        // Criamos o pipeline combinado, na ordem que quisermos!
+        this.pipeline = Arrays.asList(
+            new MissaoExplorar(passosExplorar),
+            new MissaoPatrulhar(waypoints),
+            new MissaoMonitorar(waypoints.get(0), ciclosMonitoramento)
+        );
     }
 
-    // 2. A descrição continua útil para identificar o tipo do robô.
     @Override
     public String getDescricao() {
         return "Robô Híbrido (Explorar + Patrulhar)";

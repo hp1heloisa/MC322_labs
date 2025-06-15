@@ -1,57 +1,36 @@
 package simulador.robo;
 
-import java.util.ArrayList;
-import java.util.List;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
 import simulador.interfaces.Missao;
 
 /**
- * Representa um robô com a capacidade de seguir uma lista (pipeline) de missões.
- * Esta classe introduz a inteligência de seguir um plano.
+ * Robô que executa missões de forma autônoma.
  */
 public abstract class AgenteInteligente extends Robo {
 
-    // A pipeline de missões, agora uma lista flexível.
-    protected List<Missao> pipeline;
+    protected Missao missao;
 
     public AgenteInteligente(Ambiente ambiente, String nome, Coordenada pos_inicial) {
         super(ambiente, null, ambiente.getlistRobos(), EstadoRobo.ligado, nome, pos_inicial);
-        this.pipeline = new ArrayList<>(); // Inicializa como uma lista vazia.
     }
 
-    /**
-     * Adiciona uma missão à lista de tarefas do robô.
-     * @param missao A missão a ser adicionada.
-     */
-    public void adicionarMissao(Missao missao) {
-        if (missao != null) {
-            this.pipeline.add(missao);
-            System.out.println("INFO: Missão '" + missao.getDescricao() + "' adicionada ao robô " + getNome());
-        }
+    /** Método para atribuir missões ao robô. */
+    public void definirMissao(Missao missao) { 
+        this.missao = missao; 
     }
-    
-    /**
-     * Executa todas as missões na pipeline, em ordem.
-     * Esta lógica agora vive aqui e não precisa ser reescrita nos filhos.
-     */
-    public void executarMissao(Ambiente ambiente) {
-        if (pipeline.isEmpty()) {
-            System.out.println("AVISO: " + getNome() + " não tem nenhuma missão na sua pipeline.");
-            return;
-        }
 
-        System.out.println("--- Iniciando pipeline para " + getNome() + " ---");
-        for (Missao missaoAtual : pipeline) {
-            if (getEstado() == EstadoRobo.desligado) {
-                System.out.println("Pipeline interrompido: Robô foi desligado.");
-                break;
-            }
-            System.out.println("Executando missão: " + missaoAtual.getDescricao());
-            // O Agente delega a execução para o objeto Missao.
-            missaoAtual.executar(this, ambiente);
-        }
-        System.out.println("--- Pipeline de " + getNome() + " concluído ---");
-        pipeline.clear(); // Limpa a pipeline para receber novas missões.
+    /** Método para indicar se o robô tem uma missão. */
+    public boolean temMissao() {
+        return missao != null; 
     }
+<<<<<<< HEAD
+=======
+
+    /** Método para executar missão */
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) missao.executar(this, a);
+        else System.out.println(getNome() + " não tem nenhuma missão.");
+    }
+>>>>>>> parent of 23012e5 (Atualizações)
 }

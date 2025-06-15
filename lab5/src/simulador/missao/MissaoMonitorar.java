@@ -48,9 +48,4 @@ public class MissaoMonitorar implements Missao {
 
         log.log("Monitoramento encerrado.");
     }
-
-    public String getDescricao() {
-        return "Explorar por " + ciclos + " passos.";
-    }
-
 }
