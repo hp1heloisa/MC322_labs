@@ -34,23 +34,23 @@ public class RoboGuindaste extends RoboTerrestre {
     public void guindastiando() {
         System.out.println("Indique a direção do obstáculo: a, d, w ou s?");
         char direcao = scanner.next().charAt(0);
-        Coordenada pos_robo = new Coordenada(coordenada.getx(), coordenada.gety(), 0), pos_obstaculo = new Coordenada(0, 0, 0);
+        Coordenada pos_robo = new Coordenada(pos_atual.getx(), pos_atual.gety(), 0), pos_obstaculo = new Coordenada(0, 0, 0);
         boolean pode_mover = false;
         switch (direcao) {
             case 'a':
-                pos_obstaculo = new Coordenada(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
+                pos_obstaculo = new Coordenada(pos_atual.getx() - 1, pos_atual.gety(), pos_atual.getz());
                 pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 'd':
-                pos_obstaculo = new Coordenada(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
+                pos_obstaculo = new Coordenada(pos_atual.getx() + 1, pos_atual.gety(), pos_atual.getz());
                 pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 'w':
-                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
+                pos_obstaculo = new Coordenada(pos_atual.getx(), pos_atual.gety() + 1, pos_atual.getz());
                 pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             case 's':
-                pos_obstaculo = new Coordenada(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
+                pos_obstaculo = new Coordenada(pos_atual.getx(), pos_atual.gety() - 1, pos_atual.getz());
                 pode_mover = ambiente.trocarObstaculo(this, ambiente.getEntidade(pos_obstaculo));
                 break;
             default:
@@ -58,8 +58,8 @@ public class RoboGuindaste extends RoboTerrestre {
                 break;
         }
         if (pode_mover) {
-            coordenada.setx(pos_obstaculo.getx());// vamos definir a posição do robô onde estava o obstáculo
-            coordenada.sety(pos_obstaculo.gety());
+            pos_atual.setx(pos_obstaculo.getx());// vamos definir a posição do robô onde estava o obstáculo
+            pos_atual.sety(pos_obstaculo.gety());
         }
 
     }

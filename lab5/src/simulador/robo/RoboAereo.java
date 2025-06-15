@@ -60,15 +60,15 @@ public abstract class RoboAereo extends AgenteInteligente {
     @Override
     public void print_sensores() {
         super.print_sensores();
-        sensorAltitude.identificarArea(coordenada);
+        sensorAltitude.identificarArea(pos_atual);
     }
 
     /**
      * Método que altera a altitude de um robô aéreo, podendo subir ou descer.
      */
     public void alterar_altitude(int deltah) throws ColisaoException {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz());
-        Coordenada nova_c = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz() + deltah);
+        Coordenada c_0 = new Coordenada(pos_atual.getx(), pos_atual.gety(), pos_atual.getz());
+        Coordenada nova_c = new Coordenada(pos_atual.getx(), pos_atual.gety(), pos_atual.getz() + deltah);
         boolean dentroDosLimites = ambiente.dentroDosLimites(nova_c);
         if (dentroDosLimites) {
             if (!sensorPlano.tem_obstaculo(nova_c)) {

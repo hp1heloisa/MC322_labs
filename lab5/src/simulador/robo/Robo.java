@@ -24,7 +24,7 @@ import simulador.sensores.SensorUmidade;
 public abstract class Robo implements InterfaceRobo {
 
     protected String nome;
-    protected Coordenada coordenada;
+    protected Coordenada pos_atual;
     protected Scanner scanner;
     protected Ambiente ambiente;
     protected EstadoRobo estado;
@@ -47,12 +47,12 @@ public abstract class Robo implements InterfaceRobo {
         sensorHumidade = new SensorUmidade(5, 0, ambiente);
         this.ambiente = ambiente;
         this.nome = nome;
-        this.coordenada = pos_inicial;
+        this.pos_atual = pos_inicial;
         this.estado = estado;
         this.id = ++contadorId;
 
     }
-    public abstract void poder(Coordenada cord_desejada, Coordenada cord_atual) throws ColisaoException;
+    public abstract void poder(Coordenada cord_desejada, Coordenada cord_atual) throws ColisaoException, ForadosLimitesException;
 
     @Override
     public TipoEntidade getTipo() {
@@ -71,32 +71,32 @@ public abstract class Robo implements InterfaceRobo {
 
     @Override
     public int getX() {
-        return coordenada.getx();
+        return pos_atual.getx();
     }
 
     @Override
     public int getY() {
-        return coordenada.gety();
+        return pos_atual.gety();
     }
 
     @Override
     public int getZ() {
-        return coordenada.getz();
+        return pos_atual.getz();
     }
 
     @Override
     public void setX(int x) {
-        coordenada.setx(x);
+        pos_atual.setx(x);
     }
 
     @Override
     public void setY(int y) {
-        coordenada.sety(y);
+        pos_atual.sety(y);
     }
 
     @Override
     public void setZ(int z) {
-        coordenada.setz(z);
+        pos_atual.setz(z);
     }
 
     @Override
@@ -243,8 +243,8 @@ public abstract class Robo implements InterfaceRobo {
      * obstáculo
      */
     protected void mover(int deltaX, int deltaY) throws ForadosLimitesException, EnergiaInsuficienteException {
-        Coordenada c_0 = new Coordenada(coordenada.getx(), coordenada.gety(), coordenada.getz()); // Coordenada inicial do robô
-        Coordenada nova_pos = new Coordenada(coordenada.getx() + deltaX, coordenada.gety() + deltaY, coordenada.getz()); // Nova coordenada do robô
+        Coordenada c_0 = new Coordenada(pos_atual.getx(), pos_atual.gety(), pos_atual.getz()); // Coordenada inicial do robô
+        Coordenada nova_pos = new Coordenada(pos_atual.getx() + deltaX, pos_atual.gety() + deltaY, pos_atual.getz()); // Nova coordenada do robô
 
         consumirEnergia(2);
 
@@ -269,16 +269,16 @@ public abstract class Robo implements InterfaceRobo {
      * Método que printa as informações dos sensores
      */
     public void print_sensores() {
-        sensorTemperatura.calcula_temperatura(coordenada);
-        sensorHumidade.calcula_umidade(coordenada);
-        sensorPlano.identificarArea(coordenada);
+        sensorTemperatura.calcula_temperatura(pos_atual);
+        sensorHumidade.calcula_umidade(pos_atual);
+        sensorPlano.identificarArea(pos_atual);
     }
 
     /**
      * Método que retorna a posição do robô
      */
     public void getPosicao() {
-        System.out.printf("%s se encontra na posição: %s\n", nome, coordenada);
+        System.out.printf("%s se encontra na posição: %s\n", nome, pos_atual);
     }
 
     /**
@@ -330,9 +330,9 @@ public abstract class Robo implements InterfaceRobo {
         } else {
             ambiente.atualizar_espaco_vazio(c_0);
             ambiente.atualizar_robo(c, this);
-            coordenada.setx(c.getx());
-            coordenada.sety(c.gety());
-            coordenada.setz(c.getz());
+            pos_atual.setx(c.getx());
+            pos_atual.sety(c.gety());
+            pos_atual.setz(c.getz());
         }
     }
 
@@ -352,26 +352,26 @@ public abstract class Robo implements InterfaceRobo {
         }
     }
     public Coordenada get_Coordenada(){
-        return coordenada;
+        return pos_atual;
     }
     /**
      * Método que retorna a posiçãoX do robô
      */
     public int getPosicaoX() {
-        return coordenada.getx();
+        return pos_atual.getx();
     }
 
     /**
      * Método que retorna a posição Y do robô
      */
     public int getPosicaoY() {
-        return coordenada.gety();
+        return pos_atual.gety();
     }
 
     /**
      * Método que retorna a posição Z do robô
      */
     public int getposicaoZ() {
-        return coordenada.getz();
+        return pos_atual.getz();
     }
 }

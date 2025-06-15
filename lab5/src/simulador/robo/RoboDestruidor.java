@@ -23,7 +23,7 @@ public class RoboDestruidor extends RoboAereo {
     }
 
     @Override
-    public void poder(Coordenada alvo, Coordenada pos_atual) {
+    public void poder(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException {
         destruir(alvo, pos_atual);
     }
 
@@ -42,34 +42,40 @@ public class RoboDestruidor extends RoboAereo {
     /**
      * Método especial do robô destruidor, o de destruir obstáculos
      */
-    public void destruir(Coordenada alvo, Coordenada pos_atual) {
-        Coordenada diferenca = new Coordenada(alvo.getx() - pos_atual.getx(), alvo.gety() - pos_atual.gety(), alvo.getz() - alvo.getz());
+    public void destruir(Coordenada alvo, Coordenada pos_atual) throws ForadosLimitesException, ColisaoException {
+        Coordenada diferenca = new Coordenada(alvo.getx() - pos_atual.getx(), alvo.gety() - pos_atual.gety(), alvo.getz() - pos_atual.getz());
         if (diferenca.getx() != 0) {
             if (diferenca.getx() < 0) {
-                ambiente.eliminaObstaculo(coordenada.getx() - 1, coordenada.gety(), coordenada.getz());
+                ambiente.eliminaObstaculo(pos_atual.getx() - 1, pos_atual.gety(), pos_atual.getz());
+                this.ambiente.moverEntidade(this, pos_atual.getx() - 1, pos_atual.gety(), pos_atual.getz(), this);
                 return;
             } else {
-                ambiente.eliminaObstaculo(coordenada.getx() + 1, coordenada.gety(), coordenada.getz());
+                ambiente.eliminaObstaculo(pos_atual.getx() + 1, pos_atual.gety(), pos_atual.getz());
+                this.ambiente.moverEntidade(this, pos_atual.getx() + 1, pos_atual.gety(), pos_atual.getz(), this);
                 return;
             }
         }
         if (diferenca.gety() != 0) {
             if (diferenca.gety() < 0) {
-                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() - 1, coordenada.getz());
+                ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety() - 1, pos_atual.getz());
+                this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety() - 1, pos_atual.getz(), this);
                 return;
             } else {
-                System.out.println("Erro");
-                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety() + 1, coordenada.getz());
+    
+                ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety() + 1, pos_atual.getz());
+                this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety() + 1, pos_atual.getz(), this);
                 return;
 
             }
         }
         if (diferenca.getz() != 0) {
             if (diferenca.getz() > 0) {
-                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() + 1);
+                ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety(), pos_atual.getz() + 1);
+                this.ambiente.moverEntidade(this, pos_atual.getx(), pos_atual.gety(), pos_atual.getz()+ 1, this);
                 return;
             } else {
-                ambiente.eliminaObstaculo(coordenada.getx(), coordenada.gety(), coordenada.getz() - 1);
+                ambiente.eliminaObstaculo(pos_atual.getx(), pos_atual.gety(), pos_atual.getz() - 1);
+                this.ambiente.moverEntidade(this, pos_atual.getx() - 1, pos_atual.gety(), pos_atual.getz() - 1, this);
                 return;
             }
         }

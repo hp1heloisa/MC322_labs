@@ -306,7 +306,7 @@ public class Ambiente {
                 throw new ColisaoException("\n");
             }
         } catch (ColisaoException exception) {
-            System.out.println(" Mova novamente!");
+            robo.poder(new_pos, robo.get_Coordenada());
             return;
         }
         mapa[e.getX()][e.getY()][e.getZ()] = TipoEntidade.VAZIO;
