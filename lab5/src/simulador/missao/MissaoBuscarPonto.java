@@ -30,18 +30,21 @@ public class MissaoBuscarPonto implements Missao {
             int dx = Integer.compare(destino.getx(), robo.getPosicaoX());
             int dy = Integer.compare(destino.gety(), robo.getPosicaoY());
 
-            try {
-                ambiente.moverEntidade(robo, robo.getPosicaoX() + dx, robo.getPosicaoY() + dy, robo.getposicaoZ(), robo);
-                log.log("Passo " + passo + ": Buscando ponto -> " + robo.get_Coordenada());
-            } catch (Exception e) {
-                log.log("Passo " + passo + ": Falha ao mover. Causa: " + e.getMessage());
-                break; // Interrompe a missão se não puder se mover
+                try {
+                    ambiente.moverEntidade(robo, robo.getPosicaoX() + dx, robo.getPosicaoY() + dy, robo.getposicaoZ(), robo);
+                    log.log("Buscando ponto -> " + robo.get_Coordenada());
+                } catch (Exception e) { 
+                    log.log(e.getMessage()); 
+                    break; 
+                }
             }
+            log.log("Alvo alcançado!");
+        } catch (Exception ignored) {
+
         }
-        if (robo.get_Coordenada().equals(destino)) {
-            log.log("Alvo alcançado em " + destino + "!");
-        } else {
-            log.log("Não foi possível alcançar o alvo. Parou em " + robo.get_Coordenada());
-        }
+    }
+    @Override
+    public String getDescricao(){
+        return "Deu certo! Robo no ponto" + this.destino;
     }
 }

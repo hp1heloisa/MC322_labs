@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
-import simulador.interfaces.InterfaceRobo;
+import simulador.interfaces.Missao;
+import simulador.missao.CriarMissao;
+import simulador.robo.AgenteInteligente; // Importa a classe AgenteInteligente
+import simulador.robo.Robo;
 import simulador.robo.TiposRobos;
 
 public class Main {
@@ -23,79 +26,63 @@ public class Main {
             System.out.println("Digite o seu comando, como explicado no README");
             String linha = scanner.nextLine();
             String[] infos = linha.split(" ");
-            if (infos[0].equals("ROBO")) {
-                robo = tiposRobos.definir_robo(ambiente, infos);
-            }
-            else if(infos[0].equals("MISSAO")){
+            String comando = infos[0].toUpperCase();
+
+            if ("SAIR".equalsIgnoreCase(comando)) break;
+
+            switch (comando) {
+                case "ROBO":
+                    // A chamada agora está correta, usando o método estático da fábrica.
+                    Robo novoRobo = TiposRobos.criarRobo(ambiente, infos);
+                    if (novoRobo != null) {
+                        ambiente.adicionarEntidade(novoRobo);
+                        System.out.println("INFO: Robô '" + novoRobo.getNome() + "' criado.");
+                    }
+                    break;
+
+                case "MISSAO":
+                    if (infos.length < 3) {
+                        System.err.println("ERRO: Comando MISSAO incompleto. Use: MISSAO NOME_ROBO TIPO_MISSAO [PARAM...]");
+                        continue;
+                    }
+                    String nomeRoboAlvo = infos[1];
+                    Robo roboAlvo = ambiente.getRoboPorNome(nomeRoboAlvo);
+
+                    if (roboAlvo instanceof AgenteInteligente) { // Verifica se o robô pode ter missões
+                        AgenteInteligente agenteAlvo = (AgenteInteligente) roboAlvo; // Faz o cast
+                        Missao novaMissao = CriarMissao.criarMissao(infos);
+                        if(novaMissao != null) {
+                           agenteAlvo.adicionarMissao(novaMissao); // Chama o método do AgenteInteligente
+                        }
+                    } else if (roboAlvo != null) {
+                        System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não pode receber missões.");
+                    } else {
+                        System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não encontrado.");
+                    }
+                    break;
                 
+                case "EXECUTAR":
+                     if (infos.length < 2) {
+                        System.err.println("ERRO: Comando EXECUTAR incompleto. Use: EXECUTAR NOME_ROBO");
+                        continue;
+                    }
+                    String nomeRoboExec = infos[1];
+                    Robo roboParaExecutar = ambiente.getRoboPorNome(nomeRoboExec);
+                     if (roboParaExecutar instanceof AgenteInteligente) { // Verifica se o robô pode executar missões
+                        AgenteInteligente agenteParaExecutar = (AgenteInteligente) roboParaExecutar; // Faz o cast
+                        agenteParaExecutar.executarMissao(ambiente); // Chama o método do AgenteInteligente
+                    } else if (roboParaExecutar != null) {
+                        System.err.println("ERRO: Robô '" + nomeRoboExec + "' não pode executar missões.");
+                    } else {
+                        System.err.println("ERRO: Robô '" + nomeRoboExec + "' não encontrado.");
+                    }
+                    break;
+                
+                default:
+                    System.err.println("ERRO: Comando '" + comando + "' desconhecido.");
+                    break;
             }
-            
-
         }
-
-        // while (estado != 'x') {
-        //     System.out.println("Criar robô explorador autônomo? (s/n)");
-        //     if ("s".equalsIgnoreCase(scanner.nextLine().trim())) {
-        //         Random rnd = new Random();
-        //         boolean escolheExplorador = rnd.nextBoolean();   // true => explorador, false => patrulheiro
-        //         if (escolheExplorador) {
-        //             RoboExplorador explorador = new RoboExplorador(ambiente, 30, new Coordenada(8,3,0));
-        //             ambiente.adicionarEntidade(explorador);
-        //             explorador.executarMissao(ambiente);
-        //             System.out.println("Log salvo em missao_" + explorador.getNome() + ".txt");
-        //         } else {
-        //             List<Coordenada> wp = List.of(new Coordenada(1,1,0), new Coordenada(5,1,0), new Coordenada(5,5,0));
-        //             RoboPatrulheiro pat = new RoboPatrulheiro(ambiente, wp, 10);
-        //             ambiente.adicionarEntidade(pat);
-        //             pat.executarMissao(ambiente);
-        //             System.out.println("Patrulheiro criado → log em missao_" + pat.getNome() + ".txt");
-        //         }
-        //     } else {
-        //         switch (estado) {
-        //             case 'c':
-        //                 System.out.println("Você gostaria de trocar de robô ou remover algum robo? (m para mudar e r para remover)");
-        //                 estado = scanner.next().charAt(0);
-        //                 break;
-        //             case 'm':
-        //                 ambiente.getRobos();
-        //                 System.out.println("Qual deles você escolhe?");
-        //                 indexRobo = scanner.nextInt();
-        //                 indexRobo--;
-        //                 robo = ambiente.getRobo(indexRobo);
-        //                 System.out.printf("Você agora está no mundo do robô %s!\n", robo.getNome());
-        //                 robo.getPosicao();
-        //                 robo.print_sensores();
-        //                 try {
-        //                     estado = robo.movimentacao();
-        //                 } catch (ForadosLimitesException exception) {
-        //                     System.out.println(exception.getMessage());
-        //                 }
-        //                 break;
-        //             case 'r':
-        //                 ambiente.getRobos();
-        //                 System.out.println("Qual deles você gostaria de remover?");
-        //                 indexRobo = scanner.nextInt();
-        //                 Robo roboParaRemover = ambiente.get_tipo_Robo(indexRobo);
-        //                 indexRobo--;
-        //                 String removRob = ambiente.removerEntidade(roboParaRemover);
-        //                 System.out.printf("O robô %s foi removido com sucesso!", removRob);
-        //                 System.out.println("Para remover outro robô digite r, escolher um robô digite m e para criar um novo digite n:");
-        //                 estado = scanner.next().charAt(0);
-        //                 break;
-        //             default:
-        //                 robo = tiposRobos.definir_robo(ambiente);
-        //                 ambiente.adicionarEntidade(robo);
-        //                 System.out.printf("Você agora está no mundo do robô %s!", robo.getNome());
-        //                 robo.explicar_movimentacao();
-        //                 try {
-        //                     estado = robo.movimentacao();
-        //                 } catch (ForadosLimitesException exception) {
-        //                     System.out.println(exception.getMessage());
-        //                 }
-        //                 break;
-        //         }
-        //     }
-        // }
         scanner.close();
     }
 }

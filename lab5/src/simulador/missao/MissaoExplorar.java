@@ -18,25 +18,23 @@ public class MissaoExplorar implements Missao {
     }
 
     @Override
-    public void executar(Robo robo, Ambiente ambiente, LogadorMissao log) {
-        for (int passo = 1; passo <= passosMax && robo.getEstado() == EstadoRobo.ligado; passo++) {
-
-            int dx = rnd.nextInt(3) - 1;   // -1,0,1
-            int dy = rnd.nextInt(3) - 1;
-
-            Coordenada antes = robo.get_Coordenada();
-            try {
-                if (robo instanceof RoboExplorador explorador) 
-                    explorador.tentarMoverAleatorio(ambiente);
-                log.log(robo.getNome() + " -> " + robo.get_Coordenada());
-            } catch (Exception e) {
-                log.log("Falha de movimento (" + e.getMessage() + ")");
-            }
-        }
-        log.log("Missão concluída.");
+public void executar(Robo robo, Ambiente ambiente) {
+    try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
+        executar(robo, ambiente, log);
+    } catch (Exception e) {
+        // 👇 CORREÇÃO: Imprima o erro para saber o que está acontecendo
+        System.err.println("FALHA CRÍTICA AO CRIAR LOG: Não foi possível criar o arquivo de log para o robô " + robo.getNome());
+        e.printStackTrace(); // Imprime a "pilha de chamadas" completa do erro no console
     }
+}
 
     /* Interface antiga sem logger */
+    // @Override
+    // public void executar(Robo robo, Ambiente ambiente) {
+    //     try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
+    //         executar(robo, ambiente, log);
+    //     } catch (Exception ignored) {}
+    // }
     @Override
     public void executar(Robo robo, Ambiente ambiente) {
         try (LogadorMissao log = new LogadorMissao("missao_" + robo.getNome() + ".txt")) {
