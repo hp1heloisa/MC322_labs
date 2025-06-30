@@ -44,10 +44,44 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 - Alerta de nível de enrgia baixo
 
 ### Robô Patrulheiro 
+- Realiza patrulhas em áreas definidas do ambiente.
+- Se movimenta em trajetos fixos e circulares, monitorando obstáculos e atualizando informações constantemente.
+- Ideal para manter vigilância e identificar mudanças no ambiente.
+- Pode ser usado em missões de monitoramento autônomo.
 
 ### Robô Explorador 
+- Programado para explorar o ambiente de forma semi-autônoma.
+- Escolhe aleatoriamente direções para avançar, desviando de obstáculos conforme necessário.
+- Utiliza sensores para analisar o ambiente e reportar informações.
+- É útil para reconhecimento territorial e mapeamento de regiões desconhecidas.
 
 ### Agente Inteligente
+- Robô avançado com capacidade de executar missões de forma autônoma.
+- Pode receber diferentes tipos de missão (Explorar, Monitorar, Buscar Ponto) e executá-las sem intervenção manual.
+- Analisa o ambiente, toma decisões baseadas nos sensores e ajusta seu comportamento conforme a situação.
+- Representa o avanço da robótica com inteligência embarcada e comportamento orientado a objetivos.
+
+## Missões
+
+### Missão Buscar Ponto
+- Objetivo: Levar o robô até uma coordenada específica do ambiente.
+- O robô traça uma trajetória em direção ao ponto-alvo, desviando de obstáculos se necessário.
+- Pode ser usada para posicionar o robô em locais estratégicos ou para alcançar objetivos específicos.
+
+### Missão Explorar
+- Objetivo: Realizar uma exploração aleatória do ambiente durante um número determinado de passos.
+- O robô se move por diferentes regiões, evitando obstáculos e mapeando a área ao redor.
+- Ideal para descoberta de terreno, reconhecimento e levantamento de dados ambientais.
+
+### Missão Monitorar
+- Objetivo: Permanecer em uma coordenada e observar o ambiente durante um número fixo de ciclos.
+- O robô utiliza seus sensores para registrar mudanças de temperatura, umidade e movimentação.
+- Útil para vigilância passiva, estudos ambientais ou espera em pontos estratégicos.
+
+### Missão Patrulhar
+- Objetivo: Realizar uma patrulha contínua em uma área definida.
+- O robô percorre uma rota determinada ou circular, mantendo o ambiente sob vigilância constante.
+- Recomendado para missões de segurança e monitoramento de regiões de interesse.
 
 ## Tipos de obstáculos
 
@@ -111,6 +145,11 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 
 ### Receptor
 - Interface para recebimento de mensagens (herdada por **Comunicavel**).
+
+### MoverParaOutroPonto
+- Define robôs capazes de se locomover até uma coordenada específica no ambiente.
+- É usada principalmente em missões como Buscar Ponto, onde o robô precisa atingir um destino definido.
+- Robôs que implementam essa interface devem considerar obstáculos, energia e limites do ambiente durante o trajeto.
 
 ## Exceções Personalizadas
 
