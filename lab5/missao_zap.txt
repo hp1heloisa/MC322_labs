@@ -1,0 +1,30 @@
+2025-06-29T23:18:31.186460 - Iniciando missão 'Buscar o ponto (5, 5, 1)'.
+2025-06-29T23:18:31.186495 - Passo 1: Moveu para (3, 2, 0)
+2025-06-29T23:30:05.714794 - Iniciando missão 'Buscar o ponto (5, 5, 1)'.
+2025-06-29T23:30:05.714834 - Passo 1: Moveu para (3, 2, 0)
+2025-06-29T23:33:27.899952 - Iniciando missão 'Buscar o ponto (5, 5, 1)'.
+2025-06-29T23:33:27.900266 - Passo 1: Moveu para (3, 2, 0)
+2025-06-29T23:36:35.247491 - Iniciando missão 'Buscar o ponto (5, 5, 1)'.
+2025-06-29T23:36:35.247691 - Passo 1: Moveu para (3, 2, 0)
+2025-06-29T23:45:05.271505 - Iniciando missão 'Buscar o ponto (5, 5, 1)'.
+2025-06-29T23:45:05.271645 - Passo 1: Moveu para (3, 2, 0)
+2025-06-29T23:45:05.272286 - Passo 2: Moveu para (3, 2, 30)
+2025-06-29T23:45:05.272344 - Passo 3: Moveu para (3, 2, 29)
+2025-06-29T23:45:05.272394 - Passo 4: Moveu para (3, 2, 28)
+2025-06-29T23:45:05.272442 - Passo 5: Moveu para (3, 2, 27)
+2025-06-29T23:45:05.272491 - Passo 6: Moveu para (3, 2, 26)
+2025-06-29T23:45:05.274113 - Passo 7: Moveu para (3, 2, 30)
+2025-06-29T23:45:05.274187 - Passo 8: Moveu para (3, 2, 29)
+2025-06-29T23:45:05.274275 - Passo 9: Moveu para (3, 2, 28)
+2025-06-29T23:45:05.274330 - Passo 10: Moveu para (3, 2, 27)
+2025-06-29T23:45:05.274378 - Passo 11: Moveu para (3, 2, 26)
+2025-06-29T23:45:05.275659 - Passo 12: Moveu para (3, 2, 30)
+2025-06-29T23:45:05.275710 - Passo 13: Moveu para (3, 2, 29)
+2025-06-29T23:45:05.275754 - Passo 14: Moveu para (3, 2, 28)
+2025-06-29T23:45:05.275797 - Passo 15: Moveu para (3, 2, 27)
+2025-06-29T23:45:05.275836 - Passo 16: Moveu para (3, 2, 26)
+2025-06-29T23:45:05.277026 - Passo 17: Moveu para (3, 2, 30)
+2025-06-29T23:45:05.277077 - Passo 18: Moveu para (3, 2, 29)
+2025-06-29T23:45:05.277117 - Passo 19: Moveu para (3, 2, 28)
+2025-06-29T23:45:05.277155 - Passo 20: Moveu para (3, 2, 27)
+2025-06-29T23:45:05.277443 - FALHA: Missão não concluída. Passos executados: 20

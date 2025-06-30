@@ -43,6 +43,15 @@ public abstract class AgenteInteligente extends Robo {
     }
 
     /**
+     * Verifica se o robô possui pelo menos uma missão na pipeline.
+     * 
+     * @return true se houver missões pendentes, false caso contrário.
+     */
+    public boolean temMissao() {
+        return !pipeline.isEmpty();
+    }
+
+    /**
      * Executa todas as missões na pipeline, em ordem. Esta lógica agora vive
      * aqui e não precisa ser reescrita nos filhos.
      */

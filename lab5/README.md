@@ -1,4 +1,4 @@
-# Laboratório 4 - Interfaces
+# Laboratório 5 - Modularização e Arquivos
 
 ## Introdução
 Seja bem-vindo a explicação do código do Lab 4!
@@ -42,6 +42,12 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 - Possui energia limitada e precisa se recarregar em oficinas
 - Pode verificar seu nível de bateria
 - Alerta de nível de enrgia baixo
+
+### Robô Patrulheiro 
+
+### Robô Explorador 
+
+### Agente Inteligente
 
 ## Tipos de obstáculos
 
@@ -180,3 +186,19 @@ Todos os robôs terrestres possuem velocidade máxima de 5km/h por padrão.
 1. Agora usamos "m", que significa mudar o robô e trocamos para o robô Link, e fazemos com que ele morra afogado no lago.
 2. Depois entramos no mundo do Spock e fizemos com que ele morresse queimado nas chamas.
 3. E depois trocamos para o Bob que acaba se movendo sem incidentes.
+
+## Exemplo de input.txt
+
+```txt
+ROBO DESTRUIDOR oi 0 0 0
+ROBO GUINDASTE io 0 1 0
+MISSAO oi BUSCAR 0 1 6
+MISSAO io EXPLORAR
+EXECUTAR oi
+EXECUTAR io
+SAIR
+```
+
+## Logs e Execução
+
+O simulador imprime logs no console, incluindo movimentos, mensagens de erro e eventos (como destruição de obstáculos, missões concluídas ou falhas). Todos os robôs são registrados em tempo real. Ao final, cada missão deixa seu rastro no arquivo de log correspondente (ex: `missao_oi.txt`, `missao_io.txt`).

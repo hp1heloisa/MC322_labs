@@ -22,6 +22,18 @@ public class RoboTerrestre extends AgenteInteligente {
     }
 
     @Override
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) {
+            try {
+                System.out.println("Executando missão terrestre...");
+                super.executarMissao(a);
+            } catch (ColisaoException | IOException | ForadosLimitesException e) {
+                System.out.println("Erro ao executar missão: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
     public String getDescricao() {
         return "Olá! Eu sou um Robô Terrestre e eu posso me mover nas coordenadas X e Y.";
     }

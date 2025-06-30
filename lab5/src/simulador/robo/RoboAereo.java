@@ -36,6 +36,18 @@ public abstract class RoboAereo extends AgenteInteligente {
     // }
 
     @Override
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) {
+            try {
+                System.out.println("Robô aéreo iniciando missão...");
+                super.executarMissao(a);
+            } catch (ColisaoException | IOException | ForadosLimitesException e) {
+                System.out.println("Erro ao executar missão: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
     public String getDescricao() {
         return "Olá! Eu sou o Robô Aéreo e eu posso me mover nas coordenadas X, Y e Z!";
     }

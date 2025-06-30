@@ -1,8 +1,11 @@
 package simulador.robo;
 
+import java.io.IOException;
 import java.util.Random;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
+import simulador.exceptions.ColisaoException;
+import simulador.exceptions.ForadosLimitesException;
 
 
 public class RoboPatrulheiro extends AgenteInteligente {
@@ -10,6 +13,18 @@ public class RoboPatrulheiro extends AgenteInteligente {
 
     public RoboPatrulheiro(Ambiente ambiente, String nome, Coordenada pos_inicial) {
         super(ambiente, nome, pos_inicial);
+    }
+
+    @Override
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) {
+            try {
+                System.out.println("Executando missão patrulhar...");
+                super.executarMissao(a);
+            } catch (ColisaoException | IOException | ForadosLimitesException e) {
+                System.out.println("Erro ao executar missão: " + e.getMessage());
+            }
+        }
     }
 
     @Override

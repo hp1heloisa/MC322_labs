@@ -1,6 +1,23 @@
+# Inicialização de robôs inteligentes
 ROBO DESTRUIDOR oi 0 0 0
 ROBO GUINDASTE io 0 1 0
+ROBO EXPLORADOR rex 1 1 0
+ROBO TELETRANSPORTADOR zap 2 2 0
+ROBO PATRULEIRO guard 3 3 0
+
+# Atribuição de missões
 MISSAO oi BUSCAR 0 1 6
 MISSAO io EXPLORAR
+MISSAO rex EXPLORAR
+MISSAO zap BUSCAR 5 5 1
+MISSAO guard MONITORAR 3 3 0 3
+
+# Execução das missões
 EXECUTAR oi
+EXECUTAR io
+EXECUTAR rex
+EXECUTAR zap
+EXECUTAR guard
+
+# Fim do programa
 SAIR

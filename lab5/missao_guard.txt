@@ -1,0 +1,6 @@
+2025-06-29T23:45:05.279028 - Iniciando missão de monitoramento no ponto: (3, 3, 0)
+2025-06-29T23:45:05.279153 - Robô posicionado em (3, 3, 0)
+2025-06-29T23:45:05.279329 - Ciclo 1: sensores acionados com sucesso em (3, 3, 0)
+2025-06-29T23:45:05.279376 - Ciclo 2: sensores acionados com sucesso em (3, 3, 0)
+2025-06-29T23:45:05.279411 - Ciclo 3: sensores acionados com sucesso em (3, 3, 0)
+2025-06-29T23:45:05.279433 - Missão de monitoramento concluída.

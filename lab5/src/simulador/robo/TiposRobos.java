@@ -1,5 +1,7 @@
 package simulador.robo;
 
+import java.util.Scanner;
+
 import simulador.ambiente.Ambiente;
 import simulador.exceptions.TipoDeRoboInexistenteException;
 
@@ -15,7 +17,7 @@ public class TiposRobos {
      * @param infos    O array de strings do comando (ex: "ROBO", "TIPO", "NOME", "X", "Y", "Z").
      * @return Uma instância de Robô ou null se a criação falhar.
      */
-    public static Robo criarRobo(Ambiente ambiente, String[] infos) {
+    public static Robo criarRobo(Ambiente ambiente, String[] infos, Scanner scanner) {
         if (infos.length < 6) {
             System.err.println("ERRO: Comando ROBO incompleto. Use: ROBO TIPO NOME X Y Z");
             return null;
@@ -28,7 +30,7 @@ public class TiposRobos {
             TipoRobo tipo = TipoRobo.valueOf(tipo_robo_str.toUpperCase());
             
             // O Scanner é passado como nulo, pois a criação é via comando, não interativa.
-            return tipo.criar(ambiente, null, infos);
+            return tipo.criar(ambiente, scanner, infos);
         } catch (IllegalArgumentException e) {
             // Ocorre se valueOf() não encontrar o enum
             System.err.println("ERRO: Tipo de robô '" + tipo_robo_str + "' desconhecido.");

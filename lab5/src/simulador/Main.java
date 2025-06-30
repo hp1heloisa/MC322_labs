@@ -6,7 +6,7 @@ import simulador.ambiente.Ambiente;
 import simulador.exceptions.ColisaoException;
 import simulador.exceptions.ForadosLimitesException;
 import simulador.interfaces.Missao;
-import simulador.missao.CriarMissao;
+import simulador.missao.FabricaMissao;
 import simulador.robo.AgenteInteligente; // Importa a classe AgenteInteligente
 import simulador.robo.Robo;
 import simulador.robo.TiposRobos;
@@ -15,9 +15,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ColisaoException, ForadosLimitesException {
         Ambiente ambiente = new Ambiente("ambiente.txt");
-        Scanner scanner;
+        Scanner scanner, entradaUsuario;
         try {
             scanner = new Scanner(new java.io.File("input.txt"));
+            entradaUsuario = new Scanner(System.in);
             System.out.println("INFO: Lendo comandos do arquivo 'input.txt'.");
         } catch (java.io.FileNotFoundException e) {
             System.err.println("ERRO: 'input.txt' não encontrado.");
@@ -29,7 +30,7 @@ public class Main {
         while (true) {
             System.out.print("> ");
             String linha = scanner.nextLine();
-            if (linha.isEmpty()) {
+            if (linha.isEmpty() || linha.startsWith("#")) {
                 continue;
             }
 
@@ -43,7 +44,7 @@ public class Main {
             switch (comando) {
                 case "ROBO":
                     // A chamada agora está correta, usando o método estático da fábrica.
-                    Robo novoRobo = TiposRobos.criarRobo(ambiente, infos);
+                    Robo novoRobo = TiposRobos.criarRobo(ambiente, infos, entradaUsuario);
                     if (novoRobo != null) {
                         ambiente.adicionarEntidade(novoRobo);
                         System.out.println("INFO: Robô '" + novoRobo.getNome() + "' criado.");
@@ -60,9 +61,11 @@ public class Main {
 
                     if (roboAlvo instanceof AgenteInteligente) { // Verifica se o robô pode ter missões
                         AgenteInteligente agenteAlvo = (AgenteInteligente) roboAlvo; // Faz o cast
-                        Missao novaMissao = CriarMissao.criarMissao(infos);
+                        Missao novaMissao = FabricaMissao.criarMissao(infos);
                         if (novaMissao != null) {
                             agenteAlvo.adicionarMissao(novaMissao); 
+                        } else {
+                            System.err.println("ERRO: Tipo de missão inválido ou parâmetros incorretos.");
                         }
                     } else if (roboAlvo != null) {
                         System.err.println("ERRO: Robô '" + nomeRoboAlvo + "' não pode receber missões.");

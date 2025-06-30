@@ -1,5 +1,6 @@
 package simulador.robo;
 
+import java.io.IOException;
 import java.util.Random;
 import simulador.ambiente.Ambiente;
 import simulador.ambiente.Coordenada;
@@ -32,6 +33,18 @@ public class RoboExplorador extends AgenteInteligente implements MoverParaOutroP
     @Override
     public void poder(Coordenada desejada, Coordenada atual) {
         System.out.println("Robô Explorador não consegue utilizar poderes");
+    }
+
+    @Override
+    public void executarMissao(Ambiente a) {
+        if (temMissao()) {
+            try {
+                System.out.println("Executando missão exploratória...");
+                super.executarMissao(a);
+            } catch (ColisaoException | IOException | ForadosLimitesException e) {
+                System.out.println("Erro ao executar missão: " + e.getMessage());
+            }
+        }
     }
 
     /**
